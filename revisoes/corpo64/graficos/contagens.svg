@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="483.27559055118115" height="325" preserveAspectRatio="xMinYMin meet" viewBox="0 0 483 325" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="483.27559055118115" height="325"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-325)" style="clip-path: url(#clip)">
+		<g transform="">
+			<path d="M 88,56 L 88,300 Z" style="stroke: rgb(86%,89%,92%); stroke-linecap: butt; stroke-width: 0.5;"/>
+			<text x="85.775390625" y="39" style="font-family: Body; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,78) scale(1,-1)">0</text>
+			<path d="M 183.818898,56 L 183.818898,300 Z" style="stroke: rgb(86%,89%,92%); stroke-linecap: butt; stroke-width: 0.5;"/>
+			<text x="177.1450695127953" y="39" style="font-family: Body; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,78) scale(1,-1)">250</text>
+			<path d="M 279.637795,56 L 279.637795,300 Z" style="stroke: rgb(86%,89%,92%); stroke-linecap: butt; stroke-width: 0.5;"/>
+			<text x="272.9639671505906" y="39" style="font-family: Body; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,78) scale(1,-1)">500</text>
+			<path d="M 375.456693,56 L 375.456693,300 Z" style="stroke: rgb(86%,89%,92%); stroke-linecap: butt; stroke-width: 0.5;"/>
+			<text x="368.78286478838584" y="39" style="font-family: Body; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,78) scale(1,-1)">750</text>
+			<path d="M 471.275591,56 L 471.275591,300 Z" style="stroke: rgb(86%,89%,92%); stroke-linecap: butt; stroke-width: 0.5;"/>
+			<text x="462.37715305118115" y="39" style="font-family: Body; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,78) scale(1,-1)">1000</text>
+			<text x="47.48925781249999" y="281" style="font-family: Body; font-size: 9px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,562) scale(1,-1)">SUM8/0</text>
+			<rect x="88" y="275" width="383.27559055118115" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,48%,51%); fill-rule: evenodd;"/>
+			<text x="270.7393577755906" y="281" style="font-family: Body-Bold; font-size: 8px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,562) scale(1,-1)">1000</text>
+			<text x="47.48925781249999" y="249" style="font-family: Body; font-size: 9px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,498) scale(1,-1)">SUM8/1</text>
+			<rect x="88" y="243" width="215.784157480315" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,48%,51%); fill-rule: evenodd;"/>
+			<text x="189.2182506151575" y="249" style="font-family: Body-Bold; font-size: 8px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,498) scale(1,-1)">563</text>
+			<rect x="303.784157480315" y="243" width="150.24403149606303" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(88%,60%,26%); fill-rule: evenodd;"/>
+			<text x="372.2323451033465" y="249" style="font-family: Body-Bold; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,498) scale(1,-1)">392</text>
+			<rect x="454.02818897637803" y="243" width="17.247401574803177" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(53%,58%,64%); fill-rule: evenodd;"/>
+			<text x="47.48925781249999" y="217" style="font-family: Body; font-size: 9px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,434) scale(1,-1)">SUM8/2</text>
+			<rect x="88" y="211" width="110.76664566929134" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,48%,51%); fill-rule: evenodd;"/>
+			<text x="136.70949470964567" y="217" style="font-family: Body-Bold; font-size: 8px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,434) scale(1,-1)">289</text>
+			<rect x="198.76664566929134" y="211" width="237.24759055118113" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(88%,60%,26%); fill-rule: evenodd;"/>
+			<text x="310.7166128198819" y="217" style="font-family: Body-Bold; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,434) scale(1,-1)">619</text>
+			<rect x="436.01423622047247" y="211" width="34.4948031496063" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(53%,58%,64%); fill-rule: evenodd;"/>
+			<text x="448.81241904527565" y="217" style="font-family: Body-Bold; font-size: 8px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,434) scale(1,-1)">90</text>
+			<rect x="470.50903937007877" y="211" width="0.7665511811023862" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(72%,24%,33%); fill-rule: evenodd;"/>
+			<text x="47.48925781249999" y="185" style="font-family: Body; font-size: 9px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,370) scale(1,-1)">SUM8/3</text>
+			<rect x="88" y="179" width="38.327559055118115" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,48%,51%); fill-rule: evenodd;"/>
+			<text x="100.48995140255906" y="185" style="font-family: Body-Bold; font-size: 8px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,370) scale(1,-1)">100</text>
+			<rect x="126.32755905511812" y="179" width="310.06995275590555" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(88%,60%,26%); fill-rule: evenodd;"/>
+			<text x="274.6887073080709" y="185" style="font-family: Body-Bold; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,370) scale(1,-1)">809</text>
+			<rect x="436.39751181102366" y="179" width="34.87807874015749" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(53%,58%,64%); fill-rule: evenodd;"/>
+			<text x="449.3873324311024" y="185" style="font-family: Body-Bold; font-size: 8px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,370) scale(1,-1)">91</text>
+			<text x="47.99023437499999" y="153" style="font-family: Body; font-size: 9px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,306) scale(1,-1)">CRC8/1</text>
+			<rect x="88" y="147" width="206.9688188976378" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,48%,51%); fill-rule: evenodd;"/>
+			<text x="184.8105813238189" y="153" style="font-family: Body-Bold; font-size: 8px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,306) scale(1,-1)">540</text>
+			<rect x="294.9688188976378" y="147" width="160.2091968503937" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(88%,60%,26%); fill-rule: evenodd;"/>
+			<text x="368.39958919783464" y="153" style="font-family: Body-Bold; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,306) scale(1,-1)">418</text>
+			<rect x="455.1780157480315" y="147" width="16.097574803149598" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(53%,58%,64%); fill-rule: evenodd;"/>
+			<text x="47.99023437499999" y="121" style="font-family: Body; font-size: 9px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,242) scale(1,-1)">CRC8/2</text>
+			<rect x="88" y="115" width="116.89905511811025" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,48%,51%); fill-rule: evenodd;"/>
+			<text x="139.77569943405513" y="121" style="font-family: Body-Bold; font-size: 8px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,242) scale(1,-1)">305</text>
+			<rect x="204.89905511811025" y="115" width="227.2824251968504" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(88%,60%,26%); fill-rule: evenodd;"/>
+			<text x="311.8664395915355" y="121" style="font-family: Body-Bold; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,242) scale(1,-1)">593</text>
+			<rect x="432.18148031496065" y="115" width="39.0941102362205" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(53%,58%,64%); fill-rule: evenodd;"/>
+			<text x="445.0547073080709" y="121" style="font-family: Body-Bold; font-size: 8px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,242) scale(1,-1)">102</text>
+			<text x="47.99023437499999" y="89" style="font-family: Body; font-size: 9px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,178) scale(1,-1)">CRC8/3</text>
+			<rect x="88" y="83" width="44.459968503937006" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,48%,51%); fill-rule: evenodd;"/>
+			<text x="103.5561561269685" y="89" style="font-family: Body-Bold; font-size: 8px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,178) scale(1,-1)">116</text>
+			<rect x="132.459968503937" y="83" width="303.5542677165355" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(88%,60%,26%); fill-rule: evenodd;"/>
+			<text x="277.5632742372047" y="89" style="font-family: Body-Bold; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,178) scale(1,-1)">792</text>
+			<rect x="436.0142362204725" y="83" width="35.261354330708684" height="20" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(53%,58%,64%); fill-rule: evenodd;"/>
+			<text x="449.19569463582684" y="89" style="font-family: Body-Bold; font-size: 8px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,178) scale(1,-1)">92</text>
+			<rect x="5" y="12" width="9" height="9" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,48%,51%); fill-rule: evenodd;"/>
+			<text x="18" y="13" style="font-family: Body; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,26) scale(1,-1)">OK</text>
+			<rect x="120" y="12" width="9" height="9" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(88%,60%,26%); fill-rule: evenodd;"/>
+			<text x="133" y="13" style="font-family: Body; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,26) scale(1,-1)">Corrompido</text>
+			<rect x="235" y="12" width="9" height="9" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(53%,58%,64%); fill-rule: evenodd;"/>
+			<text x="248" y="13" style="font-family: Body; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,26) scale(1,-1)">Perdido</text>
+			<rect x="350" y="12" width="9" height="9" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(72%,24%,33%); fill-rule: evenodd;"/>
+			<text x="363" y="13" style="font-family: Body; font-size: 8px;fill: rgb(7%,20%,29%); stroke:none;" transform="translate(0,26) scale(1,-1)">Não detectado</text>
+		</g>
+	</g>
+</svg>

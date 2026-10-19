@@ -1,0 +1,27 @@
+﻿# TECNICA,SUM8
+# PREPARADO_RX_CORPO64,SUM8,10,primeira_seq=0,pausa_automatica=NAO,versao=1.0
+evento_id,seq_experimento,seq_rx,seq_referencia,seq_enlace_esperada,seq_enlace_proxima,tecnica,len_rx,residuo,decisao,status,payload_confere,cabecalho_diverge,entregue_aplicacao,verificacao_us,intervalo_inicio_us,recuperacao_ms,corpo_rx_hex,corpo_tx_hex,motivo,decisao_us,referencia_us
+# DECISAO_ANTES_DA_COPIA,evento=1,seq_rx=0,residuo=0,decisao=ACEITO,proxima_seq=1,decisao_us=924283356
+1,0,0,0,0,1,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,7,0,-1,070000E3C6FDCA89,070000E3C6FDCA89,CHECADO_ANTES_DA_COPIA,924283356,924297395
+# DECISAO_ANTES_DA_COPIA,evento=2,seq_rx=1,residuo=0,decisao=ACEITO,proxima_seq=2,decisao_us=924384331
+2,1,1,1,1,2,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,100987,-1,070100C7AED8D9D2,070100C7AED8D9D2,CHECADO_ANTES_DA_COPIA,924384331,924398393
+# DECISAO_ANTES_DA_COPIA,evento=3,seq_rx=2,residuo=0,decisao=ACEITO,proxima_seq=3,decisao_us=924485331
+3,2,2,2,2,3,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,070200ADF2B4851F,070200ADF2B4851F,CHECADO_ANTES_DA_COPIA,924485331,924499393
+# DECISAO_ANTES_DA_COPIA,evento=4,seq_rx=3,residuo=0,decisao=ACEITO,proxima_seq=4,decisao_us=924586331
+4,3,3,3,3,4,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,070300A8F591B513,070300A8F591B513,CHECADO_ANTES_DA_COPIA,924586331,924600393
+# DECISAO_ANTES_DA_COPIA,evento=5,seq_rx=4,residuo=0,decisao=ACEITO,proxima_seq=5,decisao_us=924687331
+5,4,4,4,4,5,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,070400C2D4DAC5C0,070400C2D4DAC5C0,CHECADO_ANTES_DA_COPIA,924687331,924701393
+# DECISAO_ANTES_DA_COPIA,evento=6,seq_rx=5,residuo=0,decisao=ACEITO,proxima_seq=6,decisao_us=924788331
+6,5,5,5,5,6,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,0705008FDC51B97F,0705008FDC51B97F,CHECADO_ANTES_DA_COPIA,924788331,924802393
+# DECISAO_ANTES_DA_COPIA,evento=7,seq_rx=6,residuo=0,decisao=ACEITO,proxima_seq=7,decisao_us=924889331
+7,6,6,6,6,7,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,070600E4E09C6C27,070600E4E09C6C27,CHECADO_ANTES_DA_COPIA,924889331,924903393
+# DECISAO_ANTES_DA_COPIA,evento=8,seq_rx=7,residuo=0,decisao=ACEITO,proxima_seq=8,decisao_us=924990331
+8,7,7,7,7,8,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,070700C9FFD45FF7,070700C9FFD45FF7,CHECADO_ANTES_DA_COPIA,924990331,925004393
+# DECISAO_ANTES_DA_COPIA,evento=9,seq_rx=8,residuo=0,decisao=ACEITO,proxima_seq=9,decisao_us=925091331
+9,8,8,8,8,9,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,0708009EBEDCD4E5,0708009EBEDCD4E5,CHECADO_ANTES_DA_COPIA,925091331,925105393
+# DECISAO_ANTES_DA_COPIA,evento=10,seq_rx=9,residuo=0,decisao=ACEITO,proxima_seq=10,decisao_us=925192331
+10,9,9,9,9,10,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,070900ED97C28921,070900ED97C28921,CHECADO_ANTES_DA_COPIA,925192331,925206393
+# RESUMO,SUM8,total=10,OK=10,CORROMPIDO=0,PERDIDO=0,NAO_DETECTADO=0,taxa=NA
+# VALIDACAO,esperados=10,auditados=10,nao_classificados=0,sem_referencia=0,referencias_invalidas=0,repetidos_auditoria=0,cabecalhos_aceitos_divergentes=0,rodada_valida=SIM
+# ENLACE,checados=10,aceitos_detector=10,descartados=0,malformados=0,proxima_seq=10,anonimos=0,ausencias_evidenciadas=0,ambiguidades=0,antigos_repetidos=0
+# TEMPOS_RX,amostras=10,verificacao_media_us=1.600,verificacao_min_us=1,verificacao_max_us=7

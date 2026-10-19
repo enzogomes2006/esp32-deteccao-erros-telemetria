@@ -32,34 +32,17 @@ O marcador distingue a referência dos dados. O corpo completo é copiado para a
 
 O TX pausa 10 ms após o marcador, 3 ms após cada byte do corpo e 10 ms antes da cópia. As pausas ficam em nível ocioso alto; a taxa de cada byte permanece 115200 baud. Cada rodada começa na sequência 0; t envia dez quadros e g envia mil. O contador é uint16. O enlace implementado é unidirecional, sem ACK ou retransmissão; um descarte não interrompe o quadro seguinte.
 
-# Regras do receptor e timeouts
 
-O estado do enlace depende dos bytes recebidos; a classificação experimental depende também da auditoria.
+# Regras atuais do receptor CORPO64
 
-## Sequência e quadro descartado
+O parser limita o corpo a oito bytes e exige LEN=7. LEN inválido gera PERDIDO por enquadramento, SEM_CHECAGEM. Em corpos válidos, resíduo não zero gera DESCARTADO/CORROMPIDO e não avança a sequência usando cabeçalho não confiável. Resíduo zero gera ACEITO; o enlace aplica ordenação uint16 de meia faixa e distingue essa aceitação da entrega à aplicação.
 
-A rodada tem uma janela finita de 10 ou 1000 posições, com origem zero nos comandos USB. Após montar um corpo com LEN=7, o RX calcula o resíduo e decide ACEITO ou DESCARTADO. Para um número admissível, marca as posições anteriores ainda não observadas como PERDIDO, registra a decisão da posição atual e passa a esperar seq_rx+1. Um quadro checado e descartado não é contado novamente como perdido.
+Descartes e eventos malformados acumulam eventos anônimos. A próxima sequência aceita permite evidenciar a lacuna, descontando os anônimos e as ausências já diagnosticadas. Isso impede dupla contagem de corrompidos como perdidos. Associações incompatíveis são registradas como ambiguidades.
 
-A diferença é calculada em uint16: delta = seq_rx - seq_esperada. Delta ≥ 32768 significa sequência antiga/fora de ordem. O índice da janela é uint16(seq_rx - primeira_seq); números fora da janela e posições já registradas são ignorados e diagnosticados. Se houver descarte com sequência não confiável, a medição é invalidada. A cópia nunca é usada para corrigir esse histórico.
+A auditoria associa cada evento à referência somente depois da decisão. seq_rx mantém a sequência recebida; seq_referencia/seq_experimento são identidade de auditoria. A referência nunca reescreve o enlace. Divergências de cabeçalho são registradas à parte; a classe NAO_DETECTADO da tabela usa divergência do payload. ACEITO não implica automaticamente entregue_aplicacao.
 
-A aritmética prevê 65535 para 0 em uma janela que cruze esse limite. Esse caso foi exercitado em software; as rodadas físicas de 0 a 999 não demonstram o cruzamento. Antes do primeiro marcador de dados, o RX apenas aguarda: não declara perdas por ausência de início da transmissão.
+Timeouts: 60 ms para bloco/auditoria e 250 ms para ausência de progresso de dados, com passo de 100 ms. Progresso de dados, não a referência, renova o prazo de enlace. Referência órfã, ausente, inválida ou associação ambígua invalida a medição. Perdas sem evento exigem evidência de ausência e conciliação sem ambiguidade.
 
-| Situação | Prazo e origem | Tratamento |
-| --- | --- | --- |
-| Corpo/cópia parcial | 60 ms desde o respectivo marcador | Abandona o bloco e procura marcador no próximo byte processado |
-| Auditoria pendente | 60 ms desde o marcador de dados | Referência ausente invalida a medição; não cria OK fictício |
-| Silêncio no enlace | 250 ms desde primeiro marcador; reiniciado após cada corpo checado | Marca uma posição não observada como perdida |
-| Silêncio persistente | Avança o prazo em 100 ms por posição perdida | Segue a janela sem duplicar posições classificadas |
+Ruído CORPO64: modo 1 sorteia um dos 64 bits; modo 2 dois distintos; modo 3 rajada contígua de 3 a 8 bits dentro de um byte. Modo 0 é controle sem pulsos. Modo 4 é controle extra em P0/P1. Marcador e referência permanecem preservados.
 
-O prazo de 250 ms corresponde a aproximadamente 2,48 períodos medidos de 101 ms: tolera variação em torno de um período sem retardar excessivamente a perda. Com as pausas do TX, a referência termina em cerca de 45 ms após o marcador de dados; 60 ms é uma margem de projeto. Os prazos são atendidos pelo loop, sem promessa de disparo no microssegundo exato.
-
-## Quatro classes, uma vez por sequência
-
-| Classe | Critério |
-| --- | --- |
-| OK | ACEITO, com referência válida e payload igual |
-| CORROMPIDO | Corpo checado e DESCARTADO por resíduo diferente de zero |
-| PERDIDO | Sem checagem concluída; identificado por lacuna ou timeout |
-| NAO_DETECTADO | ACEITO, mas payload diferente da referência válida |
-
-Referência ausente, com LEN/seq divergente ou resíduo inválido torna a rodada inválida. Um aceito sem referência fica não classificado; não vira uma quinta classe da tabela. A série só é usada quando as quatro classes somam o esperado e os diagnósticos de auditoria são consistentes.
+Os detalhes de projeto prévios estão em revisoes/corpo64/ESPECIFICACAO_REVISAO_PRE_IMPLEMENTACAO.md, preservada como documento histórico. Implementação atual em revisoes/corpo64/firmware/. A especificação antiga está em historico/payload_2026-10-17/ESPECIFICACAO_PROTOCOLO.md.

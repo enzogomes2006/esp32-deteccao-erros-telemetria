@@ -1,3 +1,5 @@
+> Histórico da série com ruído somente no payload. O relatório atual CORPO64 está em [Relatorio_Final_ESP32.pdf](../Relatorio_Final_ESP32.pdf). Estes PDFs foram preservados como documentos originais por etapa.
+
 # Sete PDFs originais das etapas do trabalho
 
 Esta pasta reúne os sete PDFs gerados ao longo do desenvolvimento, com seus nomes e conteúdos originais. Eles foram adicionados em 19/10/2026.

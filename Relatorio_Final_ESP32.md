@@ -1,328 +1,246 @@
 # Detecção de erros em telemetria sob ruído real
 
-Enzo Aurélio | IFMT - Octayde | TCD - Transmissão e Comunicação de Dados | Professor Ruy Oliveira | Outubro de 2026
+Enzo Aurélio · IFMT - Octayde · TCD - Transmissão e Comunicação de Dados
 
-Repositório com códigos, dados e documentação: https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria
+Professor Ruy Oliveira · Revisão CORPO64 · 19 de outubro de 2026
 
-# RESUMO
+Repositório público: https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria
 
-Este trabalho compara a detecção de erros por soma modular de oito bits (SUM8) e CRC-8/SMBUS em um enlace UART entre dois ESP32, perturbado por um terceiro microcontrolador. O injetor aciona um transistor NPN para forçar bits do payload a zero e registra o efeito efetivamente observado. Foram realizadas sete rodadas válidas de 1000 quadros: quatro com SUM8, incluindo o controle sem ruído, e três com CRC8. O receptor executa a checagem antes de consultar uma cópia de depuração, utilizada exclusivamente para auditar a integridade do payload. SUM8 apresentou quatro erros não detectados no modo de dois alvos, correspondentes a 0,5083% dos 787 quadros com erro dessa rodada. CRC8 apresentou zero erros não detectados nos modos ensaiados. O tempo de verificação registrado na série foi de 1 µs para SUM8 e 3 µs para CRC8. Em um ensaio complementar de interrupção da recepção, o RX completo retomou a aceitação 153,028 ms após a primeira detecção de perda. Os resultados evidenciam uma limitação da soma modular e a maior cobertura do CRC para as classes de erro utilizadas, sem generalizar a detecção para qualquer padrão de corrupção.
+## Resumo
 
-Palavras-chave: ESP32; comunicação UART; checksum; CRC8; detecção de erros.
+Este trabalho compara SUM8 e CRC-8/SMBUS em um enlace UART com três ESP32: transmissor, receptor e injetor de ruído físico. Na revisão CORPO64, o sorteio alcança LEN, sequência, payload e CHK, cobrindo os 64 bits do corpo do quadro. Sete rodadas válidas de 1.000 quadros totalizaram 7.000 posições experimentais e 56.000 amostras do injetor. SUM8 apresentou dois erros não detectados no modo 2, com taxa de 2/621 = 0,3221% entre os erros checados dessa condição. CRC8 apresentou zero casos não detectados nas três rodadas ensaiadas. Os tempos médios de verificação no RX foram 1,006 µs e 3,003 µs, respectivamente. Em controle separado, o RX permaneceu sem recepção por 350,443 ms e voltou a aceitar um quadro 38,691 ms depois de reativar a UART. As conclusões se restringem ao modelo de perturbação ensaiado e distinguem checagem, entrega à aplicação e auditoria posterior.
 
-## 1 INTRODUÇÃO
+Palavras-chave: ESP32; UART; checksum; CRC8; ruído físico; telemetria.
 
-Sistemas de telemetria dependem da identificação de alterações nos dados transmitidos. Um código de detecção acrescenta redundância ao quadro e permite ao receptor decidir sobre sua aceitação. Entretanto, a aprovação na checagem não garante ausência de erro: determinadas alterações preservam o resíduo esperado.
+## 1. Objetivo e identificação da série
 
-O objetivo deste estudo foi implementar um protocolo serial, produzir perturbações reais na linha e comparar SUM8 e CRC8 quanto à ocorrência de erros não detectados. Também foram avaliados o custo de cálculo e verificação, o overhead e a recuperação após ausência temporária de recepção. A análise distingue a decisão autônoma do enlace da auditoria posterior dos dados.
+O objetivo é comparar duas técnicas de detecção no mesmo formato de quadro e observar falhas reais de comunicação. O payload contém quatro bytes sintéticos, não medições de um sensor. Cada condição usa uma técnica por vez. A série física atual foi coletada em 19/10/2026 após sete testes curtos de dez quadros. Dois controles adicionais de dez quadros registraram os tempos de cálculo do TX.
 
-# 2 FUNDAMENTAÇÃO TEÓRICA
+O relatório anterior, de 17/10/2026, usava ruído restrito ao payload e está preservado em historico/payload_2026-10-17/. Seus dados continuam em dados/ na raiz. Nenhuma contagem antiga foi somada à CORPO64. As tabelas deste relatório usam somente revisoes/corpo64/dados/.
 
-## 2.1 Soma modular de oito bits
+## 2. Bancada e modelo de ruído
 
-O SUM8 reduz a soma dos bytes protegidos ao resto da divisão por 256. Neste protocolo, o transmissor anexa o complemento modular da soma. Para os sete bytes anteriores ao detector, o valor transmitido é:
+Três ESP32 clássicos WROOM exercem os papéis TX, RX e RUÍDO. A configuração documentada dos programas é ESP32 Dev Module, CPU de 240 MHz e Arduino-ESP32 3.3.12. A montagem usa GND comum, dois resistores de 1 kΩ e um BC547. TX usa GPIO17, RX usa GPIO16; o injetor observa a linha limpa em GPIO16, a perturbada em GPIO18 e comanda a base pelo resistor em GPIO19. O guia de montagem e os esquemas do repositório detalham as ligações.
 
-CHK = -soma(LEN, seqL, seqH, p0, p1, p2, p3) mod 256.
+O injetor força a linha ao nível baixo em instantes selecionados. Um alvo em bit já zero não muda o byte. O log separa máscara selecionada de máscara efetivamente alterada e registra os oito bytes antes/depois, sincronismo e atrasos. Os resultados dependem da captura e amostragem dessa bancada; a revisão lógica dos registros não substitui uma medição de forma de onda ou calibração elétrica independente.
 
-O receptor soma o corpo completo, incluindo CHK, e aceita apenas se o resto for zero. Essa operação detecta uma alteração isolada de um bit, pois sua contribuição em valor absoluto é uma potência de dois entre 1 e 128. Por outro lado, alterações cuja soma seja múltipla de 256 não modificam o resíduo.
+| Modo | Seleção de alvos no corpo |
+| --- | --- |
+| 0 | Sem pulsos de ruído |
+| 1 | Uma posição entre os 64 bits |
+| 2 | Duas posições distintas entre os 64 bits |
+| 3 | Rajada contígua de 3 a 8 bits em um dos oito bytes |
+| 4 | Controle extra nos bits 7 de P0 e P1; fora das sete rodadas |
 
-Como o circuito força apenas o nível baixo, apagar o bit mais significativo de dois bytes distintos reduz a soma em 128 + 128 = 256. Esse padrão mantém o resíduo zero e constitui uma colisão do SUM8. A aceitação é indevida quando o payload recebido difere do original.
+O marcador e a referência de depuração são preservados. Os ensaios não cobrem corrupção deliberada do marcador nem dos bits UART de start/stop. A rajada do modo 3 fica dentro de um byte, conforme o sorteio implementado.
 
-## 2.2 CRC-8/SMBUS
+## 3. Protocolo serial e detectores
 
-O CRC opera sobre bits com aritmética polinomial em GF(2), usando operações XOR. Foi adotado o polinômio x^8 + x^2 + x + 1, identificado no SMBus por 1 0000 0111 (SMBUS, s.d.). A implementação utiliza 0x07 sem o termo de grau oito, estado inicial 0x00, sem reflexão e com xorout=0x00.
+O enlace é UART 115200 baud, 8N1, unidirecional, sem ACK nem retransmissão. O quadro tem doze bytes:
 
-Os sete bytes anteriores ao CRC representam 56 bits de dados. O catálogo de Koopman e suas notas indicam distância de Hamming 4 para o polinômio completo 0x107 em comprimentos de dados até 119 bits. Assim, para o bloco empregado, erros de um e de dois bits são detectáveis no modelo de substituição de bits (KOOPMAN, 2024a; 2024b).
-
-Qualquer alteração não nula limitada a um único byte também tem extensão de até oito bits e não é divisível por esse gerador de grau oito. Essa propriedade é relevante para o modo de rajada utilizado. A cobertura não equivale à detecção de toda corrupção possível, nem abrange automaticamente perda de bytes ou falhas de enquadramento.
-
-# 3 ESPECIFICAÇÃO DO PROTOCOLO
-
-O enlace de dados é unidirecional, do TX para o RX, em UART2 a 115200 baud, oito bits de dados, sem paridade e um bit de parada (8N1). Não há ACK nem retransmissão. A estrutura permanece igual nas rodadas SUM8 e CRC8; somente a técnica de cálculo de CHK é alterada.
-
+```text
 A5 5A C3 3C | 07 seqL seqH p0 p1 p2 p3 CHK
+```
 
-Tabela 1 - Campos do quadro de dados.
-
-| Campo | Tamanho | Descrição |
+| Campo | Bytes | Regra |
 | --- | --- | --- |
-| Marcador | 4 bytes | A5 5A C3 3C; identifica o início e não entra na checagem |
-| LEN | 1 byte | Valor 07; conta os sete bytes posteriores a LEN |
-| Sequência | 2 bytes | Inteiro sem sinal de 16 bits, byte menos significativo primeiro |
-| Payload | 4 bytes | Dados sintéticos de telemetria |
-| CHK | 1 byte | SUM8 ou CRC8; uma técnica por rodada |
+| Marcador | 4 | A5 5A C3 3C; fora da checagem |
+| LEN | 1 | 07; sete bytes posteriores a LEN |
+| Sequência | 2 | uint16 little-endian |
+| Payload | 4 | Telemetria sintética; bits 7 de P0/P1 fixados em 1 |
+| CHK | 1 | SUM8 ou CRC8, conforme a rodada |
 
-Fonte: Elaboração própria, a partir da implementação do protocolo (2026).
+O RX reconhece o marcador, coleta oito bytes de corpo e exige LEN=7. Um LEN alterado não aumenta o limite de leitura. Se LEN for inválido, o quadro não chega à checagem e é classificado PERDIDO por enquadramento. O parser volta à busca de marcadores. Um marcador dentro do corpo é tratado como dado.
 
-A checagem protege LEN, sequência e payload. No TX, o SUM8 é calculado como complemento modular da soma dos sete bytes; o CRC8 é calculado sobre esses mesmos bytes, na ordem do corpo e com processamento MSB primeiro dentro de cada byte. No RX, os oito bytes são processados e o resíduo esperado é zero. A ordem de bits do cálculo CRC não altera a transmissão LSB primeiro de cada byte pela UART.
+### 3.1. SUM8
 
-A delimitação por comprimento fixo permite qualquer valor no payload, sem escape de bytes. Ao reconhecer o marcador, o RX coleta oito bytes e exige LEN=7. Um marcador dentro desse corpo é tratado como dado. Concluído ou descartado o corpo, a busca de marcadores recomeça no próximo byte processado.
+O TX calcula CHK = -soma(LEN, seqL, seqH, p0, p1, p2, p3) módulo 256. O RX soma os oito bytes, incluindo CHK. Resíduo diferente de zero implica descarte. Alterações cuja diferença total seja múltipla de 256 mantêm o resíduo zero e podem produzir aceitação indevida.
 
-## 3.1 Referência de depuração
+### 3.2. CRC-8/SMBUS
 
-Após o quadro, o TX envia D5 6A B4 4B seguido dos oito bytes originais do corpo. Essa referência contém a sequência para associação e permite validar a própria referência antes de comparar o payload. Sua leitura ocorre depois da decisão ACEITO ou DESCARTADO e não modifica o controle de sequência.
+O programa usa o polinômio x^8 + x^2 + x + 1, representação 0x07 sem o termo x^8, init=0, refin=false, refout=false e xorout=0. O TX calcula sobre sete bytes; o RX processa os oito e espera resíduo zero. O cálculo percorre cada byte MSB primeiro, enquanto a UART transmite seus bits LSB primeiro. O teste padrão da implementação é CRC8 de "123456789" = F4.
 
-O TX insere pausas de 10 ms após o marcador de dados, 3 ms após cada byte do corpo e 10 ms antes da cópia. Essas pausas mantêm a linha em estado ocioso alto e permitem o processamento do injetor; a velocidade de transmissão dos bytes continua em 115200 baud.
+O CRC calcula um resto polinomial em GF(2), com XOR. O resultado experimental de zero falhas nesta série não deve ser convertido em garantia contra todo padrão de corrupção. LEN inválido é tratado pelo enquadramento antes da verificação de qualquer detector.
 
-# 3.2 CONTROLE DE RECEPÇÃO E SEQUÊNCIA
+### 3.3. Decisão, enlace e referência
 
-A rodada é delimitada por uma janela de 10 ou 1000 posições, com sequência inicial zero nos comandos de operação. O RX calcula o resíduo antes de consultar a referência. Para uma sequência admissível, registra posições anteriores ainda não observadas como perdidas, marca a posição atual como aceita ou descartada e passa a esperar o número seguinte. Um quadro descartado após checagem não é contado novamente como perdido.
+Após o quadro, o TX envia D5 6A B4 4B seguido de uma cópia dos oito bytes originais. A linha DECISAO_ANTES_DA_COPIA documenta a decisão antes da leitura da referência. A cópia serve para auditar e associar a posição experimental; não corrige o payload entregue nem o estado da sequência do enlace.
 
-As diferenças de sequência são calculadas com aritmética sem sinal de 16 bits. O valor delta = seq_rx - seq_esperada, reduzido a 16 bits, é considerado antigo ou fora de ordem quando delta ≥ 32768. O índice na janela também é calculado em 16 bits; posições fora da janela ou já registradas são ignoradas e diagnosticadas. A referência não é utilizada para corrigir o histórico.
+Corpos descartados não têm sequência confiável. O RX mantém eventos anônimos até conciliá-los com uma sequência aceita, sem transformar cada descarte em uma segunda perda. Sequências antigas ou repetidas não geram nova entrega. seq_rx conserva o que chegou, e seq_referencia/seq_experimento identificam a auditoria posterior. cabecalho_diverge registra divergências de LEN ou sequência, inclusive se um detector aceitar. ACEITO pelo detector e entregue_aplicacao são campos distintos.
 
-O controle usa a sequência recebida também nos descartes porque o injetor tem como alvos somente os bits do payload. Portanto, a implementação assume que o cabeçalho não é corrompido nesse experimento. Essa premissa é necessária: uma sequência pertencente a um quadro com checagem falha não seria confiável em um canal capaz de alterar o cabeçalho.
+Os timeouts são 60 ms para bloco/auditoria e 250 ms para ausência de progresso no enlace, com avanço de 100 ms por ausência adicional. Referências não renovam o prazo de enlace. Referência ausente, órfã, inválida ou associação ambígua invalida a medição; nenhum OK é inventado.
 
-Tabela 2 - Prazos de recepção e seus marcos iniciais.
+## 4. Método e conferência dos dados
 
-| Situação | Prazo | Tratamento |
-| --- | --- | --- |
-| Corpo ou cópia parcial | 60 ms desde seu marcador | Abandona o bloco e retorna à busca de marcador |
-| Referência pendente | 60 ms desde o marcador de dados | Registra auditoria incompleta e invalida a medição |
-| Silêncio inicial do enlace | 250 ms desde o primeiro marcador, reiniciado após cada corpo checado | Declara perdida a próxima posição ainda não observada |
-| Silêncio persistente | Avanços nominais de 100 ms por posição | Prossegue pela janela sem duplicar classificações |
+Foram selecionadas quatro condições SUM8, modos 0 a 3, e três CRC8, modos 1 a 3, com mil quadros cada. O controle sem ruído CRC8 foi registrado entre os controles curtos, sem substituir nenhuma das sete condições. Cada pasta conserva rx.csv, ruido.csv, os dois logs brutos, metadados.json e revisao.txt. O manifesto fornece hashes SHA256. Os arquivos foram copiados byte a byte das pastas locais do coletor. Tentativas iniciais fora da série e controles curtos estão identificados em triagem/ e não entram nas tabelas principais.
 
-Fonte: Elaboração própria, a partir do RX completo v0.2 (2026).
+O script scripts/consolidar.py recalcula contagens e resíduos, cruza os oito bytes com as amostras do injetor e verifica máscaras, efeito físico, sincronismo, atrasos, identidade das posições e a ordem de decisão/auditoria. Também compara os registros CSV com os logs brutos. A revisão original do coletor é executável separadamente. Nenhuma fixture sintética integra as medições físicas.
 
-Antes do primeiro marcador de dados, o RX aguarda o início da transmissão e não declara perdas. O timeout de enlace de 250 ms corresponde a aproximadamente 2,48 períodos de 101 ms medidos. O prazo de 60 ms para bloco e auditoria é superior à duração prevista de aproximadamente 45 ms até o fim da referência. Os limites são verificados no loop do firmware.
-
-A passagem de 65535 para zero foi verificada em software; não nas rodadas físicas de 0 a 999.
-
-# 4 MATERIAIS E PROCEDIMENTOS
-
-Foram utilizados três ESP32 clássicos WROOM, um transistor NPN BC547 e dois resistores de 1 kΩ. A saída GPIO17 do TX foi ligada ao GPIO16 do RX por um resistor em série. O coletor do NPN foi conectado ao lado RX da linha e o emissor ao GND comum. A base foi acionada pelo GPIO19 do ESP32 de ruído através do segundo resistor. O injetor observou a linha limpa no GPIO16 e a perturbada no GPIO18.
-
-As placas foram alimentadas individualmente por USB, com os GNDs interligados. O firmware foi compilado para ESP32 Dev Module, CPU de 240 MHz e Arduino-ESP32 3.3.12. A série selecionada empregou o TX preservado, RX completo v0.2, injetor com captura v1.3.1 e coletor CSV v2.
-
-Tabela 3 - Modos de ruído empregados nas sete rodadas.
-
-| Modo | Alvos no payload |
+| Classe | Critério experimental |
 | --- | --- |
-| 0 | Sem pulso; controle de recepção |
-| 1 | Um bit sorteado entre os 32 bits |
-| 2 | Dois bits distintos sorteados entre os 32 bits |
-| 3 | Rajada de 3 a 8 bits contíguos dentro de um byte sorteado |
+| OK | Checagem aceitou e payload coincide com referência válida |
+| CORROMPIDO | Checagem concluída; resíduo diferente de zero |
+| PERDIDO | Sem checagem concluída: enquadramento ou ausência evidenciada |
+| NAO_DETECTADO | Checagem aceitou, mas payload difere da referência válida |
 
-Fonte: Elaboração própria, a partir do injetor e da metodologia experimental (2026).
+Cada posição recebe uma única classe. A taxa de não detecção é ND/(CORROMPIDO+ND). OK e PERDIDO ficam fora desse denominador. Quando não há erro checado, a taxa é n.a., não zero por convenção. Um alvo já zero não constitui erro real. Contagens de condições diferentes não são amostras pareadas do mesmo ruído.
 
-O transistor força somente 1 para 0. Um alvo que já era zero não provoca alteração. A captura de borda em hardware, por MCPWM0, fornece a referência temporal para os pulsos e amostras, sem delayMicroseconds(). Os registros contêm máscara alvo, byte antes, byte depois, alteração efetiva e diagnósticos de sincronismo e atraso. O marcador, LEN, sequência, CHK e cópia não são alvos.
+## 5. Resultados das sete rodadas
 
-Foram coletados 1000 quadros para SUM8 nos modos 0, 1, 2 e 3, e outros 1000 para CRC8 nos modos 1, 2 e 3. Os payloads e alvos foram sorteados novamente a cada execução. O TX fixa o bit mais significativo de p0 e p1 em 1 para permitir um padrão adicional de demonstração, condição mantida em todas as rodadas.
-
-O coletor salvou simultaneamente os CSVs e logs brutos do RX e do injetor. A conferência incluiu sequência única de 0 a 999, soma das quatro classes, recálculo do resíduo e comparação dos bytes do injetor com a referência e o corpo recebido. Tentativas inválidas não foram incluídas nas tabelas.
-
-# 5 RESULTADOS EXPERIMENTAIS
-
-A série contém 7000 registros RX e 11561 registros do injetor. O número de amostras do injetor varia com a quantidade de bytes observados por quadro e não corresponde ao número de quadros. Todas as sete rodadas selecionadas registraram validação de rodada positiva, sem falhas de referência ou divergências nas verificações realizadas.
-
-Tabela 4 - Resultados SUM8, com 1000 quadros por modo.
-
-| Modo | OK | Corrompido | Perdido | Não detectado | Taxa ND |
+| Técnica | Modo | OK | Corrompido | Perdido | Não detectado |
 | --- | --- | --- | --- | --- | --- |
-| 0 | 1000 | 0 | 0 | 0 | NA |
-| 1 | 469 | 531 | 0 | 0 | 0,0000% |
-| 2 | 213 | 783 | 0 | 4 | 0,5083% |
-| 3 | 44 | 956 | 0 | 0 | 0,0000% |
+| SUM8 | 0 | 1000 | 0 | 0 | 0 |
+| SUM8 | 1 | 563 | 392 | 45 | 0 |
+| SUM8 | 2 | 289 | 619 | 90 | 2 |
+| SUM8 | 3 | 100 | 809 | 91 | 0 |
+| CRC8 | 1 | 540 | 418 | 42 | 0 |
+| CRC8 | 2 | 305 | 593 | 102 | 0 |
+| CRC8 | 3 | 116 | 792 | 92 | 0 |
 
-Fonte: Elaboração própria, a partir dos registros experimentais (2026).
+Cada linha soma 1.000 posições; cada rodada tem 8.000 amostras do injetor e rodada_valida=SIM. A conferência encontrou zero cabeçalhos divergentes em corpos aceitos nas sete rodadas. Divergências em corpos descartados ou malformados permanecem nos registros.
 
-Tabela 5 - Resultados CRC8, com 1000 quadros por modo.
+![Contagens por condição](revisoes/corpo64/graficos/contagens.svg)
 
-| Modo | OK | Corrompido | Perdido | Não detectado | Taxa ND |
-| --- | --- | --- | --- | --- | --- |
-| 1 | 443 | 557 | 0 | 0 | 0,0000% |
-| 2 | 195 | 805 | 0 | 0 | 0,0000% |
-| 3 | 26 | 974 | 0 | 0 | 0,0000% |
+Figura 1. Classes registradas por condição, com mil quadros em cada barra. Os dois ND do SUM8/2 são identificados na tabela e no estudo de caso; sua largura é pequena nessa escala.
 
-Fonte: Elaboração própria, a partir dos registros experimentais (2026).
+### 5.1. Taxas e perdas de enquadramento
 
-OK identifica um quadro aceito com payload igual à referência. CORROMPIDO identifica um corpo checado e descartado. PERDIDO indica que a checagem não chegou a ser concluída e a falta foi identificada pelo enlace. NÃO DETECTADO identifica uma aceitação com payload diferente da referência válida.
-
-A taxa de não detecção utiliza apenas os quadros com erro de conteúdo:
-
-Taxa ND = NÃO DETECTADO / (CORROMPIDO + NÃO DETECTADO).
-
-Para SUM8 no modo 2, a taxa foi 4/(783+4) = 4/787 = 0,005082592, ou 0,5082592%. Os quatro casos correspondem a 0,4% de todos os 1000 quadros, fração com denominador diferente. No controle sem erro, a taxa é NA, pois o denominador é zero. Não foram registradas perdas nas sete rodadas regulares.
-
-# 5.1 ANÁLISE DE UM ERRO NÃO DETECTADO
-
-O quadro 232 da rodada SUM8/modo 2 apresentou duas alterações físicas confirmadas pelos registros do injetor. O corpo original e o recebido, incluindo o detector, foram:
-
-Original: 07 E8 00 95 8E B4 99 A1
-Recebido: 07 E8 00 15 0E B4 99 A1
-
-Tabela 6 - Comparação byte a byte do quadro 232.
-
-| Campo | Original hex | Original decimal | RX hex | RX decimal | Variação |
-| --- | --- | --- | --- | --- | --- |
-| LEN | 07 | 7 | 07 | 7 | 0 |
-| seqL | E8 | 232 | E8 | 232 | 0 |
-| seqH | 00 | 0 | 00 | 0 | 0 |
-| p0 | 95 | 149 | 15 | 21 | -128 |
-| p1 | 8E | 142 | 0E | 14 | -128 |
-| p2 | B4 | 180 | B4 | 180 | 0 |
-| p3 | 99 | 153 | 99 | 153 | 0 |
-| CHK | A1 | 161 | A1 | 161 | 0 |
-
-Fonte: Elaboração própria, a partir dos registros experimentais (2026).
-
-A sequência 0x00E8 equivale a 232. A soma dos sete bytes originais é 863, e CHK = -863 mod 256 = 161 = A1. A soma original completa é 1024. No corpo recebido, 95 (149) tornou-se 15 (21), e 8E (142) tornou-se 0E (14). A redução total foi de 256, produzindo soma 768. Como 1024 e 768 são múltiplos de 256, ambos têm resíduo zero.
-
-Tabela 7 - Efeito registrado pelo injetor no quadro 232.
-
-| Byte payload | Alvo / alterado | Antes → depois | Timestamp (µs) | Mudou / sincronismo |
+| Condição | Erros checados | ND | Taxa ND | Perdidos por LEN |
 | --- | --- | --- | --- | --- |
-| 0 | 80 / 80 | 95 → 15 | 888739020 | SIM / SIM |
-| 1 | 80 / 80 | 8E → 0E | 888742020 | SIM / SIM |
+| SUM8/0 | 0 | 0 | n.a. | 0 |
+| SUM8/1 | 392 | 0 | 0,0000% | 45 |
+| SUM8/2 | 621 | 2 | 0,3221% | 90 |
+| SUM8/3 | 809 | 0 | 0,0000% | 91 |
+| CRC8/1 | 418 | 0 | 0,0000% | 42 |
+| CRC8/2 | 593 | 0 | 0,0000% | 102 |
+| CRC8/3 | 792 | 0 | 0,0000% | 92 |
 
-Fonte: Elaboração própria, a partir dos registros experimentais (2026).
+Na rodada SUM8/2 ocorreram 621 erros checados, sendo 619 detectados e 2 não detectados. A taxa é 0,3221%. Em relação aos mil quadros transmitidos, os dois casos são 0,2%; esse é outro denominador e não substitui a taxa definida. Os 90 perdidos são excluídos da taxa de falha do detector.
 
-O RX decidiu ACEITO antes de ler a cópia. A auditoria posterior constatou payload diferente e classificou o quadro como NÃO DETECTADO. Os dois registros do injetor concordam com os corpos RX e de referência; os campos de amostras e pulsos tardios foram zero. Os registros integrais estão reproduzidos no Apêndice A.
+Todas as perdas registradas nas sete condições tiveram motivo LEN_INVALIDO. Portanto, nesta série PERDIDO representa falha de enquadramento observada, e não comprova desaparecimento completo do quadro. A ampliação do ruído ao cabeçalho explica por que a CORPO64 contém perdas mesmo com os marcadores preservados. O ensaio de recepção desligada é apresentado separadamente.
 
-# 5.2 TEMPOS E OVERHEAD
+### 5.2. Dois casos naturais não detectados
 
-Os tempos de verificação e os intervalos foram obtidos dos CSVs da série atual. O custo de cálculo no TX foi obtido de um controle anterior sem ruído, com dez quadros por técnica e o mesmo firmware TX. Essas amostras são distintas e não foram agregadas.
+As sequências 415 e 553 da rodada SUM8/2 foram aceitas e entregues à aplicação com payload errado. Em ambos os casos, o log do injetor confirma alteração de 1 para 0 nos dois alvos, sincronismo SIM e ausência de flags de amostragem ou pulso tardio.
 
-Tabela 8 - Tempos de cálculo e verificação, em microssegundos.
+| Sequência | Campo | Transmitido | Recebido | Máscara real |
+| --- | --- | --- | --- | --- |
+| 415 | P0 | 87 | 07 | 80 |
+| 415 | CHK | E7 | 67 | 80 |
+| 553 | P3 | B3 | 33 | 80 |
+| 553 | CHK | 89 | 09 | 80 |
 
-| Medição | SUM8 | CRC8 | Número de amostras |
-| --- | --- | --- | --- |
-| TX: média de cálculo | 1,100 | 3,000 | 10 por técnica |
-| TX: mínimo / máximo | 1 / 2 | 3 / 3 | Mesmo controle |
-| RX: média de verificação | 1,000 | 3,000 | 1000 por rodada atual |
-| RX: mínimo / máximo | 1 / 1 | 3 / 3 | 1000 por rodada atual |
+Todos os valores de bytes e máscaras nessa tabela são hexadecimais. Os corpos completos são:
 
-Fonte: CSV das sete rodadas e capturas do controle TX, identificadas nas referências experimentais.
+```text
+seq 415 TX: 07 9F 01 87 BA 1E 13 E7
+seq 415 RX: 07 9F 01 07 BA 1E 13 67
+seq 553 TX: 07 29 02 EA CF D9 B3 89
+seq 553 RX: 07 29 02 EA CF D9 33 09
+```
 
-Tabela 9 - Intervalos entre inícios de quadro no RX.
+Na sequência 415, a soma dos oito bytes transmitidos é 768, e a soma recebida é 512. Na sequência 553, as somas são 1.024 e 768. Apagar dois bits 7 reduz a soma em 128+128=256. Os dois valores de cada par continuam múltiplos de 256; o detector mantém resíduo zero. Em cada caso LEN e sequência permanecem intactos, enquanto payload e CHK mudam. A colisão foi observada em ruído aleatório do modo 2, sem usar o controle extra do modo 4.
 
-| Coleta | Média (µs) | Mínimo / máximo (µs) |
-| --- | --- | --- |
-| S0 SUM8/0 | 101001,001 | 100999 / 101919 |
-| S1 SUM8/1 | 101000,000 | 100999 / 101001 |
-| S2 SUM8/2 | 101000,043 | 100999 / 101022 |
-| S3 SUM8/3 | 101000,958 | 100999 / 101919 |
-| C1 CRC8/1 | 101001,001 | 100999 / 101919 |
-| C2 CRC8/2 | 101001,001 | 100999 / 101919 |
-| C3 CRC8/3 | 101000,000 | 101000 / 101000 |
+O evento 416, correspondente à sequência 415, decide ACEITO em 709748318 µs e só depois registra referência em 709762509 µs. O evento 554, sequência 553, decide em 723686327 µs e recebe referência em 723700531 µs. Esses pares pertencem ao relógio do RX. Os timestamps absolutos do injetor não foram subtraídos dos timestamps do RX.
 
-Fonte: Elaboração própria, a partir dos registros experimentais (2026).
+## 6. Tempos, taxa e overhead
 
-Cada média de intervalo utiliza 999 diferenças; o zero inicial é excluído. O período observado ficou próximo de 101 ms, justificando o timeout de enlace de 250 ms. As leituras usam esp_timer_get_time() e resolução em microssegundos, sem representar a latência completa do enlace nem medições submicrossegundo.
+### 6.1. Cálculo no transmissor
 
-Tabela 10 - Composição dos bytes transmitidos por ciclo.
+Controles separados de dez quadros, sem ruído, registraram 1 µs por cálculo SUM8 e 3 µs por cálculo CRC8. Em cada técnica, os nove intervalos após o primeiro quadro foram 101000 µs, ou 101 ms. O primeiro intervalo zero foi excluído. Os corpos fornecidos no chat foram cruzados com as referências das respectivas coletas curtas e coincidem. As transcrições estão em evidencias/corpo64/.
 
-| Componente | Bytes |
+### 6.2. Verificação no receptor
+
+| Condição | N checados | Média (µs) | Mediana (µs) | Mín. | Máx. |
+| --- | --- | --- | --- | --- | --- |
+| SUM8/0 | 1000 | 1,011 | 1,0 | 1 | 2 |
+| SUM8/1 | 955 | 1,009 | 1,0 | 1 | 7 |
+| SUM8/2 | 910 | 1,002 | 1,0 | 1 | 2 |
+| SUM8/3 | 909 | 1,002 | 1,0 | 1 | 2 |
+| CRC8/1 | 958 | 3,005 | 3,0 | 3 | 5 |
+| CRC8/2 | 898 | 3,002 | 3,0 | 3 | 4 |
+| CRC8/3 | 908 | 3,002 | 3,0 | 3 | 4 |
+
+Os corpos com LEN inválido não chegaram à checagem e têm tempo NA. Foram excluídos das estatísticas de verificação, sem substituir ausência por zero. A média agregada SUM8 usa 3.774 checagens e vale 1,006 µs. CRC8 usa 2.764 checagens e vale 3,003 µs. Essas médias são ponderadas pelas amostras individuais, e não médias simples das linhas da tabela.
+
+![Tempo médio de verificação](revisoes/corpo64/graficos/tempos_rx.svg)
+
+Figura 2. Média de verificação do RX nas sete condições. Unidade: microssegundos. Os tamanhos amostrais estão na tabela. A resolução registrada é de microssegundos; o log e o processamento da bancada podem afetar os extremos.
+
+### 6.3. Intervalos e custo de transmissão
+
+| Condição | N intervalos | Média (ms) | Mín. (ms) | Máx. (ms) |
+| --- | --- | --- | --- | --- |
+| SUM8/0 | 999 | 101,001 | 100,998 | 101,917 |
+| SUM8/1 | 999 | 101,000 | 100,992 | 101,023 |
+| SUM8/2 | 999 | 101,001 | 100,998 | 101,917 |
+| SUM8/3 | 999 | 101,001 | 100,998 | 101,917 |
+| CRC8/1 | 999 | 101,001 | 100,998 | 101,917 |
+| CRC8/2 | 999 | 101,000 | 101,000 | 101,023 |
+| CRC8/3 | 999 | 101,000 | 100,999 | 101,023 |
+
+Os intervalos são medidos pelo RX entre inícios de quadros e usam 999 diferenças por rodada. A mediana é 101 ms em todas as condições. Não são tempos de recuperação nem incluem o primeiro zero.
+
+Cada quadro de dados tem 4 bytes úteis e 8 de overhead: marcador 4, LEN 1, sequência 2 e CHK 1. A eficiência em bytes é 4/12=33,33%; overhead/total=66,67% e overhead/payload=200%. A cópia de depuração adiciona 12 bytes à instrumentação, totalizando 24 bytes e eficiência útil de 4/24=16,67% antes das pausas.
+
+Em 8N1, cada byte ocupa dez bits na linha. Os 12 bytes de dados ocupam teoricamente 120/115200 s, cerca de 1,042 ms. Incluindo a cópia, o tempo teórico de serialização é cerca de 2,083 ms. Esses valores não incluem as pausas programadas de 10 ms após o marcador, 3 ms por byte do corpo e 10 ms antes da referência. O período observado de 101 ms resulta de todo o agendamento, não de uma mudança na taxa UART. Com quatro bytes úteis a cada 101 ms, a vazão útil aproximada é 39,60 bytes/s, ou 316,83 bit/s.
+
+## 7. Recuperação após interrupção de recepção
+
+O controle SUM8 de dez quadros usa ruído configurado em zero e desliga a UART do RX após auditar a sequência 1. É uma interrupção programada da recepção, sem alterar o firmware entre cálculo e recuperação. O log foi fornecido pelo usuário em dois trechos sobrepostos, unidos sem duplicar as linhas comuns; a procedência está em evidencias/corpo64/ORIGEM.md. Não há captura complementar do monitor do injetor para esse controle.
+
+| Evento do RX | Instante (µs) |
 | --- | --- |
-| Overhead: marcador 4 + LEN 1 + sequência 2 + CHK 1 | 8 |
-| Payload | 4 |
-| Quadro de dados completo | 12 |
-| Depuração: marcador 4 + cópia do corpo 8 | 12 |
-| Total de dados e depuração, sem as pausas | 24 |
+| RX_DESLIGADO | 94561283 |
+| Primeira detecção de ausência | 94797303 |
+| RX_REATIVADO | 94911726 |
+| Aceitação da sequência 5 | 94950417 |
 
-Fonte: Elaboração própria, a partir do formato do quadro (2026). A cópia é excluída do overhead do protocolo.
+A janela efetiva sem recepção foi 94911726-94561283=350443 µs, ou 350,443 ms. O tempo da reativação até a primeira aceitação foi 94950417-94911726=38691 µs, ou 38,691 ms. Desde a primeira detecção de perda até a aceitação foram 153114 µs, ou 153,114 ms. As medidas têm origens diferentes e não devem receber o mesmo rótulo.
 
-# 5.3 PERDA CONTROLADA E RECUPERAÇÃO
+O resumo registra 7 OK, 3 PERDIDOS (sequências 2, 3 e 4), zero CORROMPIDOS e zero ND. As sete auditorias somadas às três ausências evidenciadas contabilizam dez posições. O RX informa rodada_valida=SIM, zero ambiguidades e sequência esperada final 10. As perdas não são preenchidas com referências inventadas. Esse controle não entra nas sete condições de ruído.
 
-Foi executado um ensaio complementar com dez quadros CRC8, RX completo v0.2 e ruído desligado. Após checar e auditar a sequência 1, o RX encerrou sua UART2 por uma janela programada de 350 ms. O TX continuou transmitindo. A ausência de recepção foi induzida por software, separadamente das perturbações elétricas dos experimentos principais.
+## 8. Discussão e limites
 
-Tabela 11 - Instantes registrados durante a interrupção da recepção.
+Os dois casos SUM8 demonstram uma limitação concreta da soma modular: alterações no payload e no próprio detector podem preservar o resto. O CRC8 não apresentou ND nos modos ensaiados. As diferenças de OK entre técnicas também dependem dos sorteios e dos valores dos bytes; as rodadas não reutilizaram exatamente o mesmo ruído, portanto a diferença bruta de contagens não mede isoladamente uma vantagem do algoritmo.
 
-| Evento | Instante no RX (µs) |
+A cópia posterior torna a auditoria possível, mas integra a instrumentação experimental. O resultado OK da tabela é definido pelo payload; divergências de cabeçalho precisam ser avaliadas nos campos específicos. A observação de zero cabeçalhos aceitos divergentes nesta série não elimina a possibilidade de colisões futuras no cabeçalho.
+
+A ordenação uint16 e a passagem de 65535 para zero foram previstas/testadas em software, mas as rodadas físicas de 0 a 999 não exercitam esse cruzamento. As mensagens de versão foram observadas durante a gravação. Os metadados originais conservam firmware_instalado_verificado_pelo_programa=false e ajuste_isr_us_verificado_pelo_programa=false; não houve leitura de flash nem prova criptográfica do binário instalado. Os hashes publicados atestam integridade dos arquivos, não identidade do firmware em execução.
+
+O registro de especificação prévia se refere somente à revisão CORPO64 e não comprova a ordem de elaboração do projeto original. Houve assistência de IA nos programas, na análise e na documentação. As regras da disciplina sobre autoria e defesa continuam aplicáveis. A demonstração presencial e a predição individual permanecem atividades a realizar, sem serem declaradas concluídas neste relatório.
+
+## 9. Conclusão
+
+A revisão CORPO64 produziu sete séries físicas consistentes e ampliou os alvos de ruído aos oito bytes do corpo. Dois payloads incorretos passaram pelo SUM8 no modo 2 e foram entregues, com evidência byte a byte e resíduo zero. O CRC8 registrou zero ND nas três condições ensaiadas. A verificação custou aproximadamente 1 µs no SUM8 e 3 µs no CRC8, muito abaixo do período de 101 ms adotado na bancada. O controle separado mostrou retomada após uma pausa de recepção, com distinção entre tempo sem UART, tempo após reativação e tempo desde a detecção de perda. Os dados, scripts e hashes permitem reproduzir a consolidação, dentro dos limites instrumentais descritos.
+
+## Apêndice A. Rastreabilidade e reprodução
+
+| Condição | Pasta original em revisoes/corpo64/dados/ |
 | --- | --- |
-| UART encerrada após auditar seq1 | 707244965 |
-| Primeira perda declarada | 707481280 |
-| UART reativada | 707595727 |
-| Seq5: próxima decisão ACEITO | 707634308 |
+| SUM8/0 | 20261019_091242_692_SUM8_modo0_1000 |
+| SUM8/1 | 20261019_094547_976_SUM8_modo1_1000 |
+| SUM8/2 | 20261019_095219_782_SUM8_modo2_1000 |
+| SUM8/3 | 20261019_095929_835_SUM8_modo3_1000 |
+| CRC8/1 | 20261019_100416_161_CRC8_modo1_1000 |
+| CRC8/2 | 20261019_100921_806_CRC8_modo2_1000 |
+| CRC8/3 | 20261019_101329_766_CRC8_modo3_1000 |
 
-Fonte: Capturas do ensaio de recuperação com RX completo v0.2 (17 out. 2026).
+Cada pasta contém seis arquivos originais. PROVENIENCIA_COLETAS.json identifica a cópia e seus hashes. validacao/VALIDACAO_FISICA.json registra a conferência independente; validacao/REVISAO_OFICIAL_COLETAS.json registra a revisão pelo validador do coletor. Os logs de testes sintéticos e o estado prévio de compilação continuam preservados com sua data.
 
-Tabela 12 - Duração da pausa e tempos de recuperação.
+Para recalcular a partir dos dados versionados, instalar Python 3 e reportlab e executar, na raiz do repositório:
 
-| Medida | Diferença (µs) | Resultado |
-| --- | --- | --- |
-| Janela desligada | 707595727 - 707244965 | 350,762 ms |
-| Primeira perda até ACEITO | 707634308 - 707481280 | 153,028 ms |
-| Reativação até ACEITO | 707634308 - 707595727 | 38,581 ms |
+```text
+python scripts/consolidar.py
+python scripts/atualizar_documentacao.py
+python scripts/gerar_pdf.py
+python scripts/manifestos.py
+```
 
-Fonte: Elaboração própria, por diferenças de timestamps da Tabela 11.
+## Fontes do trabalho
 
-O resumo apresentou sete OK e três PERDIDO, sem CORROMPIDO ou NÃO DETECTADO. As sequências 2 e 3 foram declaradas perdidas por timeout; a 4 foi identificada pela lacuna ao receber a sequência 5. O quadro 5 foi aceito na checagem, auditado como correto e seguido por recepção até a sequência 9. A captura complementar confirmou rodada válida.
-
-O cronômetro de recuperação preservou a primeira detecção de perda do episódio, sem reiniciar ao detectar a lacuna seguinte. A medida de 153,028 ms termina na próxima aceitação do protocolo; em geral, uma auditoria posterior ainda poderia revelar aceitação indevida. Neste ensaio, a referência confirmou o payload do quadro 5.
-
-As sete verificações desse controle tiveram média de 3,143 µs, mínimo de 3 µs e máximo de 4 µs. Os tempos foram calculados com leituras do mesmo relógio RX, sem subtrair timestamps de placas distintas. O ensaio está documentado por capturas do Monitor Serial e não integra os CSVs das sete rodadas de 1000 quadros.
-
-# 6 DISCUSSÃO E CONCLUSÃO
-
-## 6.1 Discussão dos resultados
-
-Os quatro erros não detectados em SUM8/modo 2 exibiram o mesmo mecanismo: apagar dois bits de peso 128 em bytes distintos reduziu a soma em 256. Além da sequência 232, os casos ocorreram nas sequências 239, 530 e 609. Nas duas primeiras, a soma completa passou de 1024 para 768; nas duas últimas, de 768 para 512. A informação perdida pela redução modular explica a aceitação de todos esses quadros alterados.
-
-CRC8 não apresentou erros não detectados nas três rodadas, resultado compatível com sua cobertura para um ou dois bits alterados e para alterações limitadas a um byte. A conclusão se refere às classes ensaiadas: um CRC finito também admite colisões fora delas.
-
-A contagem de descartes isoladamente não mede a superioridade de um detector. As rodadas utilizaram novos sorteios de dados e alvos, e o transistor pode selecionar bits que já eram zero. A comparação utiliza a taxa de aceitação indevida entre quadros efetivamente alterados. Também se deve considerar que p0/p1 possuem o bit mais significativo fixado em 1, de modo que o payload não é uniforme em todos os bits.
-
-Os limites do estudo incluem a restrição do ruído ao payload, a quantização temporal em microssegundos e a dependência do injetor em relação ao core e ao hardware testados. A passagem física da sequência 65535 para zero não foi demonstrada nas rodadas finitas. O ensaio de recuperação mostra retorno após uma interrupção de UART, sem representar todas as condições de perda possíveis.
-
-## 6.2 Conclusão
-
-Foi implementado e avaliado um protocolo de telemetria em que a decisão do RX antecede a leitura da referência. As sete rodadas válidas totalizaram 7000 quadros e permitiram observar quatro aceitações indevidas do SUM8, explicadas e confirmadas byte a byte. O CRC8 apresentou maior tempo de cálculo e verificação nos registros utilizados, acompanhando maior cobertura para as classes de erro ensaiadas.
-
-O RX identificou perdas sem duplicar descartes e retomou a aceitação após a pausa controlada. A escolha do detector deve considerar o modelo de erro e a alteração real do dado, pois nem todo pulso produz corrupção.
-
-# REFERÊNCIAS
-
-SMBUS. SMBus FAQ: What is the CRC-8 polynomial for SMBus? [S. l.], s.d. Disponível em: https://smbus.org/faq/faq_main.htm. Acesso em: 17 out. 2026.
-
-KOOPMAN, Philip. 8 Bit CRC Zoo. Pittsburgh: Carnegie Mellon University, 2024a. Disponível em: https://users.ece.cmu.edu/~koopman/crc/crc8.html. Acesso em: 17 out. 2026.
-
-KOOPMAN, Philip. CRC Zoo Notes. Pittsburgh: Carnegie Mellon University, 2024b. Disponível em: https://users.ece.cmu.edu/~koopman/crc/notes.html. Acesso em: 17 out. 2026.
-
-## Registros experimentais e fontes das medições
-
-AURÉLIO, Enzo. Registros experimentais de telemetria com ESP32. 17 out. 2026. Conjunto de sete rodadas, com rx.csv, ruido.csv, logs brutos, metadados e revisão por rodada. Arquivos na pasta dados/ do material experimental; identificação no Apêndice A.
-
-AURÉLIO, Enzo. Capturas dos controles de cálculo no TX. 2026. Dez quadros por técnica, com SUM8 e CRC8. Reproduzidas no documento de evidência Parte 4, páginas 4 e 5. Arquivo: evidencias/Parte_4_Tempos_TX_e_Ensaios_Anteriores.pdf. As medições do antigo RX de ensaio contidas nesse documento não compõem os tempos RX da série atual.
-
-AURÉLIO, Enzo. Capturas do ensaio de recuperação com RX completo v0.2. 2026. Reproduzidas no documento de evidência Parte 6, página 5, incluindo a confirmação complementar da validade. Arquivo: evidencias/Parte_6_Ensaio_RX_Completo.pdf.
-
-Os documentos de evidência preservam as capturas dos instrumentos de registro. As tabelas principais utilizam exclusivamente as sete rodadas identificadas no apêndice. Os controles de cálculo TX e de recuperação mantêm suas amostras e configurações próprias.
-
-# APÊNDICE A - REGISTROS E RASTREABILIDADE
-
-Tabela A1 - Identificação das sete rodadas selecionadas.
-
-| ID | Condição | Pasta original |
-| --- | --- | --- |
-| S0 | SUM8/0 | 20261017_191422_664_SUM8_modo0_1000 |
-| S1 | SUM8/1 | 20261017_184431_084_SUM8_modo1_1000 |
-| S2 | SUM8/2 | 20261017_185353_632_SUM8_modo2_1000 |
-| S3 | SUM8/3 | 20261017_190634_547_SUM8_modo3_1000 |
-| C1 | CRC8/1 | 20261017_185043_967_CRC8_modo1_1000 |
-| C2 | CRC8/2 | 20261017_185759_222_CRC8_modo2_1000 |
-| C3 | CRC8/3 | 20261017_191057_739_CRC8_modo3_1000 |
-
-Fonte: Elaboração própria, a partir dos registros experimentais (2026).
-
-Os identificadores S0 a S3 correspondem aos modos SUM8; C1 a C3, aos modos CRC8. As pastas do material experimental foram organizadas como dados/TECNICA_modoN_1000. Cada uma contém os seis arquivos originais da coleta, preservados byte a byte. O manifesto SHA256 registra a integridade dessas cópias.
-
-## A.1 Registro RX do quadro 232
-
-seq_enlace=232; seq_rx=232; tecnica=SUM8; residuo=0;
-decisao=ACEITO; status=NAO_DETECTADO; payload_confere=NAO;
-verificacao_us=1; intervalo_inicio_us=101000;
-corpo_rx_hex=07E800150EB499A1;
-corpo_tx_hex=07E800958EB499A1;
-motivo=CHECADO_ANTES_DA_COPIA.
-
-## A.2 Linhas do injetor para o mesmo quadro
-
-Campos do CSV, na ordem original: sequência, modo, byte_payload, máscara alvo, timestamp_us, antes, depois amostrado, máscara alterada, mudou, sincronismo, atraso máximo, amostras tardias, pulsos tardios e duração do byte.
-
-232,2,0,80,888739020,95,15,80,
-SIM,SIM,1,00,00,89
-
-232,2,1,80,888742020,8E,0E,80,
-SIM,SIM,1,00,00,89
-
-As quebras de linha acima servem apenas à diagramação. Nos arquivos originais, cada registro ocupa uma linha. A máscara 0x80 corresponde ao bit 7; em ambos os bytes, o registro informa alteração efetiva e sincronismo válido.
+1. Implementações TX, RX e RUÍDO da revisão CORPO64: revisoes/corpo64/firmware/. O código é a fonte dos parâmetros do protocolo, sorteio, temporização e critérios de decisão.
+2. Especificação registrada antes desta revisão: revisoes/corpo64/ESPECIFICACAO_REVISAO_PRE_IMPLEMENTACAO.md. Documento histórico, não atualização retrospectiva da proposta.
+3. Sete coletas físicas de 19/10/2026: revisoes/corpo64/dados/, identificadas no Apêndice A.
+4. Controles de cálculo e recuperação transcritos do chat: evidencias/corpo64/, com procedência em ORIGEM.md.
+5. Documentação e medições anteriores: historico/payload_2026-10-17/, dados/, evidencias/ e pdfs_por_etapa/. Servem à rastreabilidade histórica e não às contagens atuais.

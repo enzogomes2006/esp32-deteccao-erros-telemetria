@@ -1,0 +1,9 @@
+﻿REVISAO AUTOMATICA DA COLETA
+Estrutura dos registros OK: True
+RX linhas: 10
+RUIDO linhas: 80
+# RESUMO,SUM8,total=10,OK=9,CORROMPIDO=1,PERDIDO=0,NAO_DETECTADO=0,taxa=0.000000
+# VALIDACAO,esperados=10,auditados=10,nao_classificados=0,sem_referencia=0,referencias_invalidas=0,repetidos_auditoria=0,cabecalhos_aceitos_divergentes=0,rodada_valida=SIM
+
+Revisao v3 CORPO64: cruza os oito bytes, residuos e decisao anterior a copia. Nao certifica montagem ou calibracao fisica.
+Problemas encontrados:

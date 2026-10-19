@@ -1,563 +1,1110 @@
 {
-  "serie": "17/10/2026 - RX completo v0.2, RUIDO captura v1.3.1, coletor v2",
-  "rx_total": 7000,
-  "ruido_total": 11561,
-  "resultados": [
+  "data": "2026-10-19",
+  "escopo": "CORPO64",
+  "origem_medicoes": "Ensaios fisicos; testes sinteticos excluidos.",
+  "series": [
     {
-      "id": "S0",
+      "pasta": "revisoes/corpo64/dados/20261019_091242_692_SUM8_modo0_1000",
+      "pasta_original": "20261019_091242_692_SUM8_modo0_1000",
       "tecnica": "SUM8",
       "modo": 0,
-      "N": 1000,
+      "quadros": 1000,
       "contagens": {
         "OK": 1000,
         "CORROMPIDO": 0,
         "PERDIDO": 0,
         "NAO_DETECTADO": 0
       },
-      "taxa_fracao": null,
-      "taxa_percentual": null,
-      "pasta_fonte": "20261017_191422_664_SUM8_modo0_1000",
-      "destino": "dados/SUM8_modo0_1000",
-      "rx_linhas": 1000,
-      "ruido_linhas": 4000,
-      "bits_reais_alterados_histograma": {
-        "0": 1000
-      },
-      "verificacao_us": {
-        "N": 1000,
-        "media": 1,
+      "taxa_nao_deteccao": null,
+      "denominador_nao_deteccao": 0,
+      "verificacao_rx_us": {
+        "n": 1000,
+        "media": 1.011,
+        "mediana": 1.0,
         "min": 1,
-        "max": 1
+        "max": 2
       },
-      "intervalo_us": {
-        "N": 999,
-        "media": 101001.001001001,
-        "min": 100999,
-        "max": 101919
+      "intervalo_inicio_rx_us": {
+        "n": 999,
+        "media": 101001.002002002,
+        "mediana": 101000,
+        "min": 100998,
+        "max": 101917
       },
-      "inicio": "2026-10-17T19:14:22.6645657-03:00",
-      "fim": "2026-10-17T19:16:11.9758926-03:00"
+      "perdas_por_motivo": {},
+      "alvos_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 0,
+        "SEQ_H": 0,
+        "P0": 0,
+        "P1": 0,
+        "P2": 0,
+        "P3": 0,
+        "CHK": 0
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 0,
+        "SEQ_H": 0,
+        "P0": 0,
+        "P1": 0,
+        "P2": 0,
+        "P3": 0,
+        "CHK": 0
+      },
+      "quadros_com_alteracao_fisica": 0,
+      "cabecalhos_divergentes": 0,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 8000,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
     },
     {
-      "id": "S1",
+      "pasta": "revisoes/corpo64/dados/20261019_094547_976_SUM8_modo1_1000",
+      "pasta_original": "20261019_094547_976_SUM8_modo1_1000",
       "tecnica": "SUM8",
       "modo": 1,
-      "N": 1000,
+      "quadros": 1000,
       "contagens": {
-        "OK": 469,
-        "CORROMPIDO": 531,
+        "OK": 563,
+        "CORROMPIDO": 392,
+        "PERDIDO": 45,
+        "NAO_DETECTADO": 0
+      },
+      "taxa_nao_deteccao": 0.0,
+      "denominador_nao_deteccao": 392,
+      "verificacao_rx_us": {
+        "n": 955,
+        "media": 1.0094240837696336,
+        "mediana": 1,
+        "min": 1,
+        "max": 7
+      },
+      "intervalo_inicio_rx_us": {
+        "n": 999,
+        "media": 101000.03703703704,
+        "mediana": 101000,
+        "min": 100992,
+        "max": 101023
+      },
+      "perdas_por_motivo": {
+        "LEN_INVALIDO": 45
+      },
+      "alvos_por_campo": {
+        "LEN": 123,
+        "SEQ_L": 134,
+        "SEQ_H": 117,
+        "P0": 117,
+        "P1": 126,
+        "P2": 125,
+        "P3": 122,
+        "CHK": 136
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 45,
+        "SEQ_L": 65,
+        "SEQ_H": 23,
+        "P0": 56,
+        "P1": 76,
+        "P2": 54,
+        "P3": 59,
+        "CHK": 59
+      },
+      "quadros_com_alteracao_fisica": 437,
+      "cabecalhos_divergentes": 133,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 8000,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
+    },
+    {
+      "pasta": "revisoes/corpo64/dados/20261019_095219_782_SUM8_modo2_1000",
+      "pasta_original": "20261019_095219_782_SUM8_modo2_1000",
+      "tecnica": "SUM8",
+      "modo": 2,
+      "quadros": 1000,
+      "contagens": {
+        "OK": 289,
+        "CORROMPIDO": 619,
+        "PERDIDO": 90,
+        "NAO_DETECTADO": 2
+      },
+      "taxa_nao_deteccao": 0.00322061191626409,
+      "denominador_nao_deteccao": 621,
+      "verificacao_rx_us": {
+        "n": 910,
+        "media": 1.0021978021978022,
+        "mediana": 1.0,
+        "min": 1,
+        "max": 2
+      },
+      "intervalo_inicio_rx_us": {
+        "n": 999,
+        "media": 101001.002002002,
+        "mediana": 101000,
+        "min": 100998,
+        "max": 101917
+      },
+      "perdas_por_motivo": {
+        "LEN_INVALIDO": 90
+      },
+      "alvos_por_campo": {
+        "LEN": 246,
+        "SEQ_L": 245,
+        "SEQ_H": 279,
+        "P0": 218,
+        "P1": 250,
+        "P2": 245,
+        "P3": 254,
+        "CHK": 263
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 92,
+        "SEQ_L": 132,
+        "SEQ_H": 32,
+        "P0": 119,
+        "P1": 139,
+        "P2": 124,
+        "P3": 145,
+        "CHK": 126
+      },
+      "quadros_com_alteracao_fisica": 711,
+      "cabecalhos_divergentes": 240,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 8000,
+      "casos_nao_detectados": [
+        {
+          "sequencia": 415,
+          "evento_id": 416,
+          "corpo_tx_hex": "079F0187BA1E13E7",
+          "corpo_rx_hex": "079F0107BA1E1367",
+          "soma_tx": 768,
+          "soma_rx": 512,
+          "residuo": 0,
+          "entregue_aplicacao": "SIM",
+          "efeitos": [
+            {
+              "campo": "P0",
+              "indice": 3,
+              "antes": "87",
+              "depois": "07",
+              "mascara": "80"
+            },
+            {
+              "campo": "CHK",
+              "indice": 7,
+              "antes": "E7",
+              "depois": "67",
+              "mascara": "80"
+            }
+          ],
+          "decisao_us": 709748318,
+          "referencia_us": 709762509
+        },
+        {
+          "sequencia": 553,
+          "evento_id": 554,
+          "corpo_tx_hex": "072902EACFD9B389",
+          "corpo_rx_hex": "072902EACFD93309",
+          "soma_tx": 1024,
+          "soma_rx": 768,
+          "residuo": 0,
+          "entregue_aplicacao": "SIM",
+          "efeitos": [
+            {
+              "campo": "P3",
+              "indice": 6,
+              "antes": "B3",
+              "depois": "33",
+              "mascara": "80"
+            },
+            {
+              "campo": "CHK",
+              "indice": 7,
+              "antes": "89",
+              "depois": "09",
+              "mascara": "80"
+            }
+          ],
+          "decisao_us": 723686327,
+          "referencia_us": 723700531
+        }
+      ],
+      "validacao_independente": "PASS"
+    },
+    {
+      "pasta": "revisoes/corpo64/dados/20261019_095929_835_SUM8_modo3_1000",
+      "pasta_original": "20261019_095929_835_SUM8_modo3_1000",
+      "tecnica": "SUM8",
+      "modo": 3,
+      "quadros": 1000,
+      "contagens": {
+        "OK": 100,
+        "CORROMPIDO": 809,
+        "PERDIDO": 91,
+        "NAO_DETECTADO": 0
+      },
+      "taxa_nao_deteccao": 0.0,
+      "denominador_nao_deteccao": 809,
+      "verificacao_rx_us": {
+        "n": 909,
+        "media": 1.0022002200220022,
+        "mediana": 1,
+        "min": 1,
+        "max": 2
+      },
+      "intervalo_inicio_rx_us": {
+        "n": 999,
+        "media": 101001.002002002,
+        "mediana": 101000,
+        "min": 100998,
+        "max": 101917
+      },
+      "perdas_por_motivo": {
+        "LEN_INVALIDO": 91
+      },
+      "alvos_por_campo": {
+        "LEN": 621,
+        "SEQ_L": 721,
+        "SEQ_H": 617,
+        "P0": 817,
+        "P1": 750,
+        "P2": 701,
+        "P3": 635,
+        "CHK": 670
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 213,
+        "SEQ_L": 363,
+        "SEQ_H": 65,
+        "P0": 442,
+        "P1": 388,
+        "P2": 345,
+        "P3": 323,
+        "CHK": 342
+      },
+      "quadros_com_alteracao_fisica": 900,
+      "cabecalhos_divergentes": 270,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 8000,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
+    },
+    {
+      "pasta": "revisoes/corpo64/dados/20261019_100416_161_CRC8_modo1_1000",
+      "pasta_original": "20261019_100416_161_CRC8_modo1_1000",
+      "tecnica": "CRC8",
+      "modo": 1,
+      "quadros": 1000,
+      "contagens": {
+        "OK": 540,
+        "CORROMPIDO": 418,
+        "PERDIDO": 42,
+        "NAO_DETECTADO": 0
+      },
+      "taxa_nao_deteccao": 0.0,
+      "denominador_nao_deteccao": 418,
+      "verificacao_rx_us": {
+        "n": 958,
+        "media": 3.0052192066805845,
+        "mediana": 3.0,
+        "min": 3,
+        "max": 5
+      },
+      "intervalo_inicio_rx_us": {
+        "n": 999,
+        "media": 101001.003003003,
+        "mediana": 101000,
+        "min": 100998,
+        "max": 101917
+      },
+      "perdas_por_motivo": {
+        "LEN_INVALIDO": 42
+      },
+      "alvos_por_campo": {
+        "LEN": 109,
+        "SEQ_L": 130,
+        "SEQ_H": 131,
+        "P0": 138,
+        "P1": 130,
+        "P2": 122,
+        "P3": 140,
+        "CHK": 100
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 42,
+        "SEQ_L": 71,
+        "SEQ_H": 19,
+        "P0": 79,
+        "P1": 70,
+        "P2": 57,
+        "P3": 70,
+        "CHK": 52
+      },
+      "quadros_com_alteracao_fisica": 460,
+      "cabecalhos_divergentes": 132,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 8000,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
+    },
+    {
+      "pasta": "revisoes/corpo64/dados/20261019_100921_806_CRC8_modo2_1000",
+      "pasta_original": "20261019_100921_806_CRC8_modo2_1000",
+      "tecnica": "CRC8",
+      "modo": 2,
+      "quadros": 1000,
+      "contagens": {
+        "OK": 305,
+        "CORROMPIDO": 593,
+        "PERDIDO": 102,
+        "NAO_DETECTADO": 0
+      },
+      "taxa_nao_deteccao": 0.0,
+      "denominador_nao_deteccao": 593,
+      "verificacao_rx_us": {
+        "n": 898,
+        "media": 3.002227171492205,
+        "mediana": 3.0,
+        "min": 3,
+        "max": 4
+      },
+      "intervalo_inicio_rx_us": {
+        "n": 999,
+        "media": 101000.04504504504,
+        "mediana": 101000,
+        "min": 101000,
+        "max": 101023
+      },
+      "perdas_por_motivo": {
+        "LEN_INVALIDO": 102
+      },
+      "alvos_por_campo": {
+        "LEN": 252,
+        "SEQ_L": 254,
+        "SEQ_H": 271,
+        "P0": 222,
+        "P1": 242,
+        "P2": 231,
+        "P3": 261,
+        "CHK": 267
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 104,
+        "SEQ_L": 132,
+        "SEQ_H": 29,
+        "P0": 107,
+        "P1": 134,
+        "P2": 113,
+        "P3": 128,
+        "CHK": 137
+      },
+      "quadros_com_alteracao_fisica": 695,
+      "cabecalhos_divergentes": 249,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 8000,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
+    },
+    {
+      "pasta": "revisoes/corpo64/dados/20261019_101329_766_CRC8_modo3_1000",
+      "pasta_original": "20261019_101329_766_CRC8_modo3_1000",
+      "tecnica": "CRC8",
+      "modo": 3,
+      "quadros": 1000,
+      "contagens": {
+        "OK": 116,
+        "CORROMPIDO": 792,
+        "PERDIDO": 92,
+        "NAO_DETECTADO": 0
+      },
+      "taxa_nao_deteccao": 0.0,
+      "denominador_nao_deteccao": 792,
+      "verificacao_rx_us": {
+        "n": 908,
+        "media": 3.002202643171806,
+        "mediana": 3.0,
+        "min": 3,
+        "max": 4
+      },
+      "intervalo_inicio_rx_us": {
+        "n": 999,
+        "media": 101000.06606606607,
+        "mediana": 101000,
+        "min": 100999,
+        "max": 101023
+      },
+      "perdas_por_motivo": {
+        "LEN_INVALIDO": 92
+      },
+      "alvos_por_campo": {
+        "LEN": 627,
+        "SEQ_L": 841,
+        "SEQ_H": 717,
+        "P0": 606,
+        "P1": 730,
+        "P2": 701,
+        "P3": 696,
+        "CHK": 709
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 212,
+        "SEQ_L": 419,
+        "SEQ_H": 63,
+        "P0": 321,
+        "P1": 372,
+        "P2": 347,
+        "P3": 358,
+        "CHK": 341
+      },
+      "quadros_com_alteracao_fisica": 884,
+      "cabecalhos_divergentes": 291,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 8000,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
+    }
+  ],
+  "triagem": [
+    {
+      "pasta": "revisoes/corpo64/triagem/20261019_085335_636_SUM8_modo0_10",
+      "pasta_original": "20261019_085335_636_SUM8_modo0_10",
+      "tecnica": "SUM8",
+      "modo": 0,
+      "quadros": 10,
+      "contagens": {
+        "OK": 10,
+        "CORROMPIDO": 0,
         "PERDIDO": 0,
         "NAO_DETECTADO": 0
       },
-      "taxa_fracao": 0.0,
-      "taxa_percentual": 0.0,
-      "pasta_fonte": "20261017_184431_084_SUM8_modo1_1000",
-      "destino": "dados/SUM8_modo1_1000",
-      "rx_linhas": 1000,
-      "ruido_linhas": 1000,
-      "bits_reais_alterados_histograma": {
-        "0": 469,
-        "1": 531
+      "taxa_nao_deteccao": null,
+      "denominador_nao_deteccao": 0,
+      "verificacao_rx_us": {
+        "n": 10,
+        "media": 1.6,
+        "mediana": 1.0,
+        "min": 1,
+        "max": 7
       },
-      "verificacao_us": {
-        "N": 1000,
+      "intervalo_inicio_rx_us": {
+        "n": 9,
+        "media": 100998.55555555556,
+        "mediana": 101000,
+        "min": 100987,
+        "max": 101000
+      },
+      "perdas_por_motivo": {},
+      "alvos_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 0,
+        "SEQ_H": 0,
+        "P0": 0,
+        "P1": 0,
+        "P2": 0,
+        "P3": 0,
+        "CHK": 0
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 0,
+        "SEQ_H": 0,
+        "P0": 0,
+        "P1": 0,
+        "P2": 0,
+        "P3": 0,
+        "CHK": 0
+      },
+      "quadros_com_alteracao_fisica": 0,
+      "cabecalhos_divergentes": 0,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 80,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
+    },
+    {
+      "pasta": "revisoes/corpo64/triagem/20261019_085556_983_SUM8_modo1_10",
+      "pasta_original": "20261019_085556_983_SUM8_modo1_10",
+      "tecnica": "SUM8",
+      "modo": 1,
+      "quadros": 10,
+      "contagens": {
+        "OK": 9,
+        "CORROMPIDO": 1,
+        "PERDIDO": 0,
+        "NAO_DETECTADO": 0
+      },
+      "taxa_nao_deteccao": 0.0,
+      "denominador_nao_deteccao": 1,
+      "verificacao_rx_us": {
+        "n": 10,
         "media": 1,
+        "mediana": 1.0,
         "min": 1,
         "max": 1
       },
-      "intervalo_us": {
-        "N": 999,
-        "media": 101000,
-        "min": 100999,
+      "intervalo_inicio_rx_us": {
+        "n": 9,
+        "media": 101000.11111111111,
+        "mediana": 101000,
+        "min": 101000,
         "max": 101001
       },
-      "inicio": "2026-10-17T18:44:31.0849033-03:00",
-      "fim": "2026-10-17T18:46:21.5484133-03:00"
+      "perdas_por_motivo": {},
+      "alvos_por_campo": {
+        "LEN": 1,
+        "SEQ_L": 5,
+        "SEQ_H": 0,
+        "P0": 1,
+        "P1": 0,
+        "P2": 1,
+        "P3": 1,
+        "CHK": 1
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 0,
+        "SEQ_H": 0,
+        "P0": 1,
+        "P1": 0,
+        "P2": 0,
+        "P3": 0,
+        "CHK": 0
+      },
+      "quadros_com_alteracao_fisica": 1,
+      "cabecalhos_divergentes": 0,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 80,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
     },
     {
-      "id": "S2",
+      "pasta": "revisoes/corpo64/triagem/20261019_085705_555_SUM8_modo2_10",
+      "pasta_original": "20261019_085705_555_SUM8_modo2_10",
       "tecnica": "SUM8",
       "modo": 2,
-      "N": 1000,
+      "quadros": 10,
       "contagens": {
-        "OK": 213,
-        "CORROMPIDO": 783,
-        "PERDIDO": 0,
-        "NAO_DETECTADO": 4
+        "OK": 6,
+        "CORROMPIDO": 3,
+        "PERDIDO": 1,
+        "NAO_DETECTADO": 0
       },
-      "taxa_fracao": 0.005082592121982211,
-      "taxa_percentual": 0.5082592121982211,
-      "pasta_fonte": "20261017_185353_632_SUM8_modo2_1000",
-      "destino": "dados/SUM8_modo2_1000",
-      "rx_linhas": 1000,
-      "ruido_linhas": 1790,
-      "bits_reais_alterados_histograma": {
-        "2": 276,
-        "1": 511,
-        "0": 213
-      },
-      "verificacao_us": {
-        "N": 1000,
+      "taxa_nao_deteccao": 0.0,
+      "denominador_nao_deteccao": 3,
+      "verificacao_rx_us": {
+        "n": 9,
         "media": 1,
+        "mediana": 1,
         "min": 1,
         "max": 1
       },
-      "intervalo_us": {
-        "N": 999,
-        "media": 101000.04304304304,
-        "min": 100999,
-        "max": 101022
-      },
-      "inicio": "2026-10-17T18:53:53.6353075-03:00",
-      "fim": "2026-10-17T18:55:44.8663653-03:00"
-    },
-    {
-      "id": "S3",
-      "tecnica": "SUM8",
-      "modo": 3,
-      "N": 1000,
-      "contagens": {
-        "OK": 44,
-        "CORROMPIDO": 956,
-        "PERDIDO": 0,
-        "NAO_DETECTADO": 0
-      },
-      "taxa_fracao": 0.0,
-      "taxa_percentual": 0.0,
-      "pasta_fonte": "20261017_190634_547_SUM8_modo3_1000",
-      "destino": "dados/SUM8_modo3_1000",
-      "rx_linhas": 1000,
-      "ruido_linhas": 1000,
-      "bits_reais_alterados_histograma": {
-        "3": 246,
-        "5": 111,
-        "2": 248,
-        "1": 146,
-        "4": 158,
-        "0": 44,
-        "6": 39,
-        "7": 8
-      },
-      "verificacao_us": {
-        "N": 1000,
-        "media": 1,
-        "min": 1,
-        "max": 1
-      },
-      "intervalo_us": {
-        "N": 999,
-        "media": 101000.95795795796,
-        "min": 100999,
-        "max": 101919
-      },
-      "inicio": "2026-10-17T19:06:34.5476178-03:00",
-      "fim": "2026-10-17T19:08:33.9079467-03:00"
-    },
-    {
-      "id": "C1",
-      "tecnica": "CRC8",
-      "modo": 1,
-      "N": 1000,
-      "contagens": {
-        "OK": 443,
-        "CORROMPIDO": 557,
-        "PERDIDO": 0,
-        "NAO_DETECTADO": 0
-      },
-      "taxa_fracao": 0.0,
-      "taxa_percentual": 0.0,
-      "pasta_fonte": "20261017_185043_967_CRC8_modo1_1000",
-      "destino": "dados/CRC8_modo1_1000",
-      "rx_linhas": 1000,
-      "ruido_linhas": 1000,
-      "bits_reais_alterados_histograma": {
-        "0": 443,
-        "1": 557
-      },
-      "verificacao_us": {
-        "N": 1000,
-        "media": 3,
-        "min": 3,
-        "max": 3
-      },
-      "intervalo_us": {
-        "N": 999,
-        "media": 101001.001001001,
-        "min": 100999,
-        "max": 101919
-      },
-      "inicio": "2026-10-17T18:50:43.9674341-03:00",
-      "fim": "2026-10-17T18:52:34.2974185-03:00"
-    },
-    {
-      "id": "C2",
-      "tecnica": "CRC8",
-      "modo": 2,
-      "N": 1000,
-      "contagens": {
-        "OK": 195,
-        "CORROMPIDO": 805,
-        "PERDIDO": 0,
-        "NAO_DETECTADO": 0
-      },
-      "taxa_fracao": 0.0,
-      "taxa_percentual": 0.0,
-      "pasta_fonte": "20261017_185759_222_CRC8_modo2_1000",
-      "destino": "dados/CRC8_modo2_1000",
-      "rx_linhas": 1000,
-      "ruido_linhas": 1771,
-      "bits_reais_alterados_histograma": {
-        "1": 484,
-        "2": 321,
-        "0": 195
-      },
-      "verificacao_us": {
-        "N": 1000,
-        "media": 3,
-        "min": 3,
-        "max": 3
-      },
-      "intervalo_us": {
-        "N": 999,
-        "media": 101001.001001001,
-        "min": 100999,
-        "max": 101919
-      },
-      "inicio": "2026-10-17T18:57:59.2232156-03:00",
-      "fim": "2026-10-17T18:59:48.7887364-03:00"
-    },
-    {
-      "id": "C3",
-      "tecnica": "CRC8",
-      "modo": 3,
-      "N": 1000,
-      "contagens": {
-        "OK": 26,
-        "CORROMPIDO": 974,
-        "PERDIDO": 0,
-        "NAO_DETECTADO": 0
-      },
-      "taxa_fracao": 0.0,
-      "taxa_percentual": 0.0,
-      "pasta_fonte": "20261017_191057_739_CRC8_modo3_1000",
-      "destino": "dados/CRC8_modo3_1000",
-      "rx_linhas": 1000,
-      "ruido_linhas": 1000,
-      "bits_reais_alterados_histograma": {
-        "4": 185,
-        "2": 246,
-        "3": 245,
-        "1": 167,
-        "0": 26,
-        "5": 86,
-        "6": 35,
-        "7": 9,
-        "8": 1
-      },
-      "verificacao_us": {
-        "N": 1000,
-        "media": 3,
-        "min": 3,
-        "max": 3
-      },
-      "intervalo_us": {
-        "N": 999,
+      "intervalo_inicio_rx_us": {
+        "n": 9,
         "media": 101000,
+        "mediana": 101000,
         "min": 101000,
         "max": 101000
       },
-      "inicio": "2026-10-17T19:10:57.7395170-03:00",
-      "fim": "2026-10-17T19:12:51.3398094-03:00"
+      "perdas_por_motivo": {
+        "LEN_INVALIDO": 1
+      },
+      "alvos_por_campo": {
+        "LEN": 3,
+        "SEQ_L": 3,
+        "SEQ_H": 4,
+        "P0": 2,
+        "P1": 3,
+        "P2": 1,
+        "P3": 1,
+        "CHK": 3
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 1,
+        "SEQ_L": 1,
+        "SEQ_H": 0,
+        "P0": 1,
+        "P1": 2,
+        "P2": 0,
+        "P3": 1,
+        "CHK": 0
+      },
+      "quadros_com_alteracao_fisica": 4,
+      "cabecalhos_divergentes": 1,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 80,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
+    },
+    {
+      "pasta": "revisoes/corpo64/triagem/20261019_085757_703_SUM8_modo3_10",
+      "pasta_original": "20261019_085757_703_SUM8_modo3_10",
+      "tecnica": "SUM8",
+      "modo": 3,
+      "quadros": 10,
+      "contagens": {
+        "OK": 2,
+        "CORROMPIDO": 8,
+        "PERDIDO": 0,
+        "NAO_DETECTADO": 0
+      },
+      "taxa_nao_deteccao": 0.0,
+      "denominador_nao_deteccao": 8,
+      "verificacao_rx_us": {
+        "n": 10,
+        "media": 1,
+        "mediana": 1.0,
+        "min": 1,
+        "max": 1
+      },
+      "intervalo_inicio_rx_us": {
+        "n": 9,
+        "media": 101000.11111111111,
+        "mediana": 101000,
+        "min": 101000,
+        "max": 101001
+      },
+      "perdas_por_motivo": {},
+      "alvos_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 5,
+        "SEQ_H": 15,
+        "P0": 0,
+        "P1": 6,
+        "P2": 5,
+        "P3": 13,
+        "CHK": 9
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 1,
+        "SEQ_H": 0,
+        "P0": 0,
+        "P1": 4,
+        "P2": 2,
+        "P3": 7,
+        "CHK": 4
+      },
+      "quadros_com_alteracao_fisica": 8,
+      "cabecalhos_divergentes": 1,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 80,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
+    },
+    {
+      "pasta": "revisoes/corpo64/triagem/20261019_085918_397_CRC8_modo1_10",
+      "pasta_original": "20261019_085918_397_CRC8_modo1_10",
+      "tecnica": "CRC8",
+      "modo": 1,
+      "quadros": 10,
+      "contagens": {
+        "OK": 7,
+        "CORROMPIDO": 3,
+        "PERDIDO": 0,
+        "NAO_DETECTADO": 0
+      },
+      "taxa_nao_deteccao": 0.0,
+      "denominador_nao_deteccao": 3,
+      "verificacao_rx_us": {
+        "n": 10,
+        "media": 3.2,
+        "mediana": 3.0,
+        "min": 3,
+        "max": 5
+      },
+      "intervalo_inicio_rx_us": {
+        "n": 9,
+        "media": 101000,
+        "mediana": 101000,
+        "min": 101000,
+        "max": 101000
+      },
+      "perdas_por_motivo": {},
+      "alvos_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 0,
+        "SEQ_H": 2,
+        "P0": 0,
+        "P1": 5,
+        "P2": 1,
+        "P3": 1,
+        "CHK": 1
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 0,
+        "SEQ_H": 0,
+        "P0": 0,
+        "P1": 2,
+        "P2": 0,
+        "P3": 1,
+        "CHK": 0
+      },
+      "quadros_com_alteracao_fisica": 3,
+      "cabecalhos_divergentes": 0,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 80,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
+    },
+    {
+      "pasta": "revisoes/corpo64/triagem/20261019_090046_797_CRC8_modo2_10",
+      "pasta_original": "20261019_090046_797_CRC8_modo2_10",
+      "tecnica": "CRC8",
+      "modo": 2,
+      "quadros": 10,
+      "contagens": {
+        "OK": 4,
+        "CORROMPIDO": 6,
+        "PERDIDO": 0,
+        "NAO_DETECTADO": 0
+      },
+      "taxa_nao_deteccao": 0.0,
+      "denominador_nao_deteccao": 6,
+      "verificacao_rx_us": {
+        "n": 10,
+        "media": 3,
+        "mediana": 3.0,
+        "min": 3,
+        "max": 3
+      },
+      "intervalo_inicio_rx_us": {
+        "n": 9,
+        "media": 101000.11111111111,
+        "mediana": 101000,
+        "min": 101000,
+        "max": 101001
+      },
+      "perdas_por_motivo": {},
+      "alvos_por_campo": {
+        "LEN": 3,
+        "SEQ_L": 3,
+        "SEQ_H": 4,
+        "P0": 1,
+        "P1": 2,
+        "P2": 5,
+        "P3": 1,
+        "CHK": 1
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 1,
+        "SEQ_H": 0,
+        "P0": 0,
+        "P1": 2,
+        "P2": 2,
+        "P3": 0,
+        "CHK": 1
+      },
+      "quadros_com_alteracao_fisica": 6,
+      "cabecalhos_divergentes": 1,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 80,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
+    },
+    {
+      "pasta": "revisoes/corpo64/triagem/20261019_090207_975_CRC8_modo3_10",
+      "pasta_original": "20261019_090207_975_CRC8_modo3_10",
+      "tecnica": "CRC8",
+      "modo": 3,
+      "quadros": 10,
+      "contagens": {
+        "OK": 3,
+        "CORROMPIDO": 7,
+        "PERDIDO": 0,
+        "NAO_DETECTADO": 0
+      },
+      "taxa_nao_deteccao": 0.0,
+      "denominador_nao_deteccao": 7,
+      "verificacao_rx_us": {
+        "n": 10,
+        "media": 3,
+        "mediana": 3.0,
+        "min": 3,
+        "max": 3
+      },
+      "intervalo_inicio_rx_us": {
+        "n": 9,
+        "media": 101000.11111111111,
+        "mediana": 101000,
+        "min": 101000,
+        "max": 101001
+      },
+      "perdas_por_motivo": {},
+      "alvos_por_campo": {
+        "LEN": 3,
+        "SEQ_L": 0,
+        "SEQ_H": 14,
+        "P0": 12,
+        "P1": 3,
+        "P2": 0,
+        "P3": 18,
+        "CHK": 5
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 0,
+        "SEQ_H": 0,
+        "P0": 6,
+        "P1": 1,
+        "P2": 0,
+        "P3": 10,
+        "CHK": 4
+      },
+      "quadros_com_alteracao_fisica": 7,
+      "cabecalhos_divergentes": 0,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 80,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
+    },
+    {
+      "pasta": "revisoes/corpo64/triagem/20261019_102158_177_SUM8_modo0_10",
+      "pasta_original": "20261019_102158_177_SUM8_modo0_10",
+      "tecnica": "SUM8",
+      "modo": 0,
+      "quadros": 10,
+      "contagens": {
+        "OK": 10,
+        "CORROMPIDO": 0,
+        "PERDIDO": 0,
+        "NAO_DETECTADO": 0
+      },
+      "taxa_nao_deteccao": null,
+      "denominador_nao_deteccao": 0,
+      "verificacao_rx_us": {
+        "n": 10,
+        "media": 1,
+        "mediana": 1.0,
+        "min": 1,
+        "max": 1
+      },
+      "intervalo_inicio_rx_us": {
+        "n": 9,
+        "media": 101000.11111111111,
+        "mediana": 101000,
+        "min": 101000,
+        "max": 101001
+      },
+      "perdas_por_motivo": {},
+      "alvos_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 0,
+        "SEQ_H": 0,
+        "P0": 0,
+        "P1": 0,
+        "P2": 0,
+        "P3": 0,
+        "CHK": 0
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 0,
+        "SEQ_H": 0,
+        "P0": 0,
+        "P1": 0,
+        "P2": 0,
+        "P3": 0,
+        "CHK": 0
+      },
+      "quadros_com_alteracao_fisica": 0,
+      "cabecalhos_divergentes": 0,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 80,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
+    },
+    {
+      "pasta": "revisoes/corpo64/triagem/20261019_102351_826_CRC8_modo0_10",
+      "pasta_original": "20261019_102351_826_CRC8_modo0_10",
+      "tecnica": "CRC8",
+      "modo": 0,
+      "quadros": 10,
+      "contagens": {
+        "OK": 10,
+        "CORROMPIDO": 0,
+        "PERDIDO": 0,
+        "NAO_DETECTADO": 0
+      },
+      "taxa_nao_deteccao": null,
+      "denominador_nao_deteccao": 0,
+      "verificacao_rx_us": {
+        "n": 10,
+        "media": 3,
+        "mediana": 3.0,
+        "min": 3,
+        "max": 3
+      },
+      "intervalo_inicio_rx_us": {
+        "n": 9,
+        "media": 101000.11111111111,
+        "mediana": 101000,
+        "min": 101000,
+        "max": 101001
+      },
+      "perdas_por_motivo": {},
+      "alvos_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 0,
+        "SEQ_H": 0,
+        "P0": 0,
+        "P1": 0,
+        "P2": 0,
+        "P3": 0,
+        "CHK": 0
+      },
+      "bits_alterados_por_campo": {
+        "LEN": 0,
+        "SEQ_L": 0,
+        "SEQ_H": 0,
+        "P0": 0,
+        "P1": 0,
+        "P2": 0,
+        "P3": 0,
+        "CHK": 0
+      },
+      "quadros_com_alteracao_fisica": 0,
+      "cabecalhos_divergentes": 0,
+      "cabecalhos_aceitos_divergentes": 0,
+      "amostras_ruido": 80,
+      "casos_nao_detectados": [],
+      "validacao_independente": "PASS"
     }
   ],
+  "verificacao_rx_agregada_us": {
+    "SUM8": {
+      "n": 3774,
+      "media": 1.0063593004769475,
+      "mediana": 1.0,
+      "min": 1,
+      "max": 7
+    },
+    "CRC8": {
+      "n": 2764,
+      "media": 3.0032561505065125,
+      "mediana": 3.0,
+      "min": 3,
+      "max": 5
+    }
+  },
+  "controles_complementares": {
+    "SUM8": {
+      "calculo_us": {
+        "n": 10,
+        "media": 1,
+        "mediana": 1.0,
+        "min": 1,
+        "max": 1
+      },
+      "intervalo_us": {
+        "n": 9,
+        "media": 101000,
+        "mediana": 101000,
+        "min": 101000,
+        "max": 101000
+      },
+      "fonte": "evidencias/corpo64/tx_SUM8_10.log",
+      "cruzamento_referencias": "PASS"
+    },
+    "CRC8": {
+      "calculo_us": {
+        "n": 10,
+        "media": 3,
+        "mediana": 3.0,
+        "min": 3,
+        "max": 3
+      },
+      "intervalo_us": {
+        "n": 9,
+        "media": 101000,
+        "mediana": 101000,
+        "min": 101000,
+        "max": 101000
+      },
+      "fonte": "evidencias/corpo64/tx_CRC8_10.log",
+      "cruzamento_referencias": "PASS"
+    },
+    "recuperacao": {
+      "fonte": "evidencias/corpo64/rx_recuperacao_SUM8_10.log",
+      "tecnica": "SUM8",
+      "quadros": 10,
+      "ok": 7,
+      "perdidos": 3,
+      "sequencias_perdidas": [
+        2,
+        3,
+        4
+      ],
+      "uart_desligada_us": 350443,
+      "apos_reativar_us": 38691,
+      "desde_deteccao_us": 153114,
+      "primeira_sequencia_aceita": 5,
+      "origem": "Transcricao fornecida no chat; ver ORIGEM.md",
+      "validacao": "PASS"
+    }
+  },
   "casos_nao_detectados": [
     {
-      "fonte": "S2",
-      "pasta": "20261017_185353_632_SUM8_modo2_1000",
-      "seq": 232,
-      "original_hex": "07E800958EB499A1",
-      "recebido_hex": "07E800150EB499A1",
-      "soma_original": 1024,
-      "soma_recebido": 768,
+      "sequencia": 415,
+      "evento_id": 416,
+      "corpo_tx_hex": "079F0187BA1E13E7",
+      "corpo_rx_hex": "079F0107BA1E1367",
+      "soma_tx": 768,
+      "soma_rx": 512,
       "residuo": 0,
-      "ruido": [
+      "entregue_aplicacao": "SIM",
+      "efeitos": [
         {
-          "seq": "232",
-          "modo": "2",
-          "byte_payload": "0",
-          "mascara_alvo_hex": "80",
-          "timestamp_us": "888739020",
-          "antes_hex": "95",
-          "depois_amostrado_hex": "15",
-          "mascara_mudou_hex": "80",
-          "mudou": "SIM",
-          "sincronismo_ok": "SIM",
-          "atraso_amostra_max_us": "1",
-          "amostras_tardias_hex": "00",
-          "pulsos_tardios_hex": "00",
-          "duracao_byte_us": "89"
+          "campo": "P0",
+          "indice": 3,
+          "antes": "87",
+          "depois": "07",
+          "mascara": "80"
         },
         {
-          "seq": "232",
-          "modo": "2",
-          "byte_payload": "1",
-          "mascara_alvo_hex": "80",
-          "timestamp_us": "888742020",
-          "antes_hex": "8E",
-          "depois_amostrado_hex": "0E",
-          "mascara_mudou_hex": "80",
-          "mudou": "SIM",
-          "sincronismo_ok": "SIM",
-          "atraso_amostra_max_us": "1",
-          "amostras_tardias_hex": "00",
-          "pulsos_tardios_hex": "00",
-          "duracao_byte_us": "89"
+          "campo": "CHK",
+          "indice": 7,
+          "antes": "E7",
+          "depois": "67",
+          "mascara": "80"
         }
       ],
-      "linha_rx": {
-        "seq_enlace": "232",
-        "seq_rx": "232",
-        "tecnica": "SUM8",
-        "residuo": "0",
-        "decisao": "ACEITO",
-        "status": "NAO_DETECTADO",
-        "payload_confere": "NAO",
-        "verificacao_us": "1",
-        "intervalo_inicio_us": "101000",
-        "recuperacao_ms": "-1",
-        "corpo_rx_hex": "07E800150EB499A1",
-        "corpo_tx_hex": "07E800958EB499A1",
-        "motivo": "CHECADO_ANTES_DA_COPIA"
-      }
+      "decisao_us": 709748318,
+      "referencia_us": 709762509,
+      "pasta": "revisoes/corpo64/dados/20261019_095219_782_SUM8_modo2_1000"
     },
     {
-      "fonte": "S2",
-      "pasta": "20261017_185353_632_SUM8_modo2_1000",
-      "seq": 239,
-      "original_hex": "07EF00E5A843A09A",
-      "recebido_hex": "07EF00E52843209A",
-      "soma_original": 1024,
-      "soma_recebido": 768,
+      "sequencia": 553,
+      "evento_id": 554,
+      "corpo_tx_hex": "072902EACFD9B389",
+      "corpo_rx_hex": "072902EACFD93309",
+      "soma_tx": 1024,
+      "soma_rx": 768,
       "residuo": 0,
-      "ruido": [
+      "entregue_aplicacao": "SIM",
+      "efeitos": [
         {
-          "seq": "239",
-          "modo": "2",
-          "byte_payload": "1",
-          "mascara_alvo_hex": "80",
-          "timestamp_us": "889449018",
-          "antes_hex": "A8",
-          "depois_amostrado_hex": "28",
-          "mascara_mudou_hex": "80",
-          "mudou": "SIM",
-          "sincronismo_ok": "SIM",
-          "atraso_amostra_max_us": "1",
-          "amostras_tardias_hex": "00",
-          "pulsos_tardios_hex": "00",
-          "duracao_byte_us": "89"
+          "campo": "P3",
+          "indice": 6,
+          "antes": "B3",
+          "depois": "33",
+          "mascara": "80"
         },
         {
-          "seq": "239",
-          "modo": "2",
-          "byte_payload": "3",
-          "mascara_alvo_hex": "80",
-          "timestamp_us": "889455018",
-          "antes_hex": "A0",
-          "depois_amostrado_hex": "20",
-          "mascara_mudou_hex": "80",
-          "mudou": "SIM",
-          "sincronismo_ok": "SIM",
-          "atraso_amostra_max_us": "1",
-          "amostras_tardias_hex": "00",
-          "pulsos_tardios_hex": "00",
-          "duracao_byte_us": "89"
+          "campo": "CHK",
+          "indice": 7,
+          "antes": "89",
+          "depois": "09",
+          "mascara": "80"
         }
       ],
-      "linha_rx": {
-        "seq_enlace": "239",
-        "seq_rx": "239",
-        "tecnica": "SUM8",
-        "residuo": "0",
-        "decisao": "ACEITO",
-        "status": "NAO_DETECTADO",
-        "payload_confere": "NAO",
-        "verificacao_us": "1",
-        "intervalo_inicio_us": "101000",
-        "recuperacao_ms": "-1",
-        "corpo_rx_hex": "07EF00E52843209A",
-        "corpo_tx_hex": "07EF00E5A843A09A",
-        "motivo": "CHECADO_ANTES_DA_COPIA"
-      }
-    },
-    {
-      "fonte": "S2",
-      "pasta": "20261017_185353_632_SUM8_modo2_1000",
-      "seq": 530,
-      "original_hex": "07120288BBC909D0",
-      "recebido_hex": "07120208BB4909D0",
-      "soma_original": 768,
-      "soma_recebido": 512,
-      "residuo": 0,
-      "ruido": [
-        {
-          "seq": "530",
-          "modo": "2",
-          "byte_payload": "0",
-          "mascara_alvo_hex": "80",
-          "timestamp_us": "918836921",
-          "antes_hex": "88",
-          "depois_amostrado_hex": "08",
-          "mascara_mudou_hex": "80",
-          "mudou": "SIM",
-          "sincronismo_ok": "SIM",
-          "atraso_amostra_max_us": "1",
-          "amostras_tardias_hex": "00",
-          "pulsos_tardios_hex": "00",
-          "duracao_byte_us": "89"
-        },
-        {
-          "seq": "530",
-          "modo": "2",
-          "byte_payload": "2",
-          "mascara_alvo_hex": "80",
-          "timestamp_us": "918842921",
-          "antes_hex": "C9",
-          "depois_amostrado_hex": "49",
-          "mascara_mudou_hex": "80",
-          "mudou": "SIM",
-          "sincronismo_ok": "SIM",
-          "atraso_amostra_max_us": "1",
-          "amostras_tardias_hex": "00",
-          "pulsos_tardios_hex": "00",
-          "duracao_byte_us": "89"
-        }
-      ],
-      "linha_rx": {
-        "seq_enlace": "530",
-        "seq_rx": "530",
-        "tecnica": "SUM8",
-        "residuo": "0",
-        "decisao": "ACEITO",
-        "status": "NAO_DETECTADO",
-        "payload_confere": "NAO",
-        "verificacao_us": "1",
-        "intervalo_inicio_us": "101000",
-        "recuperacao_ms": "-1",
-        "corpo_rx_hex": "07120208BB4909D0",
-        "corpo_tx_hex": "07120288BBC909D0",
-        "motivo": "CHECADO_ANTES_DA_COPIA"
-      }
-    },
-    {
-      "fonte": "S2",
-      "pasta": "20261017_185353_632_SUM8_modo2_1000",
-      "seq": 609,
-      "original_hex": "076102AF897B6B78",
-      "recebido_hex": "0761022F097B6B78",
-      "soma_original": 768,
-      "soma_recebido": 512,
-      "residuo": 0,
-      "ruido": [
-        {
-          "seq": "609",
-          "modo": "2",
-          "byte_payload": "0",
-          "mascara_alvo_hex": "80",
-          "timestamp_us": "926815895",
-          "antes_hex": "AF",
-          "depois_amostrado_hex": "2F",
-          "mascara_mudou_hex": "80",
-          "mudou": "SIM",
-          "sincronismo_ok": "SIM",
-          "atraso_amostra_max_us": "1",
-          "amostras_tardias_hex": "00",
-          "pulsos_tardios_hex": "00",
-          "duracao_byte_us": "89"
-        },
-        {
-          "seq": "609",
-          "modo": "2",
-          "byte_payload": "1",
-          "mascara_alvo_hex": "80",
-          "timestamp_us": "926818895",
-          "antes_hex": "89",
-          "depois_amostrado_hex": "09",
-          "mascara_mudou_hex": "80",
-          "mudou": "SIM",
-          "sincronismo_ok": "SIM",
-          "atraso_amostra_max_us": "1",
-          "amostras_tardias_hex": "00",
-          "pulsos_tardios_hex": "00",
-          "duracao_byte_us": "89"
-        }
-      ],
-      "linha_rx": {
-        "seq_enlace": "609",
-        "seq_rx": "609",
-        "tecnica": "SUM8",
-        "residuo": "0",
-        "decisao": "ACEITO",
-        "status": "NAO_DETECTADO",
-        "payload_confere": "NAO",
-        "verificacao_us": "1",
-        "intervalo_inicio_us": "101000",
-        "recuperacao_ms": "-1",
-        "corpo_rx_hex": "0761022F097B6B78",
-        "corpo_tx_hex": "076102AF897B6B78",
-        "motivo": "CHECADO_ANTES_DA_COPIA"
-      }
+      "decisao_us": 723686327,
+      "referencia_us": 723700531,
+      "pasta": "revisoes/corpo64/dados/20261019_095219_782_SUM8_modo2_1000"
     }
   ],
-  "firmware_referencia_sha256": {
-    "tx\\tx.ino": "c762bac4da3a3a5c38afad96a8aeda7c3d9fafc9de7c18bd52afb6a6d44983d0",
-    "rx_completo\\rx_completo.ino": "aa1dec0e72c4eb6e4c8cdcc0e94e694f1ba34cb85912151970514fde71d017c3",
-    "noise_captura_v131\\noise_captura_v131.ino": "3b894d2611f1d1e5da59dd4bc6af20d4336d15eafb6de8320d41997e28e713db",
-    "noise_captura_v131\\capture_schedule.h": "befb835299fe8fc90da2d3c1b6f91e02015cd1b1c17371e40d37b8021c4c576d",
-    "Coletor_CSV_ESP32_v2\\Coletor.ps1": "d3fbb35566216906a1d3fd034ef1a663281762bbf582f4515a8cd57f7610fc40"
-  },
-  "fontes_sha256": {
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_191422_664_SUM8_modo0_1000\\rx.csv": "ae0ea021369de73ad959911a4a47df2530b653f3f5dc42a0731ef0a5773a2f44",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_191422_664_SUM8_modo0_1000\\ruido.csv": "5a414d9b79776d43dce2e48981ed259f03a1618fafc1f6f320f181ae10538878",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_191422_664_SUM8_modo0_1000\\rx_bruto.log": "3ec4ad3a7a5c6efd5b096119478ac8dce4217c57c51ce2fdde81b3a97a76e5a4",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_191422_664_SUM8_modo0_1000\\ruido_bruto.log": "052e00395606974722e102989c77ab3d2b22dbc4dfa31dd5deafef2fd25d1dce",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_191422_664_SUM8_modo0_1000\\metadados.json": "bbcb2adf3355db26c4fde66879fcdba7712f8482857a3794c6ab96bfcd1a7dcb",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_191422_664_SUM8_modo0_1000\\revisao.txt": "0890309097f73f3d37cd8222544ae5f787ef24e183412cbe2b97abf9e7597b89",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_184431_084_SUM8_modo1_1000\\rx.csv": "86dccfd5c8681212a7f8b9fab917ed0622bb8a8c97a057f5fd9393034d311989",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_184431_084_SUM8_modo1_1000\\ruido.csv": "13d9fce17f63e9de1db3ca7adf8dea6abb634bae96a6bec93a07051710aa104f",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_184431_084_SUM8_modo1_1000\\rx_bruto.log": "c6ff6ab0debb59ba075542f6f915115e3e05b874b3fb151ee8394ec76f61db1f",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_184431_084_SUM8_modo1_1000\\ruido_bruto.log": "cb24a27fc5c1cf7bbf59735e3e70ef5c6e2967d9081e0e7ea5d93999ce43b272",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_184431_084_SUM8_modo1_1000\\metadados.json": "94b7c6eb77f7c99a7c0a76ad8e9ed849a06e7b5cd7293d9cc17611914d5a44c6",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_184431_084_SUM8_modo1_1000\\revisao.txt": "85b135be8da1b48ec576a6b84703cafe30052c27733fa3735c24892829b6f851",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185353_632_SUM8_modo2_1000\\rx.csv": "1256e911aff47ca3885bce5bd5381766e912243cb2bc2e6697e0b5063039d9b6",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185353_632_SUM8_modo2_1000\\ruido.csv": "ef440a55a1206e3f37c1000be0c71eae31ad876b3a89d59bf2977c647aa9e017",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185353_632_SUM8_modo2_1000\\rx_bruto.log": "0f368cc6bdf2e8f0428758be811f920bedf0afce70b072f2686912751783b5ca",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185353_632_SUM8_modo2_1000\\ruido_bruto.log": "38948ed845076cca96f78b74db125a4c59d2f49731f836a808c9b9e4bb43d049",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185353_632_SUM8_modo2_1000\\metadados.json": "6e34478e72343d0a320f2c2e0d03474fd39de87d7dc370f15f0f372290b76c5c",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185353_632_SUM8_modo2_1000\\revisao.txt": "fef74cd5276f52315ba02456e9ba3bbdb67152cd6d3b4ee7445d6cfa80998883",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_190634_547_SUM8_modo3_1000\\rx.csv": "f14e83cc8ae884fe6df79e717f37cac38aab1ff93a2681fdb5ac907ed5633858",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_190634_547_SUM8_modo3_1000\\ruido.csv": "25d9e10288e809f65663257a98cdb412356f6f1c16a36c3bc38ad0faa89b22b6",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_190634_547_SUM8_modo3_1000\\rx_bruto.log": "42102c8c68300c3f5546af9addc39e35acc5d624c310b2ccb53f88637f4c22b0",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_190634_547_SUM8_modo3_1000\\ruido_bruto.log": "122df44d3d6847a51507344d317aeae5a5b1124164aeb51452fa3d0ec8e75817",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_190634_547_SUM8_modo3_1000\\metadados.json": "f19e8cba7d19ff575a2c80a412b10661cb5612527f9f432a15706f09d6255063",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_190634_547_SUM8_modo3_1000\\revisao.txt": "122fdf57fcf24389daf7f02d6105d43a917b7c5e93cb8084fe4b3c3c219758f2",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185043_967_CRC8_modo1_1000\\rx.csv": "84d5d9b6904b92010582d2ccb635b1709f15d0360d8a26c6ab88e98d6e101f24",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185043_967_CRC8_modo1_1000\\ruido.csv": "7d15e4279f4451abe27e800804597b19f3d3fad11888ff49e85cd33c9b4bbec7",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185043_967_CRC8_modo1_1000\\rx_bruto.log": "9af30ba36545425293b1993eb9cf637413c1872b267930de2a0b633c40de01de",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185043_967_CRC8_modo1_1000\\ruido_bruto.log": "f5244f5e128c472dc7c89c4017484a654f32b437382811874f5e55f059bf5c6d",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185043_967_CRC8_modo1_1000\\metadados.json": "024e7b11b23cd5db15c475ab461f72534fdb06a6b1856dbe2c03ab948648ad07",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185043_967_CRC8_modo1_1000\\revisao.txt": "dfc7a43a31084d04b2f7a0262667fbf7f7e9227eb14127928eb16a25c8152808",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185759_222_CRC8_modo2_1000\\rx.csv": "57058cd7c5eba3d52b56402b4adab6369670690b8d3cc5fe96d44926dfef3dae",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185759_222_CRC8_modo2_1000\\ruido.csv": "bd9e1df2a8e2ce1c650106308fe988e68d459f13c0acdcb419efb30901d7458e",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185759_222_CRC8_modo2_1000\\rx_bruto.log": "efd7e19970d595e1df19c0246287eced14fbefa98a91cc523727c52c2f6d5c6a",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185759_222_CRC8_modo2_1000\\ruido_bruto.log": "adac970a5e0e9cf5cf3db0db05e54a420d3e9c750f946d0e18dbd806749996d4",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185759_222_CRC8_modo2_1000\\metadados.json": "e52a50414d364507424451b30e60cea0ac341c57da388dc0b96065824da2721d",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_185759_222_CRC8_modo2_1000\\revisao.txt": "86d56d607c2846942f40faa7a37957285e4ba0d303c1a3e8403be6da3abcf507",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_191057_739_CRC8_modo3_1000\\rx.csv": "8d42dacd7f7a50d31340fa15aff06210e97d1a7c60ba8043f5bd4bd1f5df6503",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_191057_739_CRC8_modo3_1000\\ruido.csv": "6e854325defab6848125cbee099e7921caacb41c80e6f05c463eee880b3d4dcb",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_191057_739_CRC8_modo3_1000\\rx_bruto.log": "a660f8cb8051953e092b0ffbcb9f1f32d939f4ec829fb10867d3b3b6874d54f4",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_191057_739_CRC8_modo3_1000\\ruido_bruto.log": "783e614a1d6e0624c3adaa84f21fb84af6f12e73a0276cb3eca7900bbdf207ff",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_191057_739_CRC8_modo3_1000\\metadados.json": "7030eda3d2a314bcd09e8e98fd5cbcf1c5415c1be79688e1f29292e40b420cab",
-    "C:\\Users\\USER\\Documents\\Codex\\2026-10-16\\ve\\outputs\\Coletor_CSV_ESP32_v2\\Coletas\\20261017_191057_739_CRC8_modo3_1000\\revisao.txt": "7019742b8f1baa8d7dd113e3cfcd154cee743012fb3752a1e988254569d3da05"
-  },
-  "excluida": "20261017_190148_047_CRC8_modo3_1000: rodada invalida e tecnicas desencontradas"
+  "definicao_taxa": "NAO_DETECTADO / (CORROMPIDO + NAO_DETECTADO); PERDIDO e OK excluidos.",
+  "limites": "Marcador, referencia e bits start/stop preservados; somente pulsos 1 para 0; nao houve leitura de flash para atestar hashes do firmware instalado."
 }

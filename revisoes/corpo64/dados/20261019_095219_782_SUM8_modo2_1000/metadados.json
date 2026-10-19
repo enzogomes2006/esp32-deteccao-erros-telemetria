@@ -1,0 +1,42 @@
+﻿{
+    "quadros":  1000,
+    "validacao_rx":  "# VALIDACAO,esperados=1000,auditados=1000,nao_classificados=0,sem_referencia=0,referencias_invalidas=0,repetidos_auditoria=0,cabecalhos_aceitos_divergentes=0,rodada_valida=SIM",
+    "revisao":  {
+                    "estrutura_ok":  true,
+                    "contagens":  {
+                                      "OK":  289,
+                                      "NAO_DETECTADO":  2,
+                                      "PERDIDO":  90,
+                                      "CORROMPIDO":  619
+                                  },
+                    "cabecalhos_aceitos_divergentes":  0,
+                    "rx_linhas":  1000,
+                    "ruido_linhas":  8000,
+                    "problemas":  [
+
+                                  ]
+                },
+    "modo_ruido_confirmado":  true,
+    "porta_ruido":  "COM6",
+    "iniciado_em":  "2026-10-19T09:52:19.7832321-04:00",
+    "porta_rx":  "COM5",
+    "ruido_versao_instalada":  "conferir na captura de inicializacao",
+    "escopo":  "CORPO64",
+    "arquivos":  [
+                     "rx.csv",
+                     "ruido.csv",
+                     "rx_bruto.log",
+                     "ruido_bruto.log",
+                     "revisao.txt"
+                 ],
+    "rx_preparado":  true,
+    "tecnica":  "SUM8",
+    "resumo_rx":  "# RESUMO,SUM8,total=1000,OK=289,CORROMPIDO=619,PERDIDO=90,NAO_DETECTADO=2,taxa=0.003221",
+    "baud":  115200,
+    "ajuste_isr_us_verificado_pelo_programa":  false,
+    "firmware_instalado_verificado_pelo_programa":  false,
+    "modo_ruido":  2,
+    "rx_esperado":  "RX CORPO64 v1.0",
+    "encerrado_em":  "2026-10-19T09:54:11.2058327-04:00",
+    "coletor_versao":  "3"
+}

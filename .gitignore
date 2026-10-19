@@ -9,3 +9,5 @@ latex/*.log
 coletor/Coletas/
 build/
 .arduinoIDE/
+__pycache__/
+*.pyc

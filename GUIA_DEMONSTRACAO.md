@@ -1,78 +1,35 @@
-# Guia da demonstração final
+# Demonstração CORPO64
 
-São três programas, um por placa. Os nomes abaixo foram simplificados somente nas cópias deste pacote; o conteúdo é idêntico ao usado nas últimas sete coletas.
+Use RX CORPO64 v1.0, RUÍDO CORPO64 v2.0 e o TX compatível da pasta revisoes/corpo64/firmware/. Preserve os .h nas pastas dos sketches. A montagem está em montagem/GUIA_MONTAGEM_FISICA_ESP32.md. As portas variam; identifique cada placa na máquina usada.
 
-| Placa | Abrir na Arduino IDE | Porta observada |
-|---|---|---|
-| TX | firmware/tx/tx.ino | COM5 |
-| RX | firmware/rx/rx.ino | COM6 |
-| RUÍDO | firmware/noise/noise.ino | COM3 |
+## Coletor v3
 
-Mantenha capture_schedule.h na mesma pasta de noise.ino. Não coloque os três sketches na mesma pasta. Use ESP32 Dev Module, ESP32 clássico WROOM, CPU 240 MHz e core Espressif 3.3.12. Os números COM podem mudar; confira a placa. O código de RUÍDO usa APIs LL dessa versão, não é uma versão para C3/S3/S2.
+1. Com TX parado (`x`), feche Monitores Seriais de RX e RUÍDO.
+2. Baixe o repositório inteiro e extraia o ZIP. Abra revisoes/corpo64/coletor/Abrir_Coletor.cmd com Coletor.ps1 e Revisar.ps1 ao lado.
+3. Selecione portas, técnica, modo e quantidade. Clique Preparar e gravar.
+4. Espere PRONTO E GRAVANDO. No TX, envie `s` para SUM8 ou `c` para CRC8, depois `t` para dez ou `g` para mil. Envie um comando por vez.
+5. Espere COLETA SALVA e confira revisao.txt. Preserve a pasta inteira, inclusive quando inválida.
 
-Se não gravou outro programa desde as sete coletas, os programas já estão nas placas: não precisa regravar para usar este pacote. As mensagens de inicialização ainda dizem candidato porque os arquivos validados foram copiados sem edição; a seleção para a entrega é baseada nos testes registrados, não na troca desse texto.
+Uma rodada sem ruído deve produzir dez OK e 80 amostras. Com ruído, o alvo pode já ser zero. LEN inválido aparece como PERDIDO, sem checagem. As contagens variam e não devem ser copiadas do relatório como previsão exata.
 
-## 1. Conferência curta para o dia da apresentação
+## Comandos manuais
 
-Use monitores USB em 115200 baud e New Line. Se o coletor estiver aberto com portas ocupadas, encerre a coleta antes de abrir os monitores RX e RUÍDO. Envie cada comando separadamente e espere sua confirmação.
-
-1. No TX, envie x para parar.
-2. No RUÍDO, envie 0.
-3. No RX, envie x, depois s e depois d.
-4. No TX, envie s e depois t.
-5. O RX deve resumir dez OK, demais classes zero e rodada_valida=SIM, se a bancada estiver funcionando.
-
-Essa é uma verificação opcional da montagem no dia, não uma exigência de repetir as sete coletas concluídas.
-
-## 2. Teste de predição solicitado pelo professor
-
-1. Pare o TX com x. Selecione no RUÍDO o modo escolhido (0, 1, 2 ou 3).
-2. Anote a técnica. Cada integrante prevê os quatro números para dez quadros e sua justificativa antes do envio. Use as frequências do relatório; previsões inteiras somam dez.
-3. No RX, envie x, depois s para SUM8 ou c para CRC8, e depois d.
-4. No TX, envie a mesma técnica e depois t.
-5. Compare previsão e resultado, incluindo contadores de validade. Não prometa dez resultados idênticos à média de mil.
-
-| Integrante | OK | CORROMPIDO | PERDIDO | NAO_DETECTADO | Justificativa |
-|---|---|---|---|---|---|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
-
-Técnica e modo escolhidos: __________. Resultado observado: __________.
-
-## 3. Mostrar por que SUM8 deixa passar um erro
-
-1. Pare TX com x. Envie 4 ao RUÍDO.
-2. No RX: x, s, d. No TX: s, t.
-3. O padrão tenta apagar o bit 7 de p0/p1, que o TX fixou em 1. Com atuação correta, reduz a soma em 256, conserva resíduo zero e produz NAO_DETECTADO. Confira os corpos e os avisos do RUÍDO.
-4. Compare com CRC8: RX x, c, d; TX c, t; RUÍDO permanece em 4. Esse padrão de dois bits deve ser descartado se a injeção estiver válida.
-5. Explique que o modo 4 é extra; o caso natural 232 do relatório veio do modo 2. As rodadas usam novos bytes e não são o mesmo fluxo original/recebido entre técnicas.
-
-## 4. Mostrar recuperação, se solicitado
-
-1. Pare TX com x e envie 0 ao RUÍDO.
-2. No RX: x, c, a. No TX: c, t.
-3. O RX pausa sua própria UART por 350 ms após checar e auditar seq1. Mostre RX_DESLIGADO, RX_REATIVADO, RECUPERACAO_PERDA e RECUPERACAO_UART.
-4. As três perdas e os tempos do relatório são o que foi medido naquele ensaio. Uma nova apresentação pode ter valores diferentes: registre os números mostrados, sem reutilizar o tempo antigo como nova medição.
-
-Não troque para rx_recuperacao: o RX deste pacote já faz a recuperação e as quatro classificações.
-
-## 5. Coletor opcional, para salvar os dez quadros comuns
-
-1. Deixe TX parado. Feche apenas os monitores RX e RUÍDO; mantenha o monitor TX aberto.
-2. Execute coletor/Abrir_Coletor.cmd, depois de extrair o ZIP em pasta gravável.
-3. Confira RX COM6, RUÍDO COM3, técnica, modo e dez quadros. Clique Preparar e gravar.
-4. Espere PRONTO E GRAVANDO. Só então envie s ou c e depois t no TX, conforme a indicação.
-5. Espere o término e preserve a nova pasta em coletor/Coletas. O coletor não grava firmware nem inicia o TX.
-
-O coletor normal prepara d/r; não use esse fluxo para a pausa a. Se aparecer revisão, preserve os logs e não trate a tentativa como válida só porque terminou. Usar o coletor e monitores nas mesmas portas ao mesmo tempo causa conflito.
-
-## Comandos resumidos
+USB: 115200 baud, New Line. Feche o coletor antes de abrir os três monitores.
 
 | Placa | Comandos |
 |---|---|
-| TX | s SUM8; c CRC8; t dez; g mil; x parar |
-| RX | s SUM8; c CRC8; d dez; r mil; a dez com pausa; x cancelar |
-| RUÍDO | 0 desligado; 1 um alvo; 2 dois alvos; 3 rajada; 4 extra SUM8 |
+| TX | x para; s seleciona SUM8; c CRC8; t transmite dez; g mil |
+| RX | x cancela; s SUM8; c CRC8; d prepara dez; r mil; a dez com pausa |
+| RUÍDO | 0 desligado; 1 um alvo; 2 dois alvos; 3 rajada; 4 controle extra |
 
-O TX reinicia a sequência em zero em cada rodada. Selecione a mesma técnica nos dois com a rodada parada. Todos os integrantes precisam explicar o sistema inteiro.
+Prepare sempre RX antes de iniciar TX. Para um teste manual SUM8/0/dez: RUÍDO `0`; RX `x`, `s`, `d`; TX `s`, `t`. Para CRC8, troque s por c no RX e TX.
+
+## Colisão e recuperação
+
+Os casos naturais para explicar são SUM8/2, sequências 415 e 553. Em cada um, um byte do payload e o CHK perdem o bit 7; a soma diminui 256 e mantém resíduo zero. O modo 4 é um controle adicional, separado das sete condições aleatórias.
+
+Recuperação manual, sem ruído: TX `x`; RUÍDO `0`; RX `x`, `s`, `a`; TX `s`, `t`. A UART do RX pausa por 350 ms após auditar seq 1. Guarde o log inteiro, incluindo RX_DESLIGADO, RX_REATIVADO, RECUPERACAO_UART, RESUMO e VALIDACAO. O resultado medido foi 7 OK e 3 PERDIDOS, retomada 38,691 ms após reativar; nova execução pode ter pequenas variações.
+
+## Predição e defesa
+
+Antes do cenário escolhido pelo professor, cada integrante anota OK, CORROMPIDO, PERDIDO e ND previstos, somando dez, com justificativa. Só depois executar e comparar com o resultado e a validade. Explicar separadamente resíduo, entrega ao aplicativo e auditoria da cópia. Este roteiro não declara que a avaliação já ocorreu.

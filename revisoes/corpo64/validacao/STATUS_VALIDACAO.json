@@ -1,48 +1,21 @@
 {
-  "registrado_utc": "2026-10-19T09:47:27.975117+00:00",
-  "estado": "COMPILADO_E_TESTADO_EM_SOFTWARE_VALIDACAO_FISICA_PENDENTE",
-  "alvo": "ESP32 classico / esp32:esp32:esp32 / Arduino-ESP32 3.3.12 / CPU 240 MHz",
-  "compilacoes": {
-    "tx": {
-      "flash_bytes": 270168,
-      "ram_estatica_bytes": 22140
-    },
-    "rx": {
-      "flash_bytes": 276948,
-      "ram_estatica_bytes": 23380
-    },
-    "noise": {
-      "flash_bytes": 283124,
-      "ram_estatica_bytes": 22468
-    }
-  },
-  "fontes_sha256": {
-    "firmware/noise/capture_schedule.h": "befb835299fe8fc90da2d3c1b6f91e02015cd1b1c17371e40d37b8021c4c576d",
-    "firmware/noise/noise.ino": "3eecaeb164464b42820ca4b548547a8ca4714c4e6e9ffc9bb39bc8d6ace1ba53",
-    "firmware/noise/noise_targets.h": "b23507f1f90d2abbac2795403a794b2a22717fc9e2b482e240836b2c4d33c7fb",
-    "firmware/rx/rx.ino": "e49bc58c11f6eaac2a0541b798351203108a8d6454624b9c9a4a1f40655f3c0d",
-    "firmware/rx/sequence_link.h": "19e4d1f748ebfd65e93e58bf40e19e19f23b52bc7f73d32e0e1ea2a867e508af",
-    "firmware/tx/tx.ino": "c762bac4da3a3a5c38afad96a8aeda7c3d9fafc9de7c18bd52afb6a6d44983d0"
-  },
-  "testes": {
-    "rx_casos_um_bit_todos_campos": 128,
-    "sorteios_de_alvos": 50000,
-    "series_sinteticas_coletor": 10,
-    "eventos_por_serie_sintetica": 1000,
-    "amostras_por_serie_sintetica": 8000,
-    "perdas_sem_evento_e_ambiguidade": "PASS",
-    "interface_sem_abrir_portas": "PASS",
-    "relatorios_nao_sao_dados_fisicos": true
-  },
-  "portas_seriais_disponiveis_na_verificacao": 0,
-  "firmwares_gravados_nesta_revisao": false,
-  "novas_coletas_fisicas": 0,
-  "especificacao_previa_sha256": "080aaf4e76ab454bc9a065cbd4b46479f5ea5cd4117a4f01fb1b26867157992c",
-  "cronologia": "Registro previo refere-se somente a esta revisao; nao comprova especificacao anterior ao codigo original.",
-  "proximos_passos": [
-    "Gravar RX e RUIDO nas placas",
-    "Validar 10 quadros sem ruido e demais modos",
-    "Realizar as sete novas coletas e registrar tempos/recuperacao",
-    "Recalcular tabelas e atualizar relatorio com evidencias reais"
-  ]
+  "registrado_data_local": "2026-10-19",
+  "estado": "SERIE_FISICA_CORPO64_CONSOLIDADA",
+  "escopo": "CORPO64",
+  "software_pre_coletas": "STATUS_VALIDACAO_PRE_COLETAS.json",
+  "alvo_documentado": "ESP32 classico / esp32:esp32:esp32 / Arduino-ESP32 3.3.12 / CPU 240 MHz",
+  "novas_coletas_fisicas": 7,
+  "quadros_series": 7000,
+  "amostras_injetor_series": 56000,
+  "controles_curtos_validos": 9,
+  "recuperacao_com_registro": true,
+  "validacao_independente": "VALIDACAO_FISICA.json",
+  "revisao_oficial": "REVISAO_OFICIAL_COLETAS.json",
+  "hash_firmware_instalado_verificado": false,
+  "calibracao_eletrica_certificada": false,
+  "pendencias": [
+    "Defesa e predicao ao vivo",
+    "Entrega conforme requisitos originais da disciplina"
+  ],
+  "nota": "Estado anterior preservado como registro datado; fontes e logs de testes de software nao foram modificados."
 }

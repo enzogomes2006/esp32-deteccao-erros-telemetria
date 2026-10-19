@@ -1,0 +1,27 @@
+﻿# TECNICA,SUM8
+# PREPARADO_RX_CORPO64,SUM8,10,primeira_seq=0,pausa_automatica=NAO,versao=1.0
+evento_id,seq_experimento,seq_rx,seq_referencia,seq_enlace_esperada,seq_enlace_proxima,tecnica,len_rx,residuo,decisao,status,payload_confere,cabecalho_diverge,entregue_aplicacao,verificacao_us,intervalo_inicio_us,recuperacao_ms,corpo_rx_hex,corpo_tx_hex,motivo,decisao_us,referencia_us
+# DECISAO_ANTES_DA_COPIA,evento=1,seq_rx=0,residuo=0,decisao=ACEITO,proxima_seq=1,decisao_us=2447544318
+1,0,0,0,0,1,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,0,-1,07000083D79A0BFA,07000083D79A0BFA,CHECADO_ANTES_DA_COPIA,2447544318,2447557580
+# DECISAO_ANTES_DA_COPIA,evento=2,seq_rx=1,residuo=0,decisao=ACEITO,proxima_seq=2,decisao_us=2447645318
+2,1,1,1,1,2,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101001,-1,070100F8FC344C84,070100F8FC344C84,CHECADO_ANTES_DA_COPIA,2447645318,2447658580
+# DECISAO_ANTES_DA_COPIA,evento=3,seq_rx=2,residuo=0,decisao=ACEITO,proxima_seq=3,decisao_us=2447746318
+3,2,2,2,2,3,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,070200FBDBB96FF9,070200FBDBB96FF9,CHECADO_ANTES_DA_COPIA,2447746318,2447759580
+# DECISAO_ANTES_DA_COPIA,evento=4,seq_rx=3,residuo=0,decisao=ACEITO,proxima_seq=4,decisao_us=2447847318
+4,3,3,3,3,4,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,070300CAE6ED4F0A,070300CAE6ED4F0A,CHECADO_ANTES_DA_COPIA,2447847318,2447860580
+# DECISAO_ANTES_DA_COPIA,evento=5,seq_rx=4,residuo=0,decisao=ACEITO,proxima_seq=5,decisao_us=2447948318
+5,4,4,4,4,5,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,070400C0B1501F15,070400C0B1501F15,CHECADO_ANTES_DA_COPIA,2447948318,2447961580
+# DECISAO_ANTES_DA_COPIA,evento=6,seq_rx=5,residuo=0,decisao=ACEITO,proxima_seq=6,decisao_us=2448049318
+6,5,5,5,5,6,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,070500F5E4B41D4A,070500F5E4B41D4A,CHECADO_ANTES_DA_COPIA,2448049318,2448062579
+# DECISAO_ANTES_DA_COPIA,evento=7,seq_rx=6,residuo=0,decisao=ACEITO,proxima_seq=7,decisao_us=2448150318
+7,6,6,6,6,7,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,070600EBC7C2730C,070600EBC7C2730C,CHECADO_ANTES_DA_COPIA,2448150318,2448163579
+# DECISAO_ANTES_DA_COPIA,evento=8,seq_rx=7,residuo=0,decisao=ACEITO,proxima_seq=8,decisao_us=2448251318
+8,7,7,7,7,8,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,070700B8E3605F98,070700B8E3605F98,CHECADO_ANTES_DA_COPIA,2448251318,2448264580
+# DECISAO_ANTES_DA_COPIA,evento=9,seq_rx=8,residuo=0,decisao=ACEITO,proxima_seq=9,decisao_us=2448352318
+9,8,8,8,8,9,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,070800BEF913CB5C,070800BEF913CB5C,CHECADO_ANTES_DA_COPIA,2448352318,2448365580
+# DECISAO_ANTES_DA_COPIA,evento=10,seq_rx=9,residuo=0,decisao=ACEITO,proxima_seq=10,decisao_us=2448453318
+10,9,9,9,9,10,SUM8,7,0,ACEITO,OK,SIM,NAO,SIM,1,101000,-1,0709009B85BA76A0,0709009B85BA76A0,CHECADO_ANTES_DA_COPIA,2448453318,2448466581
+# RESUMO,SUM8,total=10,OK=10,CORROMPIDO=0,PERDIDO=0,NAO_DETECTADO=0,taxa=NA
+# VALIDACAO,esperados=10,auditados=10,nao_classificados=0,sem_referencia=0,referencias_invalidas=0,repetidos_auditoria=0,cabecalhos_aceitos_divergentes=0,rodada_valida=SIM
+# ENLACE,checados=10,aceitos_detector=10,descartados=0,malformados=0,proxima_seq=10,anonimos=0,ausencias_evidenciadas=0,ambiguidades=0,antigos_repetidos=0
+# TEMPOS_RX,amostras=10,verificacao_media_us=1.000,verificacao_min_us=1,verificacao_max_us=1

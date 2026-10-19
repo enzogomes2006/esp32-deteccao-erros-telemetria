@@ -1,0 +1,278 @@
+{
+  "data": "2026-10-19",
+  "origem": "Reexecucao do Revisar.ps1 original sobre logs brutos copiados",
+  "rodadas": [
+    {
+      "pasta": "20261019_091242_692_SUM8_modo0_1000",
+      "categoria": "dados",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 1000,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 0,
+          "PERDIDO": 0
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 1000,
+        "ruido_linhas": 8000,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_094547_976_SUM8_modo1_1000",
+      "categoria": "dados",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 563,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 392,
+          "PERDIDO": 45
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 1000,
+        "ruido_linhas": 8000,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_095219_782_SUM8_modo2_1000",
+      "categoria": "dados",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 289,
+          "NAO_DETECTADO": 2,
+          "CORROMPIDO": 619,
+          "PERDIDO": 90
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 1000,
+        "ruido_linhas": 8000,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_095929_835_SUM8_modo3_1000",
+      "categoria": "dados",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 100,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 809,
+          "PERDIDO": 91
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 1000,
+        "ruido_linhas": 8000,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_100416_161_CRC8_modo1_1000",
+      "categoria": "dados",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 540,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 418,
+          "PERDIDO": 42
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 1000,
+        "ruido_linhas": 8000,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_100921_806_CRC8_modo2_1000",
+      "categoria": "dados",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 305,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 593,
+          "PERDIDO": 102
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 1000,
+        "ruido_linhas": 8000,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_101329_766_CRC8_modo3_1000",
+      "categoria": "dados",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 116,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 792,
+          "PERDIDO": 92
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 1000,
+        "ruido_linhas": 8000,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_085335_636_SUM8_modo0_10",
+      "categoria": "triagem",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 10,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 0,
+          "PERDIDO": 0
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 10,
+        "ruido_linhas": 80,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_085556_983_SUM8_modo1_10",
+      "categoria": "triagem",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 9,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 1,
+          "PERDIDO": 0
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 10,
+        "ruido_linhas": 80,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_085705_555_SUM8_modo2_10",
+      "categoria": "triagem",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 6,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 3,
+          "PERDIDO": 1
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 10,
+        "ruido_linhas": 80,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_085757_703_SUM8_modo3_10",
+      "categoria": "triagem",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 2,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 8,
+          "PERDIDO": 0
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 10,
+        "ruido_linhas": 80,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_085918_397_CRC8_modo1_10",
+      "categoria": "triagem",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 7,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 3,
+          "PERDIDO": 0
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 10,
+        "ruido_linhas": 80,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_090046_797_CRC8_modo2_10",
+      "categoria": "triagem",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 4,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 6,
+          "PERDIDO": 0
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 10,
+        "ruido_linhas": 80,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_090207_975_CRC8_modo3_10",
+      "categoria": "triagem",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 3,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 7,
+          "PERDIDO": 0
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 10,
+        "ruido_linhas": 80,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_102158_177_SUM8_modo0_10",
+      "categoria": "triagem",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 10,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 0,
+          "PERDIDO": 0
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 10,
+        "ruido_linhas": 80,
+        "problemas": []
+      }
+    },
+    {
+      "pasta": "20261019_102351_826_CRC8_modo0_10",
+      "categoria": "triagem",
+      "revisao": {
+        "estrutura_ok": true,
+        "contagens": {
+          "OK": 10,
+          "NAO_DETECTADO": 0,
+          "CORROMPIDO": 0,
+          "PERDIDO": 0
+        },
+        "cabecalhos_aceitos_divergentes": 0,
+        "rx_linhas": 10,
+        "ruido_linhas": 80,
+        "problemas": []
+      }
+    }
+  ]
+}

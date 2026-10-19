@@ -1,0 +1,12 @@
+{
+  "data": "2026-10-19",
+  "estado": "REGISTROS_FISICOS_CONFERIDOS",
+  "quadros_series": 7000,
+  "amostras_series": 56000,
+  "series_validas": 7,
+  "controles_validos": 9,
+  "cruzamento": "CSV e logs brutos identicos em registros; residuos, alvos, efeito fisico, sincronismo e ordem decisao/auditoria recalculados.",
+  "assinatura_firmware_gravado_verificada": false,
+  "leitura_flash_realizada": false,
+  "certificacao_eletrica": false
+}
