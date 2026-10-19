@@ -1,0 +1,110 @@
+{
+  "algoritmo": "SHA256",
+  "observacao": "Exclui apenas este manifesto. Nenhuma fixture sintetica integra o conjunto de dados fisicos.",
+  "arquivos": {
+    "coletor/Abrir_Coletor.cmd": {
+      "bytes": 273,
+      "sha256": "11e5969beea0aaefb06c13c28b1bab5b7b5869df32bb201f50b2d81de31eb113"
+    },
+    "coletor/Coletor.ps1": {
+      "bytes": 14246,
+      "sha256": "25b443e7b81a71fbb99cc1bf008d9554fb30995b9f84e83db8ffc15f36f460f2"
+    },
+    "coletor/LEIA_PRIMEIRO.md": {
+      "bytes": 1377,
+      "sha256": "2ae9d3aacc7c135de8e1269d13244927cd9002f4619b9c564c9303773ee8b771"
+    },
+    "coletor/Revisar.ps1": {
+      "bytes": 13091,
+      "sha256": "be57bbb4d49cbdce4fffc3e21d924670c0690b28644bb494366ec98f772c9660"
+    },
+    "ESPECIFICACAO_REVISAO_PRE_IMPLEMENTACAO.md": {
+      "bytes": 12722,
+      "sha256": "080aaf4e76ab454bc9a065cbd4b46479f5ea5cd4117a4f01fb1b26867157992c"
+    },
+    "firmware/noise/capture_schedule.h": {
+      "bytes": 897,
+      "sha256": "befb835299fe8fc90da2d3c1b6f91e02015cd1b1c17371e40d37b8021c4c576d"
+    },
+    "firmware/noise/noise.ino": {
+      "bytes": 12866,
+      "sha256": "3eecaeb164464b42820ca4b548547a8ca4714c4e6e9ffc9bb39bc8d6ace1ba53"
+    },
+    "firmware/noise/noise_targets.h": {
+      "bytes": 933,
+      "sha256": "b23507f1f90d2abbac2795403a794b2a22717fc9e2b482e240836b2c4d33c7fb"
+    },
+    "firmware/rx/rx.ino": {
+      "bytes": 17671,
+      "sha256": "e49bc58c11f6eaac2a0541b798351203108a8d6454624b9c9a4a1f40655f3c0d"
+    },
+    "firmware/rx/sequence_link.h": {
+      "bytes": 859,
+      "sha256": "19e4d1f748ebfd65e93e58bf40e19e19f23b52bc7f73d32e0e1ea2a867e508af"
+    },
+    "firmware/tx/tx.ino": {
+      "bytes": 3801,
+      "sha256": "c762bac4da3a3a5c38afad96a8aeda7c3d9fafc9de7c18bd52afb6a6d44983d0"
+    },
+    "LEIA_PRIMEIRO.md": {
+      "bytes": 7859,
+      "sha256": "5a83e845536e9c8f3cde300c176c4920828970983d3373abd3cd89d16f248461"
+    },
+    "REGISTRO_PRE_IMPLEMENTACAO.json": {
+      "bytes": 378,
+      "sha256": "b6c975528f8bfa157763e5964fafbc91d3b9058901e912bf200bafe8d234f3e3"
+    },
+    "testes/Arduino.h": {
+      "bytes": 912,
+      "sha256": "6e4768cc6257a4148f6da199fd7124539ca48d2d0ba73d0030f9c95c0917121d"
+    },
+    "testes/esp_timer.h": {
+      "bytes": 113,
+      "sha256": "ebc95615bcc7a2094a700e497cf4ceba90c85e397b6d4a6b93dd7d08a50913dd"
+    },
+    "testes/LEIA_TESTES.md": {
+      "bytes": 1661,
+      "sha256": "dfe4a39213d9158ddfff7e3248595850459315f4683f4ada643d859dd4db8914"
+    },
+    "testes/test_coletor.ps1": {
+      "bytes": 4265,
+      "sha256": "15d4d5707ba664e111c65e565b008056ed28e48d960ff14fb9b26ad841cbac79"
+    },
+    "testes/test_rx.cpp": {
+      "bytes": 10986,
+      "sha256": "1378a8e4ee56b420c72c8c1206337d9a3549f147d740735d1f1d9afcc8c36565"
+    },
+    "validacao/compilacao_noise.log": {
+      "bytes": 209,
+      "sha256": "52b81ccf55cdd55f32e79bc041aae18d0e22306a8a82eb49d98d8c91716da406"
+    },
+    "validacao/compilacao_rx.log": {
+      "bytes": 209,
+      "sha256": "01a7f64960f4110172d8da3d34729ede9fc64158596d7e6b40fa7b10357b8591"
+    },
+    "validacao/compilacao_tx.log": {
+      "bytes": 209,
+      "sha256": "c8c733becfec7abfbd858e8cef6097a48c5822464cc7fa6d7fb88e8997d45fff"
+    },
+    "validacao/STATUS_VALIDACAO.json": {
+      "bytes": 2117,
+      "sha256": "844011aa1b2ca7d50f2268f2c89c18a04a48d9b185ff3f7b4d95df38e0751f83"
+    },
+    "validacao/teste_interface.log": {
+      "bytes": 77,
+      "sha256": "e85dea708c8d432ae3ac4713fa81404e35d4be4fdf96902129757d618ee74c2d"
+    },
+    "validacao/teste_revisao_pasta_sintetica.json": {
+      "bytes": 422,
+      "sha256": "cef5e623d4cca6bfb6b76172887e55558b927fd6550b9d8e5323bcc96976b31a"
+    },
+    "validacao/testes_coletor.log": {
+      "bytes": 868,
+      "sha256": "9ee1b09336811d3f4cb7aa78b1be0cd6db253c8e0c6dd366c4e9a3127d86ed47"
+    },
+    "validacao/testes_rx_e_alvos.log": {
+      "bytes": 462,
+      "sha256": "82fe5f91f1d59cf9c0386ba29f927d45847cbca2d5724ce5060c528003332d5a"
+    }
+  }
+}

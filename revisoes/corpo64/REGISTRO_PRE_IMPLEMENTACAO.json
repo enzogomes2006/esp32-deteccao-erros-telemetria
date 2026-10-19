@@ -1,0 +1,7 @@
+{
+  "registrado_utc": "2026-10-19T04:53:59.6063557Z",
+  "especificacao_sha256": "080aaf4e76ab454bc9a065cbd4b46479f5ea5cd4117a4f01fb1b26867157992c",
+  "estado": "Especificacao registrada antes de criar os firmwares desta revisao",
+  "versao_anterior": "outputs/GitHub_ESP32",
+  "observacao": "Registro desta revisao; nao comprova a cronologia da implementacao original"
+}

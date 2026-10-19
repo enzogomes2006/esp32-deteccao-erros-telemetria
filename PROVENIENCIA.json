@@ -202,5 +202,12 @@
       ]
     },
     "observacao": "Mapa P2 posições 15-21 preservado. Conferido com os pinos do firmware publicado; documento não certifica continuidade elétrica da bancada."
+  },
+  "revisao_corpo64": {
+    "pasta": "revisoes/corpo64",
+    "estado": "compilada e testada em software; validacao fisica e novas coletas pendentes",
+    "especificacao_previa_sha256": "080aaf4e76ab454bc9a065cbd4b46479f5ea5cd4117a4f01fb1b26867157992c",
+    "serie_anterior_preservada": true,
+    "observacao": "Nenhum resultado sintetico substitui as medicoes fisicas. Relatorio original mantido para a serie de payload."
   }
 }

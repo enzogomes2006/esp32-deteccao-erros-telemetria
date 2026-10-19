@@ -1,0 +1,3 @@
+PASS: RX baselines; 128 single-bit cases over all fields; header corruption; immutable decisions; SUM8 payload and header-only collisions; gaps without double count; duplicates; wrap; malformed/missing/orphan references; parser recovery; UART pause; tail timeout.
+PASS: 50000 target selections; all 64 bit positions covered; distinct two bits; bursts 3..8 contiguous within byte.
+PASS: software only; no electrical measurement or experimental data generated.

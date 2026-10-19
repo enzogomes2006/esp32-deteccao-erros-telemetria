@@ -6,6 +6,14 @@ Tres ESP32 formam um enlace UART com ruido fisico: TX transmite, RX decide aceit
 
 Repositório **privado**: https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria. Para acesso pelo professor ou pela equipe, o proprietário deve conceder permissão às contas correspondentes.
 
+## Revisão CORPO64 — preparada, validação física pendente
+
+Foi preparada uma revisão com ruído em LEN, sequência, payload e CHK. Os programas compilaram e passaram nos testes de software; **ainda não há novas coletas físicas dessa revisão**. A montagem e o TX continuam compatíveis.
+
+Use o [pacote da revisão e guia para gravar/testar](revisoes/corpo64/LEIA_PRIMEIRO.md), a [especificação registrada antes desta revisão](revisoes/corpo64/ESPECIFICACAO_REVISAO_PRE_IMPLEMENTACAO.md) e o [estado de validação](revisoes/corpo64/validacao/STATUS_VALIDACAO.json). O RX, o injetor e o coletor novos estão juntos nessa pasta. Não combinar versões entre as duas séries.
+
+Os códigos da pasta `firmware/`, as tabelas abaixo, os CSVs em `dados/` e o relatório PDF permanecem como documentação da **série anterior com ruído somente no payload**. Não representam medições CORPO64. O relatório só poderá incorporar conclusões da revisão depois de coletadas e verificadas as novas evidências. O registro prévio da revisão não comprova a ordem de elaboração da versão original.
+
 ## Arquivos principais
 
 - [Guia da montagem física em PDF](montagem/GUIA_MONTAGEM_FISICA_ESP32.pdf) e [guia dos fios no GitHub](montagem/GUIA_MONTAGEM_FISICA_ESP32.md): nove jumpers, resistores, BC547 e furos da protoboard P2.
@@ -19,7 +27,7 @@ Repositório **privado**: https://github.com/enzogomes2006/esp32-deteccao-erros-
 - [Evidencias complementares](evidencias/) dos tempos e da recuperacao.
 - [Coletor CSV opcional](coletor/) e [manifesto de integridade](MANIFESTO_SHA256.json).
 
-## Resultados medidos
+## Resultados medidos — série anterior, ruído no payload
 
 Cada linha representa 1000 quadros da serie final de 17/10/2026.
 
@@ -35,7 +43,7 @@ Cada linha representa 1000 quadros da serie final de 17/10/2026.
 
 A taxa de nao deteccao e `ND / (CORROMPIDO + ND)`. Para SUM8/modo 2: `4/787 = 0,5083%`. Os quadros sem erro nao entram nesse denominador. O caso natural de sequencia 232 e analisado byte a byte no relatorio. Zero erros nao detectados nas rodadas CRC8 nao significa garantia contra qualquer corrupcao possivel.
 
-## Abrir e gravar os programas
+## Abrir e gravar os programas da série anterior
 
 Use **ESP32 Dev Module / WROOM classico**, CPU **240 MHz**, pacote **Arduino-ESP32 3.3.12** e monitores USB a **115200 baud**, com **New Line**. O injetor usa APIs especificas desse hardware/core.
 

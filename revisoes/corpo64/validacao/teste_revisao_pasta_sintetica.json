@@ -1,0 +1,17 @@
+{
+  "somente_teste_sintetico": true,
+  "observacao": "Fixture de software; nao e coleta fisica nem resultado da revisao na bancada.",
+  "revisao": {
+    "estrutura_ok": true,
+    "contagens": {
+      "OK": 298,
+      "NAO_DETECTADO": 3,
+      "PERDIDO": 97,
+      "CORROMPIDO": 602
+    },
+    "cabecalhos_aceitos_divergentes": 1,
+    "rx_linhas": 1000,
+    "ruido_linhas": 8000,
+    "problemas": []
+  }
+}

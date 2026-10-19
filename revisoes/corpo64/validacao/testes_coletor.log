@@ -1,0 +1,12 @@
+PASS: fixture SINTETICA SUM8/0, 1000 eventos/8000 amostras.
+PASS: fixture SINTETICA SUM8/1, 1000 eventos/8000 amostras.
+PASS: fixture SINTETICA SUM8/2, 1000 eventos/8000 amostras.
+PASS: fixture SINTETICA SUM8/3, 1000 eventos/8000 amostras.
+PASS: fixture SINTETICA SUM8/4, 1000 eventos/8000 amostras.
+PASS: fixture SINTETICA CRC8/0, 1000 eventos/8000 amostras.
+PASS: fixture SINTETICA CRC8/1, 1000 eventos/8000 amostras.
+PASS: fixture SINTETICA CRC8/2, 1000 eventos/8000 amostras.
+PASS: fixture SINTETICA CRC8/3, 1000 eventos/8000 amostras.
+PASS: fixture SINTETICA CRC8/4, 1000 eventos/8000 amostras.
+PASS: perda de tres eventos sem dupla contagem; inferencia ambigua rejeitada.
+PASS: mutacoes rejeitadas: firmware antigo, copia/validacao ausente, amostra LEN ausente, duplicata, residuo, timestamps, header, atraso CHK, taxa, interrupcao, decisao ausente.
