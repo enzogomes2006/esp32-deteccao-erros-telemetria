@@ -9,6 +9,7 @@ Repositório **privado**: https://github.com/enzogomes2006/esp32-deteccao-erros-
 ## Arquivos principais
 
 - [Relatorio final em PDF](Relatorio_Final_ESP32.pdf) e [fonte LaTeX](latex/main.tex).
+- [Sete PDFs originais por etapa](pdfs_por_etapa/README.md): partes 1 a 7, preservadas para consulta ao desenvolvimento.
 - [Especificacao do protocolo](ESPECIFICACAO_PROTOCOLO.md).
 - [Guia da demonstracao e comandos](GUIA_DEMONSTRACAO.md).
 - [Roteiro para os 20 minutos](APRESENTACAO_20_MIN.md).

@@ -1,6 +1,6 @@
 {
   "algoritmo": "SHA256",
-  "observacao": "Arquivos da entrega e do repositorio, exceto este manifesto e os metadados .git; dados e firmware preservados.",
+  "observacao": "Arquivos da entrega e do repositorio, exceto este manifesto e os metadados .git; dados, firmware e PDFs originais preservados.",
   "arquivos": {
     ".gitignore": {
       "bytes": 142,
@@ -231,16 +231,48 @@
       "sha256": "6efe49cf69a81c75eb6c686b6dba6aa45eb8f55649a7dd46a28194face9ce919"
     },
     "LEIA_PRIMEIRO.md": {
-      "bytes": 3072,
-      "sha256": "0060aa91e5f43321c75af30157be96880b1a7191d2b3b61872db3db53e358421"
+      "bytes": 3288,
+      "sha256": "3f3ec60b4edab80d4ac9439673d42e4b9b2a7fbad378edc1d8b5c26787038dc0"
+    },
+    "pdfs_por_etapa/Parte_1_Tabelas_de_Resultados_ESP32.pdf": {
+      "bytes": 77197,
+      "sha256": "e2e72514c1a6df7a830184984264e2be8b56c6c561aa0506682219c125096dde"
+    },
+    "pdfs_por_etapa/Parte_2_Especificacao_do_Protocolo_ESP32.pdf": {
+      "bytes": 89074,
+      "sha256": "caaf4ba477d385ed142e7def8071dea515be6ee47ab9b118763ff17e3d238a36"
+    },
+    "pdfs_por_etapa/Parte_3_Erro_Nao_Detectado_SUM8_ESP32.pdf": {
+      "bytes": 261101,
+      "sha256": "602b46abfda7ddc36a27de4b8cea7e08bf5eecc3dc315835ed2824f6e957352a"
+    },
+    "pdfs_por_etapa/Parte_4_Tempos_Overhead_e_Recuperacao_ESP32.pdf": {
+      "bytes": 358538,
+      "sha256": "46541483b8c896c4ebc75ea7ee7841b951d058bccf0cb856c7071a21adc9a070"
+    },
+    "pdfs_por_etapa/Parte_5_Analise_e_Roteiro_da_Demonstracao_ESP32.pdf": {
+      "bytes": 88994,
+      "sha256": "cf543db88d7858d8da5b53ce86f2b523412b11cd93a414246ff6637f0b1c0838"
+    },
+    "pdfs_por_etapa/Parte_6_Validacao_do_RX_Completo_ESP32.pdf": {
+      "bytes": 507498,
+      "sha256": "c713b250bb34d5e3eba8305e08242329da8b310da6ed967c859fcea7797c8862"
+    },
+    "pdfs_por_etapa/Parte_7_Resultados_e_CSVs_ESP32.pdf": {
+      "bytes": 112199,
+      "sha256": "9ff8d1b3248fb83f33fe4a2a2d5687dd0b1d8a9cc7f4b75a5f481a17f19c8b46"
+    },
+    "pdfs_por_etapa/README.md": {
+      "bytes": 1780,
+      "sha256": "6e61ffeba97c54b9e639f02266bf8ce01d15f5a53b8566c33a6d8a81262c2214"
     },
     "PROVENIENCIA.json": {
-      "bytes": 4751,
-      "sha256": "b1abd54568114c4b15cbf3a6e8476a5df6741b60596c7535a44f55d7197c82e2"
+      "bytes": 6660,
+      "sha256": "3a213be011dddd2ca97f38f4ac6b93e11f069f025a42689379ac5cdf68697719"
     },
     "README.md": {
-      "bytes": 3638,
-      "sha256": "6ff88f03aff31c641bfd35948f2b23f65d49aa8c69f5fafb78e801cab22c036a"
+      "bytes": 3760,
+      "sha256": "ba4fd33e4262825905ae62a4be74f96179b54c84effe3bdce88f58e058df0381"
     },
     "Relatorio_Final_ESP32.md": {
       "bytes": 24908,
