@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="490" height="285" preserveAspectRatio="xMinYMin meet" viewBox="0 0 490 285" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="490" height="285"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-285)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="490" height="285" rx="8" ry="8" style="stroke: rgb(84%,88%,90%); stroke-linecap: butt; stroke-width: 1; fill: rgb(93%,95%,97%); fill-rule: evenodd;"/>
+			<text x="18" y="263" style="font-family: GuiaB; font-size: 10px;fill: rgb(8%,19%,29%); stroke:none;" transform="translate(0,526) scale(1,-1)">ESQUEMA ELÉTRICO - os pontos unidos compartilham a mesma linha</text>
+			<text x="18" y="227" style="font-family: GuiaB; font-size: 11px;fill: rgb(8%,19%,29%); stroke:none;" transform="translate(0,454) scale(1,-1)">TX GPIO17</text>
+			<path d="M 101,230 L 170,230 Z" style="stroke: rgb(65%,47%,0%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 170,230 L 278,230 Z" style="stroke: rgb(71%,41%,7%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="207 225.5, 241 225.5, 241 234.5, 207 234.5" style="stroke: rgb(71%,41%,7%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,95%,87%); fill-rule: evenodd;"/>
+			<circle cx="170" cy="230" r="2.5" style="stroke: rgb(71%,41%,7%); stroke-linecap: butt; stroke-width: 1; fill: rgb(71%,41%,7%); fill-rule: evenodd;"/>
+			<circle cx="278" cy="230" r="2.5" style="stroke: rgb(71%,41%,7%); stroke-linecap: butt; stroke-width: 1; fill: rgb(71%,41%,7%); fill-rule: evenodd;"/>
+			<text x="198" y="244" style="font-family: GuiaB; font-size: 9px;fill: rgb(71%,41%,7%); stroke:none;" transform="translate(0,488) scale(1,-1)">R1  1 kΩ</text>
+			<path d="M 278,230 L 395,230 Z" style="stroke: rgb(12%,50%,28%); stroke-linecap: butt; stroke-width: 2;"/>
+			<text x="403" y="227" style="font-family: GuiaB; font-size: 10px;fill: rgb(8%,19%,29%); stroke:none;" transform="translate(0,454) scale(1,-1)">RX GPIO16</text>
+			<circle cx="137" cy="230" r="3" style="stroke: rgb(8%,19%,29%); stroke-linecap: butt; stroke-width: 1; fill: rgb(8%,19%,29%); fill-rule: evenodd;"/>
+			<path d="M 137,230 L 137,185 Z" style="stroke: rgb(40%,47%,53%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<path d="M 137,185 L 24,185 Z" style="stroke: rgb(40%,47%,53%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<text x="24" y="169" style="font-family: GuiaB; font-size: 10px;fill: rgb(8%,19%,29%); stroke:none;" transform="translate(0,338) scale(1,-1)">RUÍDO GPIO16</text>
+			<text x="110" y="211" style="font-family: Guia; font-size: 8px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,422) scale(1,-1)">ANTES de R1</text>
+			<circle cx="368" cy="230" r="3" style="stroke: rgb(8%,19%,29%); stroke-linecap: butt; stroke-width: 1; fill: rgb(8%,19%,29%); fill-rule: evenodd;"/>
+			<path d="M 368,230 L 368,185 Z" style="stroke: rgb(14%,40%,69%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<path d="M 368,185 L 466,185 Z" style="stroke: rgb(14%,40%,69%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<text x="373" y="169" style="font-family: GuiaB; font-size: 10px;fill: rgb(8%,19%,29%); stroke:none;" transform="translate(0,338) scale(1,-1)">RUÍDO GPIO18</text>
+			<text x="353" y="211" style="font-family: Guia; font-size: 8px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,422) scale(1,-1)">DEPOIS de R1</text>
+			<path d="M 327,230 L 327,135 Z" style="stroke: rgb(8%,19%,29%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<circle cx="327" cy="230" r="3" style="stroke: rgb(8%,19%,29%); stroke-linecap: butt; stroke-width: 1; fill: rgb(8%,19%,29%); fill-rule: evenodd;"/>
+			<circle cx="319" cy="111" r="24" style="stroke: rgb(45%,26%,64%); stroke-linecap: butt; stroke-width: 1.5; fill: none; fill-rule: evenodd;"/>
+			<path d="M 310,96 L 310,126 Z" style="stroke: rgb(45%,26%,64%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 310,122 L 327,135 Z" style="stroke: rgb(45%,26%,64%); stroke-linecap: butt; stroke-width: 1.6;"/>
+			<path d="M 310,100 L 327,87 Z" style="stroke: rgb(45%,26%,64%); stroke-linecap: butt; stroke-width: 1.6;"/>
+			<polygon points="327 87, 320 90, 323 95" style="stroke: rgb(45%,26%,64%); stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,26%,64%); fill-rule: evenodd;"/>
+			<path d="M 327,87 L 327,39 Z" style="stroke: rgb(8%,19%,29%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<path d="M 26,111 L 145,111 Z" style="stroke: rgb(71%,41%,7%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<path d="M 145,111 L 250,111 Z" style="stroke: rgb(71%,41%,7%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="180.5 106.5, 214.5 106.5, 214.5 115.5, 180.5 115.5" style="stroke: rgb(71%,41%,7%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,95%,87%); fill-rule: evenodd;"/>
+			<circle cx="145" cy="111" r="2.5" style="stroke: rgb(71%,41%,7%); stroke-linecap: butt; stroke-width: 1; fill: rgb(71%,41%,7%); fill-rule: evenodd;"/>
+			<circle cx="250" cy="111" r="2.5" style="stroke: rgb(71%,41%,7%); stroke-linecap: butt; stroke-width: 1; fill: rgb(71%,41%,7%); fill-rule: evenodd;"/>
+			<text x="171" y="128" style="font-family: GuiaB; font-size: 9px;fill: rgb(71%,41%,7%); stroke:none;" transform="translate(0,256) scale(1,-1)">R2  1 kΩ</text>
+			<path d="M 250,111 L 310,111 Z" style="stroke: rgb(71%,41%,7%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<text x="26" y="94" style="font-family: GuiaB; font-size: 10px;fill: rgb(8%,19%,29%); stroke:none;" transform="translate(0,188) scale(1,-1)">RUÍDO GPIO19</text>
+			<text x="337" y="138" style="font-family: GuiaB; font-size: 10px;fill: rgb(45%,26%,64%); stroke:none;" transform="translate(0,276) scale(1,-1)">C</text>
+			<text x="292" y="119" style="font-family: GuiaB; font-size: 10px;fill: rgb(45%,26%,64%); stroke:none;" transform="translate(0,238) scale(1,-1)">B</text>
+			<text x="337" y="79" style="font-family: GuiaB; font-size: 10px;fill: rgb(45%,26%,64%); stroke:none;" transform="translate(0,158) scale(1,-1)">E</text>
+			<text x="354" y="111" style="font-family: GuiaB; font-size: 12px;fill: rgb(45%,26%,64%); stroke:none;" transform="translate(0,222) scale(1,-1)">BC547</text>
+			<text x="354" y="96" style="font-family: Guia; font-size: 8px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,192) scale(1,-1)">puxa a linha para GND</text>
+			<path d="M 30,39 L 460,39 Z" style="stroke: rgb(14%,20%,23%); stroke-linecap: butt; stroke-width: 2;"/>
+			<circle cx="327" cy="39" r="3" style="stroke: rgb(14%,20%,23%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,23%); fill-rule: evenodd;"/>
+			<circle cx="68" cy="39" r="3" style="stroke: rgb(14%,20%,23%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,23%); fill-rule: evenodd;"/>
+			<text x="44.322265625" y="19" style="font-family: GuiaB; font-size: 9px;fill: rgb(8%,19%,29%); stroke:none;" transform="translate(0,38) scale(1,-1)">GND do TX</text>
+			<circle cx="205" cy="39" r="3" style="stroke: rgb(14%,20%,23%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,23%); fill-rule: evenodd;"/>
+			<text x="181.021240234375" y="19" style="font-family: GuiaB; font-size: 9px;fill: rgb(8%,19%,29%); stroke:none;" transform="translate(0,38) scale(1,-1)">GND do RX</text>
+			<circle cx="411" cy="39" r="3" style="stroke: rgb(14%,20%,23%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,23%); fill-rule: evenodd;"/>
+			<text x="378.5595703125" y="19" style="font-family: GuiaB; font-size: 9px;fill: rgb(8%,19%,29%); stroke:none;" transform="translate(0,38) scale(1,-1)">GND do RUÍDO</text>
+			<text x="18" y="62" style="font-family: Guia; font-size: 9px;fill: rgb(32%,38%,46%); stroke:none;" transform="translate(0,124) scale(1,-1)">Os três GNDs e o emissor pertencem ao mesmo terra.</text>
+		</g>
+	</g>
+</svg>

@@ -8,6 +8,7 @@ Repositório **privado**: https://github.com/enzogomes2006/esp32-deteccao-erros-
 
 ## Arquivos principais
 
+- [Guia da montagem física em PDF](montagem/GUIA_MONTAGEM_FISICA_ESP32.pdf) e [guia dos fios no GitHub](montagem/GUIA_MONTAGEM_FISICA_ESP32.md): nove jumpers, resistores, BC547 e furos da protoboard P2.
 - [Relatorio final em PDF](Relatorio_Final_ESP32.pdf) e [fonte LaTeX](latex/main.tex).
 - [Sete PDFs originais por etapa](pdfs_por_etapa/README.md): partes 1 a 7, preservadas para consulta ao desenvolvimento.
 - [Especificacao do protocolo](ESPECIFICACAO_PROTOCOLO.md).

@@ -1,6 +1,6 @@
 {
   "algoritmo": "SHA256",
-  "observacao": "Arquivos da entrega e do repositorio, exceto este manifesto e os metadados .git; dados, firmware e PDFs originais preservados.",
+  "observacao": "Arquivos da entrega e do repositorio, exceto este manifesto e os metadados .git; dados, firmware e PDFs das sete etapas preservados.",
   "arquivos": {
     ".gitignore": {
       "bytes": 142,
@@ -231,8 +231,24 @@
       "sha256": "6efe49cf69a81c75eb6c686b6dba6aa45eb8f55649a7dd46a28194face9ce919"
     },
     "LEIA_PRIMEIRO.md": {
-      "bytes": 3288,
-      "sha256": "3f3ec60b4edab80d4ac9439673d42e4b9b2a7fbad378edc1d8b5c26787038dc0"
+      "bytes": 3465,
+      "sha256": "76546d9dd778f57d7228da16db091e73811f867fbc1625fb8e892c9a4ff8e48a"
+    },
+    "montagem/esquema_eletrico.svg": {
+      "bytes": 8187,
+      "sha256": "c2b68a5bd4d1b507770984287b13dc2fddaad2ef3411e5df7594a008d65a22f2"
+    },
+    "montagem/GUIA_MONTAGEM_FISICA_ESP32.md": {
+      "bytes": 4901,
+      "sha256": "06d73a597105e52e4a431efe23561e951db6ac123fd898cf3bfb49e53e5a199d"
+    },
+    "montagem/GUIA_MONTAGEM_FISICA_ESP32.pdf": {
+      "bytes": 60414,
+      "sha256": "0f28baa5dd0b193e3ffd62257ade9c9a80cf00aaecd8d73c30e317e963ff5eac"
+    },
+    "montagem/mapa_protoboard_P2.svg": {
+      "bytes": 26089,
+      "sha256": "d44fe959d313b007f7f81105de9a53e2bdecc695cf3f1312582e024c052d4b79"
     },
     "pdfs_por_etapa/Parte_1_Tabelas_de_Resultados_ESP32.pdf": {
       "bytes": 77197,
@@ -267,12 +283,12 @@
       "sha256": "6e61ffeba97c54b9e639f02266bf8ce01d15f5a53b8566c33a6d8a81262c2214"
     },
     "PROVENIENCIA.json": {
-      "bytes": 6660,
-      "sha256": "3a213be011dddd2ca97f38f4ac6b93e11f069f025a42689379ac5cdf68697719"
+      "bytes": 8081,
+      "sha256": "75a8042adf1f0d8a678b966dcf87718fe0756294ac599acb8692c280f5f370a7"
     },
     "README.md": {
-      "bytes": 3760,
-      "sha256": "ba4fd33e4262825905ae62a4be74f96179b54c84effe3bdce88f58e058df0381"
+      "bytes": 3965,
+      "sha256": "95b7745296a1b58b51a1d3fe961a70e5be0059a5b00c6657cab1b5a6b99a50bb"
     },
     "Relatorio_Final_ESP32.md": {
       "bytes": 24908,

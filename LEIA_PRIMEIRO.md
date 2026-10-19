@@ -12,6 +12,7 @@ Este pacote reúne a série final de 17/10/2026 e os três programas escolhidos 
 - Relatorio_Final_ESP32.md: conteúdo editável em texto do relatório acadêmico.
 - ESPECIFICACAO_PROTOCOLO.md: regras atuais do protocolo e receptor.
 - GUIA_DEMONSTRACAO.md: quais códigos usar, comandos separados e roteiro dos testes ao vivo.
+- montagem/: guia físico em PDF e Markdown, com tabela dos nove fios, dois resistores, BC547 e mapas vetoriais da P2. Descreve a fiação já indicada; não exige remontagem.
 - firmware/: somente TX atual, RX completo v0.2 e RUÍDO captura v1.3.1, sem alterações nos arquivos de origem.
 - dados/: sete coletas completas, seis arquivos originais por pasta, preservados byte a byte.
 - resultados_consolidados.json: contagens, taxas, tempos e quatro erros não detectados da série.

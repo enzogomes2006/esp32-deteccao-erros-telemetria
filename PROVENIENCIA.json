@@ -67,6 +67,22 @@
     "pdfs_por_etapa/Parte_7_Resultados_e_CSVs_ESP32.pdf": {
       "origem": "outputs/Parte_7_Resultados_e_CSVs_ESP32.pdf",
       "sha256": "9ff8d1b3248fb83f33fe4a2a2d5687dd0b1d8a9cc7f4b75a5f481a17f19c8b46"
+    },
+    "montagem/GUIA_MONTAGEM_FISICA_ESP32.pdf": {
+      "origem": "outputs/Guia_Montagem_Fisica_ESP32/GUIA_MONTAGEM_FISICA_ESP32.pdf",
+      "sha256": "0f28baa5dd0b193e3ffd62257ade9c9a80cf00aaecd8d73c30e317e963ff5eac"
+    },
+    "montagem/GUIA_MONTAGEM_FISICA_ESP32.md": {
+      "origem": "outputs/Guia_Montagem_Fisica_ESP32/GUIA_MONTAGEM_FISICA_ESP32.md",
+      "sha256": "06d73a597105e52e4a431efe23561e951db6ac123fd898cf3bfb49e53e5a199d"
+    },
+    "montagem/esquema_eletrico.svg": {
+      "origem": "outputs/Guia_Montagem_Fisica_ESP32/esquema_eletrico.svg",
+      "sha256": "c2b68a5bd4d1b507770984287b13dc2fddaad2ef3411e5df7594a008d65a22f2"
+    },
+    "montagem/mapa_protoboard_P2.svg": {
+      "origem": "outputs/Guia_Montagem_Fisica_ESP32/mapa_protoboard_P2.svg",
+      "sha256": "d44fe959d313b007f7f81105de9a53e2bdecc695cf3f1312582e024c052d4b79"
     }
   },
   "coletas": [
@@ -164,5 +180,27 @@
     "pasta": "pdfs_por_etapa",
     "quantidade_pdfs": 7,
     "observacao": "Sete PDFs originais incluídos sem edição. Alguns documentam ensaios e versões anteriores; não substituem a consolidação final."
+  },
+  "guia_montagem_fisica": {
+    "data": "2026-10-19",
+    "documento": "montagem/GUIA_MONTAGEM_FISICA_ESP32.pdf",
+    "paginas": 4,
+    "pinos": {
+      "TX": [
+        "GPIO17",
+        "GND"
+      ],
+      "RX": [
+        "GPIO16",
+        "GND"
+      ],
+      "RUIDO": [
+        "GPIO16",
+        "GPIO18",
+        "GPIO19",
+        "GND"
+      ]
+    },
+    "observacao": "Mapa P2 posições 15-21 preservado. Conferido com os pinos do firmware publicado; documento não certifica continuidade elétrica da bancada."
   }
 }
