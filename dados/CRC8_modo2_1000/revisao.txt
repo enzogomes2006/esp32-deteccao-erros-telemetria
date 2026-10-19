@@ -1,0 +1,9 @@
+﻿REVISAO AUTOMATICA DA COLETA
+Estrutura dos registros OK: True
+RX linhas: 1000
+RUIDO linhas: 1771
+# RESUMO,CRC8,total=1000,OK=195,CORROMPIDO=805,PERDIDO=0,NAO_DETECTADO=0,taxa=0.000000
+# VALIDACAO,esperados=1000,sequencias_processadas=1000,nao_classificados=0,sem_referencia=0,referencias_invalidas=0,quadros_malformados=0,repetidos_atrasados_ou_fora=0,rodada_valida=SIM
+
+Revisao v2: cruza amostras RUIDO com RX/copia e recalcula a checagem. Nao certifica montagem ou calibracao fisica.
+Problemas encontrados:

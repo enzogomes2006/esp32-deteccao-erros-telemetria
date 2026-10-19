@@ -1,0 +1,40 @@
+﻿{
+    "quadros":  1000,
+    "validacao_rx":  "# VALIDACAO,esperados=1000,sequencias_processadas=1000,nao_classificados=0,sem_referencia=0,referencias_invalidas=0,quadros_malformados=0,repetidos_atrasados_ou_fora=0,rodada_valida=SIM",
+    "modo_ruido_confirmado":  true,
+    "porta_ruido":  "COM3",
+    "iniciado_em":  "2026-10-17T18:53:53.6353075-03:00",
+    "porta_rx":  "COM6",
+    "ruido_versao_instalada":  "conferir na captura de inicializacao",
+    "revisao":  {
+                    "estrutura_ok":  true,
+                    "contagens":  {
+                                      "OK":  213,
+                                      "NAO_DETECTADO":  4,
+                                      "PERDIDO":  0,
+                                      "CORROMPIDO":  783
+                                  },
+                    "rx_linhas":  1000,
+                    "ruido_linhas":  1790,
+                    "problemas":  [
+
+                                  ]
+                },
+    "arquivos":  [
+                     "rx.csv",
+                     "ruido.csv",
+                     "rx_bruto.log",
+                     "ruido_bruto.log",
+                     "revisao.txt"
+                 ],
+    "rx_preparado":  true,
+    "tecnica":  "SUM8",
+    "resumo_rx":  "# RESUMO,SUM8,total=1000,OK=213,CORROMPIDO=783,PERDIDO=0,NAO_DETECTADO=4,taxa=0.005083",
+    "baud":  115200,
+    "ajuste_isr_us_verificado_pelo_programa":  false,
+    "firmware_instalado_verificado_pelo_programa":  false,
+    "modo_ruido":  2,
+    "rx_esperado":  "rx_completo v0.2",
+    "encerrado_em":  "2026-10-17T18:55:44.8663653-03:00",
+    "coletor_versao":  "2"
+}

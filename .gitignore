@@ -1,0 +1,11 @@
+# Compilacao e arquivos locais
+.DS_Store
+Thumbs.db
+*.tmp
+*.aux
+latex/*.log
+*.toc
+*.synctex.gz
+coletor/Coletas/
+build/
+.arduinoIDE/
