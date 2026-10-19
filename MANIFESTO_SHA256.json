@@ -286,9 +286,13 @@
       "bytes": 8516,
       "sha256": "11755f4f4f84a0a6afbbdbe0e56373aab612598c47e23d735c328bf70a972ca7"
     },
+    "PROXIMOS_PASSOS.md": {
+      "bytes": 6633,
+      "sha256": "5365ef929f825bd7a04ac8487f22215e552ebcc713a3b15fbc282750bc3caff5"
+    },
     "README.md": {
-      "bytes": 5139,
-      "sha256": "fac54ecbb6a6d4f103f07b9f8fb4f1cdca5f324853ef342e27819d0ef47a19dd"
+      "bytes": 5334,
+      "sha256": "55f9dac7dcf7f379c394971f5222d23371b84524feee8ae9db5f8eddd68f609f"
     },
     "Relatorio_Final_ESP32.md": {
       "bytes": 24908,

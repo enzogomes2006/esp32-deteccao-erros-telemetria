@@ -6,6 +6,8 @@ Tres ESP32 formam um enlace UART com ruido fisico: TX transmite, RX decide aceit
 
 Repositório **privado**: https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria. Para acesso pelo professor ou pela equipe, o proprietário deve conceder permissão às contas correspondentes.
 
+**[O que fazer agora — checklist de gravação, testes e conclusão](PROXIMOS_PASSOS.md).** Comece pelo teste SUM8, modo 0, dez quadros; confira o `revisao.txt` antes das próximas coletas.
+
 ## Revisão CORPO64 — preparada, validação física pendente
 
 Foi preparada uma revisão com ruído em LEN, sequência, payload e CHK. Os programas compilaram e passaram nos testes de software; **ainda não há novas coletas físicas dessa revisão**. A montagem e o TX continuam compatíveis.
