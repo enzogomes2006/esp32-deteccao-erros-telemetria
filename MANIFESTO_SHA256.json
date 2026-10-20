@@ -267,8 +267,8 @@
       "sha256": "15d5df18677835c50d058d526b3b3234d121a2b0367674adc1432767c7a33123"
     },
     "Relatorio_Final_ESP32.pdf": {
-      "bytes": 228455,
-      "sha256": "aaa7daee66223afc26299594edc0c86ca018bc35444a1a8a93ff8fb543e07ab1"
+      "bytes": 228430,
+      "sha256": "43b6cbd42cd1308a51402f099698cfee37d7c4193859854fb588fe9ab4e8d0d3"
     },
     "relatorio_latex/figuras/contagens.pdf": {
       "bytes": 74578,
@@ -283,8 +283,8 @@
       "sha256": "8a424c4c123bed294f8fb5fb849453f86f8076f0eb7e871131e735ba5a6502be"
     },
     "relatorio_latex/main.tex": {
-      "bytes": 30627,
-      "sha256": "20e7dd0282763dfb5c8e48156384a924f6520773cd2cc2b8608e490e436b9893"
+      "bytes": 30604,
+      "sha256": "a61d7f3bc71edc536d26bfab9a84684dc7329229689fd67a09966ae33423217a"
     }
   }
 }
