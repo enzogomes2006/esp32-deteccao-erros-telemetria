@@ -16,7 +16,7 @@
    Ruido e pulso fisico 1->0: o alvo pode ja estar em zero.
    Timeouts: 60 ms bloco/auditoria; 250 ms silencio + passo de 100 ms.
    Pausa 'a' somente com ruido 0, apos auditar posicao 1: UART off 350 ms.
-   Esta revisao ainda exige validacao fisica. Ver especificacao previa.
+   Coletas desta versao: dados/ (19/10/2026). Protocolo na raiz do projeto.
 */
 #include <Arduino.h>
 #include <esp_timer.h>

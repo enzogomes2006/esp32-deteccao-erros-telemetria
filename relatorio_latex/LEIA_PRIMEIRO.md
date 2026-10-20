@@ -1,3 +1,12 @@
-# Fonte LaTeX do relatório
+# Fonte do relatório
 
-main.tex contém o relatório de Enzo Aurélio, Luís Fernando e Vinicius Moraes. Mantenha figuras/ ao lado do fonte. Compile com pdfLaTeX, XeLaTeX ou Tectonic. Para pdfLaTeX, execute duas vezes para atualizar o sumário e as referências. Os dados originais estão em dados/ no repositório.
+O relatório é de Enzo Aurélio, Luís Fernando e Vinicius Moraes. O arquivo `main.tex` e a pasta `figuras/` geram o PDF de entrega da raiz. Não há uma segunda versão do relatório para escolher.
+
+Com pdfLaTeX, execute duas vezes nesta pasta para atualizar sumário e referências:
+
+```text
+pdflatex main.tex
+pdflatex main.tex
+```
+
+Também é possível usar `tectonic main.tex`, que repete as passagens necessárias. Depois da compilação, copie `main.pdf` para `Relatorio_Final_ESP32.pdf` na raiz. As observações originais ficam em `dados/` e não devem ser alteradas para ajustar as tabelas.

@@ -1,10 +1,9 @@
-/* RUIDO CORPO64 v2.0 - CANDIDATO; validar na placa antes de usar em tabelas.
+/* RUIDO CORPO64 v2.0 - fontes usados nas coletas de 19/10/2026.
    ESP32 classico WROOM, Arduino-ESP32 3.3.12, CPU 240 MHz.
    Mesmos pinos: limpa GPIO16/UART2, perturbada GPIO18, transistor GPIO19.
    Modos 0..4. Log novo com byte_corpo 0..7 e nome do campo.
-   v1.3.1: restaura explicitamente RX da UART2 pela matriz GPIO apos
-   configurar CAP0. Corrige conflito com IOMUX nativo de GPIO16 no core3.3.12.
-   A inicializacao verifica os registradores e informa a rota compartilhada.
+   GPIO16 e compartilhado pela UART2 e pela captura CAP0. A inicializacao
+   restaura a rota da UART pela matriz GPIO e verifica os registradores.
 
    CAP0 do MCPWM grupo0 registra a borda de descida em hardware.
    CAP1, sem GPIO e sem interrupcao, fornece capturas por software do
@@ -18,8 +17,7 @@
    unsigned, validas tambem durante o wrap do contador.
    UART limpa e efeito esperado continuam auditados; avisos nao somem.
    ISR excessivamente atrasado pode perder a primeira borda ou janela;
-   este candidato NAO promete corrigir qualquer latencia de interrupcao.
-   Conferir tambem os bytes RX com o log do injetor (coletor v2).
+   conferir os avisos e cruzar os bytes RX com o log do injetor (coletor v3).
 
    MCPWM0/canais0 e1 sao exclusivos deste sketch. Chamadas LL dependem
    dos headers ESP32 instalados; compilacao verificada em core3.3.12.

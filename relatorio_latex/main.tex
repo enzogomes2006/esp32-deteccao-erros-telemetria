@@ -14,6 +14,9 @@ pdfauthor={Enzo Aurélio; Luís Fernando; Vinicius Moraes},pdfsubject={Trabalho 
 \setlength{\parindent}{1.25cm}
 \setlength{\parskip}{0.15em}
 \setlength{\emergencystretch}{2em}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
 \renewcommand{\arraystretch}{1.2}
 \captionsetup{font=small,labelfont=bf}
 \onehalfspacing
@@ -55,7 +58,7 @@ Este trabalho compara a soma modular de oito bits (SUM8) e o CRC-8/SMBUS em um e
 
 \section{Introdução e objetivos}
 
-O objetivo é comparar duas técnicas de detecção no mesmo formato de quadro e observar falhas reais de comunicação. O payload contém quatro bytes sintéticos, não medições de um sensor. Cada condição usa uma técnica por vez. A série física atual foi coletada em 19/10/2026 após sete testes curtos de dez quadros. Dois controles adicionais de dez quadros registraram os tempos de cálculo do TX.\par
+O trabalho compara SUM8 e CRC-8 no mesmo enlace UART. Os códigos, a especificação e os registros estão disponíveis em \url{https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria}. O payload contém quatro bytes sintéticos, não medições de um sensor. Cada condição usa uma técnica por vez. A série física atual foi coletada em 19/10/2026 após sete testes curtos de dez quadros. Dois controles adicionais de dez quadros registraram os tempos de cálculo do TX.\par
 
 Foram avaliadas sete condições de transmissão com o mesmo formato de quadro e a mesma temporização. As observações consideradas nas tabelas pertencem exclusivamente às sete coletas de mil quadros identificadas no Apêndice A. O objetivo é medir a incidência de erros detectados, erros não detectados e falhas de enquadramento, além do custo de cálculo e do tempo de recuperação do receptor.\par
 
@@ -170,13 +173,15 @@ Após o quadro, o TX envia D5 6A B4 4B seguido de uma cópia dos oito bytes orig
 
 Corpos descartados não têm sequência confiável. O RX mantém eventos anônimos até conciliá-los com uma sequência aceita, sem transformar cada descarte em uma segunda perda. Sequências antigas ou repetidas não geram nova entrega. seq\_rx conserva o que chegou, e seq\_referencia/seq\_experimento identificam a auditoria posterior. cabecalho\_diverge registra divergências de LEN ou sequência, inclusive se um detector aceitar. ACEITO pelo detector e entregue\_aplicacao são campos distintos.\par
 
-Os timeouts são 60 ms para bloco/auditoria e 250 ms para ausência de progresso no enlace, com avanço de 100 ms por ausência adicional. Referências não renovam o prazo de enlace. Referência ausente, órfã, inválida ou associação ambígua invalida a medição; nenhum OK é inventado.\par
+O RX espera no máximo 60 ms pelo bloco ou pela auditoria. Para ausência de progresso de dados, o prazo é 250 ms, com avanço de 100 ms por ausência adicional. O primeiro marcador inicia o controle de ausência; novos marcadores e decisões de dados renovam o prazo. A referência não o renova. Antes do primeiro marcador, o RX apenas aguarda o início da transmissão. Referência ausente, órfã, inválida ou associação ambígua invalida a medição.\par
+
+O intervalo medido entre quadros tem mediana de 101 ms e máximo de 101,917 ms nas sete séries. Assim, $250/101\approx2{,}48$: o prazo de ausência tolera mais de dois períodos antes de registrar uma falta. O passo de 100 ms acompanha o período nominal do TX. Para o quadro e sua cópia, os 24 bytes em UART 8N1 levam nominalmente $240/115200\approx2{,}08$ ms, além de 44 ms de pausas programadas. O limite de 60 ms supera esses 46,08 ms nominais e deixa margem de processamento, sem manter o RX esperando indefinidamente. Os prazos são atendidos pelo loop; não são medições de disparo exato de um timer.\par
 
 \section{Método e conferência dos dados}
 
-Foram selecionadas quatro condições SUM8, modos 0 a 3, e três CRC8, modos 1 a 3, com mil quadros cada. O controle sem ruído CRC8 foi registrado entre os controles curtos, sem substituir nenhuma das sete condições. Cada pasta conserva os CSVs do RX e do injetor, os logs brutos, os metadados e a revisão automática. O manifesto fornece hashes SHA256 para conferir a integridade. Somente as sete condições de mil quadros entram nas tabelas principais; os controles de temporização e recuperação são analisados separadamente.\par
+Foram selecionadas quatro condições SUM8, modos 0 a 3, e três CRC8, modos 1 a 3, com mil quadros cada. O controle sem ruído CRC8 foi registrado entre os controles curtos, sem substituir nenhuma das sete condições. Cada pasta conserva os CSVs do RX e do injetor, os logs brutos, os metadados e a revisão automática. Somente as sete condições de mil quadros entram nas tabelas principais; os controles de temporização e recuperação são analisados separadamente.\par
 
-A conferência recalculou contagens e resíduos, cruzou os oito bytes com as amostras do injetor e verificou máscaras, efeito físico, sincronismo, atrasos, identidade das posições e ordem de decisão/auditoria. Os CSVs foram comparados com os logs brutos. O validador publicado em coletor/Revisar.ps1 permite repetir a revisão dos registros. Nenhum dado sintético integra as medições físicas.\par
+A conferência recalculou contagens e resíduos, cruzou os oito bytes com as amostras do injetor e verificou máscaras, efeito físico, sincronismo, atrasos, identidade das posições e ordem de decisão/auditoria. Os CSVs foram comparados com os logs brutos. O validador publicado em coletor/Revisar.ps1 permite repetir a revisão dos registros. As tabelas usam registros coletados nas placas, não as saídas dos testes de software.\par
 
 \begin{table}[htbp]\centering\small\caption{Critérios de classificação dos quadros.}\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.300\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.700\linewidth-2\tabcolsep\relax}}\toprule
 
@@ -200,26 +205,23 @@ Cada posição recebe uma única classe. A taxa de não detecção considera os 
 
 \section{Resultados das sete rodadas}
 
-\begin{table}[htbp]\centering\small\caption{Contagens das sete condições experimentais.}\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.140\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.100\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.140\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.220\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.170\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.230\linewidth-2\tabcolsep\relax}}\toprule
-
-\textbf{Técnica} & \textbf{Modo} & \textbf{OK} & \textbf{Corrompido} & \textbf{Perdido} & \textbf{Não detectado} \\
-
+\begin{table}[htbp]\centering\small\caption{Resultados SUM8: mil quadros por modo.}\label{tab:sum8}
+\begin{tabular}{lrrrrr}\toprule
+Modo & OK & Corrompido & Perdido & Não detectado & Taxa ND \\
 \midrule
+0 & 1000 & 0 & 0 & 0 & n.a. \\
+1 & 563 & 392 & 45 & 0 & 0,0000\% \\
+2 & 289 & 619 & 90 & 2 & 0,3221\% \\
+3 & 100 & 809 & 91 & 0 & 0,0000\% \\
+\bottomrule\end{tabular}\end{table}
 
-SUM8 & 0 & 1000 & 0 & 0 & 0 \\
-
-SUM8 & 1 & 563 & 392 & 45 & 0 \\
-
-SUM8 & 2 & 289 & 619 & 90 & 2 \\
-
-SUM8 & 3 & 100 & 809 & 91 & 0 \\
-
-CRC8 & 1 & 540 & 418 & 42 & 0 \\
-
-CRC8 & 2 & 305 & 593 & 102 & 0 \\
-
-CRC8 & 3 & 116 & 792 & 92 & 0 \\
-
+\begin{table}[htbp]\centering\small\caption{Resultados CRC8: mil quadros por modo.}\label{tab:crc8}
+\begin{tabular}{lrrrrr}\toprule
+Modo & OK & Corrompido & Perdido & Não detectado & Taxa ND \\
+\midrule
+1 & 540 & 418 & 42 & 0 & 0,0000\% \\
+2 & 305 & 593 & 102 & 0 & 0,0000\% \\
+3 & 116 & 792 & 92 & 0 & 0,0000\% \\
 \bottomrule\end{tabular}\end{table}
 
 Cada linha soma 1.000 posições; cada rodada tem 8.000 amostras do injetor e rodada\_valida=SIM. A conferência encontrou zero cabeçalhos divergentes em corpos aceitos nas sete rodadas. Divergências em corpos descartados ou malformados permanecem nos registros.\par
@@ -228,27 +230,7 @@ Cada linha soma 1.000 posições; cada rodada tem 8.000 amostras do injetor e ro
 
 \subsection{Taxas e perdas de enquadramento}
 
-\begin{table}[htbp]\centering\small\caption{Taxas de não detecção e perdas por comprimento inválido.}\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}}\toprule
 
-\textbf{Condição} & \textbf{Erros checados} & \textbf{ND} & \textbf{Taxa ND} & \textbf{Perdidos por LEN} \\
-
-\midrule
-
-SUM8/0 & 0 & 0 & n.a. & 0 \\
-
-SUM8/1 & 392 & 0 & 0,0000\% & 45 \\
-
-SUM8/2 & 621 & 2 & 0,3221\% & 90 \\
-
-SUM8/3 & 809 & 0 & 0,0000\% & 91 \\
-
-CRC8/1 & 418 & 0 & 0,0000\% & 42 \\
-
-CRC8/2 & 593 & 0 & 0,0000\% & 102 \\
-
-CRC8/3 & 792 & 0 & 0,0000\% & 92 \\
-
-\bottomrule\end{tabular}\end{table}
 
 Na rodada SUM8/2 ocorreram 621 erros checados, sendo 619 detectados e 2 não detectados. A taxa é 0,3221\%. Em relação aos mil quadros transmitidos, os dois casos são 0,2\%; esse é outro denominador e não substitui a taxa definida. Os 90 perdidos são excluídos da taxa de falha do detector.\par
 
@@ -367,9 +349,9 @@ CRC8/3 & 999 & 101,000 & 100,999 & 101,023 \\
 
 Os intervalos são medidos pelo RX entre inícios de quadros e usam 999 diferenças por rodada. A mediana é 101 ms em todas as condições. Não são tempos de recuperação nem incluem o primeiro zero.\par
 
-Cada quadro de dados tem 4 bytes úteis e 8 de overhead: marcador 4, LEN 1, sequência 2 e CHK 1. A eficiência em bytes é 4/12=33,33\%; overhead/total=66,67\% e overhead/payload=200\%. A cópia de depuração adiciona 12 bytes à instrumentação, totalizando 24 bytes e eficiência útil de 4/24=16,67\% antes das pausas.\par
+Cada quadro de dados tem 4 bytes úteis e 8 de overhead: marcador 4, LEN 1, sequência 2 e CHK 1. A eficiência em bytes é 4/12=33,33\%; overhead/total=66,67\% e overhead/payload=200\%. A cópia de depuração fica fora dessa conta de overhead, como determina o enunciado.\par
 
-Em 8N1, cada byte ocupa dez bits na linha. Os 12 bytes de dados ocupam teoricamente 120/115200 s, cerca de 1,042 ms. Incluindo a cópia, o tempo teórico de serialização é cerca de 2,083 ms. Esses valores não incluem as pausas programadas de 10 ms após o marcador, 3 ms por byte do corpo e 10 ms antes da referência. O período observado de 101 ms resulta de todo o agendamento, não de uma mudança na taxa UART. Com quatro bytes úteis a cada 101 ms, a vazão útil aproximada é 39,60 bytes/s, ou 316,83 bit/s.\par
+Em 8N1, cada byte ocupa dez bits na linha. Os 12 bytes de dados ocupam teoricamente 120/115200 s, cerca de 1,042 ms. Esses valores não incluem as pausas programadas de 10 ms após o marcador, 3 ms por byte do corpo e 10 ms antes da referência. O período observado de 101 ms resulta de todo o agendamento, não de uma mudança na taxa UART. Com quatro bytes úteis a cada 101 ms, a vazão útil aproximada é 39,60 bytes/s, ou 316,83 bit/s.\par
 
 \section{Recuperação após interrupção de recepção}
 
@@ -401,13 +383,13 @@ Os dois casos SUM8 demonstram uma limitação concreta da soma modular: alteraç
 
 A cópia posterior torna a auditoria possível, mas integra a instrumentação experimental. O resultado OK da tabela é definido pelo payload; divergências de cabeçalho precisam ser avaliadas nos campos específicos. A observação de zero cabeçalhos aceitos divergentes nesta série não elimina a possibilidade de colisões futuras no cabeçalho.\par
 
-A ordenação uint16 e a passagem de 65535 para zero foram verificadas em software, mas as rodadas físicas de 0 a 999 não exercitam esse cruzamento. As mensagens de versão foram observadas durante a gravação; não houve leitura de flash nem verificação criptográfica do binário instalado. Os hashes publicados atestam a integridade dos arquivos disponibilizados, sem identificar por si só o firmware em execução.\par
+A ordenação uint16 e a passagem de 65535 para zero foram verificadas em software, mas as rodadas físicas de 0 a 999 não exercitam esse cruzamento. As mensagens de versão foram observadas durante a gravação; não houve leitura de flash nem verificação criptográfica do binário instalado. As mensagens de versão identificam a execução observada, mas não equivalem a uma leitura do binário instalado.\par
 
 \Needspace{13\baselineskip}
 
 \section{Conclusão}
 
-A revisão CORPO64 produziu sete séries físicas consistentes e ampliou os alvos de ruído aos oito bytes do corpo. Dois payloads incorretos passaram pelo SUM8 no modo 2 e foram entregues, com evidência byte a byte e resíduo zero. O CRC8 registrou zero ND nas três condições ensaiadas. A verificação custou aproximadamente 1 \ensuremath{\mu}s no SUM8 e 3 \ensuremath{\mu}s no CRC8, muito abaixo do período de 101 ms adotado na bancada. O controle separado mostrou retomada após uma pausa de recepção, com distinção entre tempo sem UART, tempo após reativação e tempo desde a detecção de perda. Os dados, o validador e os hashes permitem conferir a consolidação, dentro dos limites instrumentais descritos.\par
+A revisão CORPO64 produziu sete séries físicas consistentes e ampliou os alvos de ruído aos oito bytes do corpo. Dois payloads incorretos passaram pelo SUM8 no modo 2 e foram entregues, com evidência byte a byte e resíduo zero. O CRC8 registrou zero ND nas três condições ensaiadas. A verificação custou aproximadamente 1 \ensuremath{\mu}s no SUM8 e 3 \ensuremath{\mu}s no CRC8, muito abaixo do período de 101 ms adotado na bancada. O controle separado mostrou retomada após uma pausa de recepção, com distinção entre tempo sem UART, tempo após reativação e tempo desde a detecção de perda. Os dados e o validador permitem conferir a consolidação, dentro dos limites instrumentais descritos.\par
 
 \clearpage\appendix\section{Rastreabilidade e reprodução}
 
@@ -433,7 +415,7 @@ CRC8/3 & 20261019\_101329\_766\_CRC8\_modo3\_1000 \\
 
 \bottomrule\end{tabular}\end{table}
 
-Cada pasta contém seis arquivos originais. O manifesto de integridade do repositório registra seus hashes. A revisão pode ser repetida pelo coletor, usando os logs brutos. O repositório reúne os programas, a especificação do protocolo e os registros necessários para conferir as contagens e os casos discutidos.\par
+Cada pasta contém seis arquivos originais. Os metadados identificam a configuração da rodada e revisao.txt registra a conferência do coletor. A revisão pode ser repetida pelo coletor, usando os logs brutos. O repositório reúne os programas, a especificação do protocolo e os registros necessários para conferir as contagens e os casos discutidos.\par
 
 Para repetir a revisão de uma coleta no Windows, executar na raiz do repositório, substituindo o nome da pasta para conferir as outras seis séries:\par
 

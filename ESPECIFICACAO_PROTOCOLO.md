@@ -33,7 +33,7 @@ O marcador distingue a referência dos dados. O corpo completo é copiado para a
 O TX pausa 10 ms após o marcador, 3 ms após cada byte do corpo e 10 ms antes da cópia. As pausas ficam em nível ocioso alto; a taxa de cada byte permanece 115200 baud. Cada rodada começa na sequência 0; t envia dez quadros e g envia mil. O contador é uint16. O enlace implementado é unidirecional, sem ACK ou retransmissão; um descarte não interrompe o quadro seguinte.
 
 
-# Regras atuais do receptor CORPO64
+## Regras do receptor
 
 O parser limita o corpo a oito bytes e exige LEN=7. LEN inválido gera PERDIDO por enquadramento, SEM_CHECAGEM. Em corpos válidos, resíduo não zero gera DESCARTADO/CORROMPIDO e não avança a sequência usando cabeçalho não confiável. Resíduo zero gera ACEITO; o enlace aplica ordenação uint16 de meia faixa e distingue essa aceitação da entrega à aplicação.
 
@@ -41,7 +41,26 @@ Descartes e eventos malformados acumulam eventos anônimos. A próxima sequênci
 
 A auditoria associa cada evento à referência somente depois da decisão. seq_rx mantém a sequência recebida; seq_referencia/seq_experimento são identidade de auditoria. A referência nunca reescreve o enlace. Divergências de cabeçalho são registradas à parte; a classe NAO_DETECTADO da tabela usa divergência do payload. ACEITO não implica automaticamente entregue_aplicacao.
 
-Timeouts: 60 ms para bloco/auditoria e 250 ms para ausência de progresso de dados, com passo de 100 ms. Progresso de dados, não a referência, renova o prazo de enlace. Referência órfã, ausente, inválida ou associação ambígua invalida a medição. Perdas sem evento exigem evidência de ausência e conciliação sem ambiguidade.
+### Sequência, lacunas e repetição
+
+A origem da rodada é zero e a janela tem dez ou mil posições. A sequência é um inteiro de 16 bits sem sinal. Para um corpo aceito, calcula-se `delta = uint16_t(seq_rx - esperada)`. Se `delta >= 32768`, o número é antigo ou repetido: não há nova entrega e a sequência esperada não avança. Essa comparação ordena diferenças menores que meia faixa do contador. A passagem de 65535 para 0 é feita pela própria aritmética uint16; não foi exercitada nas rodadas físicas de 0 a 999.
+
+Cada corpo descartado ou malformado soma um evento anônimo desde a última sequência aceita. Ao aceitar um número adiante, o receptor desconta esses eventos e as ausências já diagnosticadas de `delta`. Somente o restante positivo aumenta a evidência de quadros ausentes. Um valor incompatível gera diagnóstico de ambiguidade, sem inventar uma posição para o descarte. Depois de um aceite em ordem, a próxima sequência esperada é `uint16_t(seq_rx + 1)` e os acumuladores dessa lacuna são zerados.
+
+A referência válida associa o evento pendente à posição experimental depois da decisão. Cada posição só recebe uma classificação. Posições sem evento só são preenchidas como PERDIDO quando a janela pode ser encerrada e a contagem de ausências do enlace coincide com as posições faltantes, sem ambiguidades nem cabeçalho divergente em corpo aceito. Referência órfã, ausente, inválida ou associação ambígua invalida a medição.
+
+### Timeouts e justificativa
+
+| Prazo | Quando começa ou é renovado | Ação |
+| --- | --- | --- |
+| 60 ms para bloco | Reconhecimento do marcador de dados ou de referência | Abandona bloco incompleto e volta à busca de marcador |
+| 60 ms para auditoria | Marcador do evento de dados | Referência não recebida no prazo invalida a medição |
+| 250 ms para ausência | Primeiro marcador da rodada; renovado pelo progresso de dados (marcador, decisão de corpo ou timeout do corpo) | Acrescenta evidência de ausência de evento, sem duplicar um descarte |
+| 100 ms adicionais | Prazo anterior de ausência | Registra a próxima ausência, se o silêncio continuar |
+
+Antes do primeiro marcador, o RX apenas aguarda; não declara perdas por demora para iniciar o TX. A cópia de depuração não renova o prazo do enlace.
+
+Os logs mediram mediana de 101 ms entre quadros, com máximo de 101,917 ms nas sete séries. Os 250 ms equivalem a aproximadamente 2,48 períodos medidos, permitindo variação de agendamento antes de declarar ausência. O passo de 100 ms acompanha o período nominal do TX. Para quadro e cópia, 24 bytes em 8N1 a 115200 baud mais as pausas programadas de 44 ms dão cerca de 46,08 ms nominais. O limite de 60 ms fornece margem de processamento e impede espera indefinida. Essas contas justificam os valores de projeto; os prazos são atendidos pelo loop e não por um disparo exato no microssegundo.
 
 Ruído CORPO64: modo 1 sorteia um dos 64 bits; modo 2 dois distintos; modo 3 rajada contígua de 3 a 8 bits dentro de um byte. Modo 0 é controle sem pulsos. Modo 4 é controle extra em P0/P1. Marcador e referência permanecem preservados.
 
