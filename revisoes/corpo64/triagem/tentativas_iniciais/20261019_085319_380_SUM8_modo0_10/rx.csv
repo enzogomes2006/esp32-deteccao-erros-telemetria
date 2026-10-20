@@ -1,1 +1,0 @@
-﻿evento_id,seq_experimento,seq_rx,seq_referencia,seq_enlace_esperada,seq_enlace_proxima,tecnica,len_rx,residuo,decisao,status,payload_confere,cabecalho_diverge,entregue_aplicacao,verificacao_us,intervalo_inicio_us,recuperacao_ms,corpo_rx_hex,corpo_tx_hex,motivo,decisao_us,referencia_us

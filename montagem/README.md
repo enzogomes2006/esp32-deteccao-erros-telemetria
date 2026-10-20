@@ -1,8 +1,7 @@
 # Guia da montagem física do seu ESP32
 
-Este guia descreve a fiação indicada para sua montagem, compatível com o TX atual, RX completo v0.2 e RUÍDO captura v1.3.1. Não exige remontar o circuito. Se for mexer nos contatos, desligue os três USBs.
+Este guia descreve a fiação indicada para sua montagem, compatível com o TX atual, RX CORPO64 v1.0 e RUÍDO CORPO64 v2.0. Não exige remontar o circuito. Se for mexer nos contatos, desligue os três USBs.
 
-[Abrir guia ilustrado em PDF](GUIA_MONTAGEM_FISICA_ESP32.pdf)
 
 ## 1. Oriente o conjunto
 

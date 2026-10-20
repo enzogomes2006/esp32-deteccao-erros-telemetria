@@ -1,48 +1,62 @@
-# Detecção de erros em telemetria com ESP32
+# Detecção de erro em telemetria sob ruído real — ESP32
 
 Enzo Aurélio · IFMT - Octayde · TCD · Professor Ruy Oliveira.
 
-**Série atual: CORPO64, coletada em 19/10/2026.** Sete rodadas físicas válidas, 7.000 quadros e 56.000 amostras do injetor. Foram confirmados dois erros não detectados do SUM8, nas sequências 415 e 553 do modo 2. O repositório é público.
+Entrega da série **CORPO64**, coletada em 19/10/2026. Três ESP32 realizam transmissão UART, recepção com checagem e injeção física de ruído. Uma técnica por rodada: SUM8 ou CRC-8/SMBUS.
 
-## Materiais atuais
+## Materiais da entrega
 
-- [Relatório PDF](Relatorio_Final_ESP32.pdf) e [texto completo](Relatorio_Final_ESP32.md).
-- [Dados físicos CORPO64](revisoes/corpo64/dados/) e [resultados consolidados](resultados_consolidados.json).
-- [Validação física](revisoes/corpo64/validacao/VALIDACAO_FISICA.json), [revisão oficial das coletas](revisoes/corpo64/validacao/REVISAO_OFICIAL_COLETAS.json) e [procedência](revisoes/corpo64/PROVENIENCIA_COLETAS.json).
-- [Controles TX e recuperação](evidencias/corpo64/ORIGEM.md).
-- [Guia para repetir os ensaios](GUIA_DEMONSTRACAO.md), [protocolo atual](ESPECIFICACAO_PROTOCOLO.md), [roteiro de 20 minutos](APRESENTACAO_20_MIN.md) e [pendências de entrega](PROXIMOS_PASSOS.md).
-- [Firmware atual e instruções](revisoes/corpo64/LEIA_PRIMEIRO.md), [montagem](montagem/GUIA_MONTAGEM_FISICA_ESP32.md) e [esquema elétrico](montagem/esquema_eletrico.svg).
+| Material | Arquivo ou pasta |
+| --- | --- |
+| Relatório explicado, tabelas e análise dos casos | [Relatorio_Final_ESP32.pdf](Relatorio_Final_ESP32.pdf) |
+| Protocolo, enquadramento, sequência e timeouts | [ESPECIFICACAO_PROTOCOLO.md](ESPECIFICACAO_PROTOCOLO.md) |
+| Três programas e seus headers necessários | [firmware/](firmware/) |
+| Sete coletas, CSVs e tabelas | [dados/](dados/) |
+| Tempos TX e recuperação após perda | [evidencias/](evidencias/ORIGEM.md) |
+| Ligações, resistores e transistor | [montagem/](montagem/README.md) |
+| Coletor e conferência dos registros | [coletor/](coletor/LEIA_PRIMEIRO.md) |
+| Roteiro de defesa e predição | [APRESENTACAO_20_MIN.md](APRESENTACAO_20_MIN.md) |
 
-## Resultados medidos
+## Gravar os programas
 
-| Técnica | Modo | OK | Corrompido | Perdido | Não detectado |
-| --- | --- | --- | --- | --- | --- |
-| SUM8 | 0 | 1000 | 0 | 0 | 0 |
-| SUM8 | 1 | 563 | 392 | 45 | 0 |
-| SUM8 | 2 | 289 | 619 | 90 | 2 |
-| SUM8 | 3 | 100 | 809 | 91 | 0 |
-| CRC8 | 1 | 540 | 418 | 42 | 0 |
-| CRC8 | 2 | 305 | 593 | 102 | 0 |
-| CRC8 | 3 | 116 | 792 | 92 | 0 |
+Baixe o repositório completo em **Code → Download ZIP** e extraia. Use **ESP32 Dev Module / WROOM clássico**, CPU **240 MHz** e **Arduino-ESP32 3.3.12**. Abra cada `.ino` pela própria pasta, mantendo seus `.h` junto dele:
 
-Taxa ND = NAO_DETECTADO/(CORROMPIDO+NAO_DETECTADO). SUM8/2: 2/621 = **0,3221%**. Os 90 perdidos dessa condição não entram no denominador. Nas sete séries, todos os perdidos foram LEN inválido, sem checagem concluída.
+- TX: [firmware/tx/tx.ino](firmware/tx/tx.ino), GPIO17 na linha de transmissão.
+- RX: [firmware/rx/rx.ino](firmware/rx/rx.ino), GPIO16 na linha perturbada.
+- RUÍDO: [firmware/noise/noise.ino](firmware/noise/noise.ino), GPIO16 na linha limpa, GPIO18 na perturbada e GPIO19 no resistor de base do BC547.
 
-![Contagens por condição](revisoes/corpo64/graficos/contagens.svg)
+A [montagem documentada](montagem/README.md) usa GND comum e dois resistores de 1 kΩ. O injetor sorteia alvos nos 64 bits do corpo (LEN, sequência, payload e CHK), preservando marcador e cópia de depuração. Seu pulso só força 1 para 0; um alvo já zero pode não mudar. A base de tempo é a captura de hardware MCPWM.
 
-## O que o sistema faz
+## Executar uma rodada
 
-TX envia dados sintéticos por UART 115200 8N1. RUÍDO aciona BC547 para forçar bits a zero em LEN, sequência, payload ou CHK. RX calcula SUM8 ou CRC-8/SMBUS e registra a decisão antes de consultar a cópia de depuração. Referência não corrige a decisão ou o enlace. Marcador e cópia ficam preservados. Não há ACK nem retransmissão.
+1. Deixe TX parado com `x`. Monitores USB: **115200 baud / New Line**.
+2. Feche os Monitores Seriais do RX e do RUÍDO e abra **coletor/Abrir_Coletor.cmd** na pasta extraída.
+3. Selecione portas, técnica, modo e 10 ou 1000 quadros. Clique **Preparar e gravar**.
+4. Aguarde **PRONTO E GRAVANDO**. No Monitor Serial do TX, envie `s` para SUM8 ou `c` para CRC8; depois `t` para dez quadros ou `g` para mil.
+5. Aguarde salvar e confira `revisao.txt`. A pasta é criada em coletor/Coletas/.
 
-Tempos médios RX: SUM8 **1,006 µs** em 3.774 checagens; CRC8 **3,003 µs** em 2.764. Controles TX: 1 µs e 3 µs. Intervalo TX: 101 ms. Recuperação após reativar UART: 38,691 ms, após pausa efetiva de 350,443 ms.
+Para o primeiro controle, selecione SUM8, modo 0, dez quadros. Espera-se 10 OK, zero nas outras classes, 80 amostras do injetor e `rodada_valida=SIM`. As contagens com ruído variam; os valores medidos no relatório não são previsão exata de outra execução.
 
-## Versões e histórico
+| Placa | Comandos pelo Monitor Serial |
+| --- | --- |
+| TX | `x` parar; `s` SUM8; `c` CRC8; `t` dez; `g` mil |
+| RX | `x` cancelar; `s` SUM8; `c` CRC8; `d` preparar dez; `r` mil; `a` dez com pausa |
+| RUÍDO | `0` desligado; `1` um alvo; `2` dois distintos; `3` rajada; `4` controle extra SUM8 |
 
-Use os programas de **revisoes/corpo64/firmware/** e o coletor v3 dessa revisão. Os programas em firmware/ na raiz e as coletas em dados/ na raiz pertencem à série anterior, com ruído somente no payload. Não combinar as versões.
+No modo manual, feche o coletor e prepare RX antes de iniciar TX. Exemplo SUM8/0/dez: RUÍDO `0`; RX `x`, `s`, `d`; TX `s`, `t`. Envie um comando por vez. Para CRC8, use `c` no RX e no TX.
 
-O [relatório e os documentos anteriores](historico/payload_2026-10-17/README_HISTORICO.md), os PDFs por etapa e as evidências antigas foram preservados. A especificação prévia CORPO64 e o estado original de testes de software também permanecem como registros datados.
+## Resultados para a defesa
 
-## Reproduzir a análise
+As sete rodadas somam 7.000 quadros. SUM8/modo 2 registrou 289 OK, 619 CORROMPIDOS, 90 PERDIDOS e 2 NÃO DETECTADOS. A taxa ND é **2/(619+2) = 0,3221%**. Os casos reais são as sequências **415 e 553**, analisadas byte a byte no relatório. CRC8 registrou zero ND nas três condições ensaiadas, sem garantia universal de detecção.
 
-Requer Python 3 e reportlab para o PDF. Na raiz: `python scripts/consolidar.py`, `python scripts/atualizar_documentacao.py`, `python scripts/gerar_pdf.py`, `python scripts/manifestos.py`. Os dois primeiros passos usam os CSVs versionados, sem precisar de portas seriais. O coletor no Windows funciona sem Python.
+Todas as perdas das sete séries tiveram LEN inválido. O controle separado de recepção desligada registrou pausa de 350,443 ms e retomada 38,691 ms após reativar. Para repetir: TX `x`; RUÍDO `0`; RX `x`, `s`, `a`; TX `s`, `t`. Preserve o log inteiro. Esse controle não entra nas sete rodadas aleatórias.
 
-Zero ND em CRC8 nas rodadas não garante detecção universal. Hashes garantem integridade dos arquivos, sem atestar o binário gravado. A defesa e a predição ao vivo ainda precisam ser realizadas. Os programas e documentos tiveram assistência de IA, conforme registrado no relatório.
+A defesa inclui prever e justificar os contadores dos próximos dez quadros antes de executar o modo escolhido pelo professor. Use o roteiro de 20 minutos. Entrega e avaliação presencial são atividades do estudante.
+
+## Rastreabilidade e autoria
+
+Os programas e os dados foram preservados na reorganização; o relatório foi ajustado aos caminhos atuais. O manifesto registra hashes dos arquivos. Versões anteriores e documentos de preparação permanecem no histórico Git; a versão anterior à limpeza é o commit `2649ac9`.
+
+A [especificação prévia da revisão CORPO64](https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria/blob/520dca3/revisoes/corpo64/ESPECIFICACAO_REVISAO_PRE_IMPLEMENTACAO.md) foi registrada antes de seus ajustes. Isso não comprova a ordem de elaboração do projeto original. Houve assistência de IA na programação, análise e documentação, declarada no relatório. As regras de autoria e defesa da disciplina continuam aplicáveis.
+
+Repositório: https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria

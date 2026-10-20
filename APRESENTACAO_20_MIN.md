@@ -1,6 +1,6 @@
 # Roteiro de apresentação CORPO64 - 20 minutos
 
-Resultados físicos de 19/10/2026. Use o relatório atual e GUIA_DEMONSTRACAO.md. A defesa e a predição precisam ser realizadas ao vivo.
+Resultados físicos de 19/10/2026. Use o relatório atual e as instruções do README.md. A defesa e a predição precisam ser realizadas ao vivo.
 
 | Tempo | Conteúdo |
 |---|---|
@@ -32,8 +32,6 @@ Técnica e modo escolhidos pelo professor: ___________________
 
 | Integrante | OK previsto | Corrompido previsto | Perdido previsto | ND previsto | Justificativa |
 |---|---|---|---|---|---|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
+| Enzo | | | | | |
 
 Resultado e validade observados: __________________________

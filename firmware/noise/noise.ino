@@ -1,7 +1,7 @@
-/* RUIDO CAPTURA v1.3.1 - CANDIDATO; validar na placa antes de usar em tabelas.
+/* RUIDO CORPO64 v2.0 - CANDIDATO; validar na placa antes de usar em tabelas.
    ESP32 classico WROOM, Arduino-ESP32 3.3.12, CPU 240 MHz.
    Mesmos pinos: limpa GPIO16/UART2, perturbada GPIO18, transistor GPIO19.
-   Mesmos modos 0..4 e mesmas 14 colunas de registro da v1.2.
+   Modos 0..4. Log novo com byte_corpo 0..7 e nome do campo.
    v1.3.1: restaura explicitamente RX da UART2 pela matriz GPIO apos
    configurar CAP0. Corrige conflito com IOMUX nativo de GPIO16 no core3.3.12.
    A inicializacao verifica os registradores e informa a rota compartilhada.
@@ -23,7 +23,8 @@
 
    MCPWM0/canais0 e1 sao exclusivos deste sketch. Chamadas LL dependem
    dos headers ESP32 instalados; compilacao verificada em core3.3.12.
-   Copia, cabecalho e CHK nao sao alvos. Nenhuma mudanca no TX/RX/fios.
+   LEN, sequencia, payload e CHK sao alvos. Copia e marcador preservados.
+   Usar RX CORPO64 v1 e coletor v3. Mesmos fios e TX anterior.
 */
 #include <Arduino.h>
 #include <esp_timer.h>
@@ -38,6 +39,7 @@
 #include <esp_rom_gpio.h>
 #include <soc/gpio_sig_map.h>
 #include "capture_schedule.h"
+#include "noise_targets.h"
 #if !defined(CONFIG_IDF_TARGET_ESP32)
 #error "Este injetor usa GPIO do ESP32 classico WROOM; nao C3/S3/S2."
 #endif
@@ -161,17 +163,9 @@ void armFrame() {
     masks[i]=0; sampledIn[i]=0; sampledOut[i]=0; timingBad[i]=0; stamps[i]=0;
     lateSamples[i]=0; latePulses[i]=0; worstLateUs[i]=0; durationUs[i]=0; entryAgeTicks[i]=0;
   }
-  if(frameMode==1 || frameMode==2) {
-    uint8_t a=esp_random()%32;
-    masks[3+a/8]|=1U<<(a%8);
-    if(frameMode==2) {
-      uint8_t b; do { b=esp_random()%32; } while(b==a);
-      masks[3+b/8]|=1U<<(b%8);
-    }
-  } else if(frameMode==3) {
-    uint8_t byte=3+esp_random()%4, len=3+esp_random()%6, bit=esp_random()%(9-len);
-    masks[byte]=uint8_t(((1U<<len)-1)<<bit);
-  } else if(frameMode==4) { masks[3]=0x80; masks[4]=0x80; }
+  uint8_t selected[8];
+  chooseTargets(frameMode,selected,[]() -> uint32_t { return esp_random(); });
+  for(uint8_t i=0;i<8;i++) masks[i]=selected[i];
   byteIndex=0; armed=true;
 }
 // Bits de motivo: 1=amostra limpa difere da UART, 2=tempo fora do limite,
@@ -210,10 +204,9 @@ void logFrame() {
       break;
     }
   }
-  for(int i=3;i<=6;i++) {
-    if(frameMode!=0 && !masks[i]) continue;
+  for(int i=0;i<8;i++) { // TODOS os bytes: cruza corpo completo com RX/referencia
     uint8_t changed=(sampledIn[i]^sampledOut[i]);
-    Serial.printf("%u,%u,%d,%02X,%lld,%02X,%02X,%02X,%s,%s,%u,%02X,%02X,%u\n",seq,frameMode,i-3,
+    Serial.printf("%u,%u,%d,%s,%02X,%lld,%02X,%02X,%02X,%s,%s,%u,%02X,%02X,%u\n",seq,frameMode,i,bodyField(i),
       unsigned(masks[i]),(long long)stamps[i],unsigned(sampledIn[i]),unsigned(sampledOut[i]),
       changed,changed?"SIM":"NAO",sync?"SIM":"NAO",unsigned(worstLateUs[i]),
       unsigned(lateSamples[i]),unsigned(latePulses[i]),unsigned(durationUs[i]));
@@ -252,9 +245,10 @@ void setup() {
     while(true) delay(1000);
   }
   Serial.println("# UART2_RX_COMPARTILHADO,gpio=16,matriz=SIM");
-  Serial.println("# RUIDO CAPTURA v1.3.1 CANDIDATO. 0=off 1=1bit 2=2bits 3=rajada 4=demoSUM8. Padrao0.");
+  Serial.println("# ESCOPO_RUIDO,CORPO64,versao=2.0");
+  Serial.println("# RUIDO CORPO64 v2.0 CANDIDATO. 0=off 1=1bit 2=2bits 3=rajada 4=demoSUM8. Padrao0.");
   Serial.printf("# CAPTURA_HW,MCPWM0,CAP0=borda_CAP1=relogio,resolucao_hz=%lu,ajuste_isr_estimado=NAO\n",(unsigned long)captureHz);
-  Serial.println("seq,modo,byte_payload,mascara_alvo_hex,timestamp_us,antes_hex,depois_amostrado_hex,mascara_mudou_hex,mudou,sincronismo_ok,atraso_amostra_max_us,amostras_tardias_hex,pulsos_tardios_hex,duracao_byte_us");
+  Serial.println("seq,modo,byte_corpo,campo,mascara_alvo_hex,timestamp_us,antes_hex,depois_amostrado_hex,mascara_mudou_hex,mudou,sincronismo_ok,atraso_amostra_max_us,amostras_tardias_hex,pulsos_tardios_hex,duracao_byte_us");
 }
 void loop() {
   // Expira antes de ler o proximo quadro. Watchdog de software da janela.
@@ -265,7 +259,7 @@ void loop() {
   while(Serial2.available()) consume(Serial2.read());
   while(Serial.available()) {
     char c=Serial.read();
-    if(c>='0'&&c<='4') { mode=c-'0'; Serial.printf("# MODO_PROXIMO_QUADRO,%u\n",mode); }
+    if(c>='0'&&c<='4') { mode=c-'0'; Serial.printf("# MODO_PROXIMO_QUADRO,%u,escopo=CORPO64,versao=2.0\n",mode); }
   }
   delay(1);
 }

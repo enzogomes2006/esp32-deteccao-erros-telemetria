@@ -20,7 +20,7 @@ Campos protegidos: LEN, sequência e payload (sete bytes). O TX calcula CHK = -s
 
 ## CRC-8/SMBUS
 
-Polinômio x^8 + x^2 + x + 1, representado por 0x07 sem o termo x^8 [1]. Estado inicial 0x00, refin=false, refout=false, xorout=0x00. O TX percorre os sete bytes na ordem do corpo, com processamento MSB primeiro em cada byte. O RX percorre os oito bytes; resíduo esperado 0x00. A UART continua transmitindo cada byte em 8N1, LSB primeiro.
+Polinômio x^8 + x^2 + x + 1, representado por 0x07 sem o termo x^8. Estado inicial 0x00, refin=false, refout=false, xorout=0x00. O TX percorre os sete bytes na ordem do corpo, com processamento MSB primeiro em cada byte. O RX percorre os oito bytes; resíduo esperado 0x00. A UART continua transmitindo cada byte em 8N1, LSB primeiro.
 
 ## Cópia de depuração: auditoria posterior
 
@@ -45,4 +45,4 @@ Timeouts: 60 ms para bloco/auditoria e 250 ms para ausência de progresso de dad
 
 Ruído CORPO64: modo 1 sorteia um dos 64 bits; modo 2 dois distintos; modo 3 rajada contígua de 3 a 8 bits dentro de um byte. Modo 0 é controle sem pulsos. Modo 4 é controle extra em P0/P1. Marcador e referência permanecem preservados.
 
-Os detalhes de projeto prévios estão em revisoes/corpo64/ESPECIFICACAO_REVISAO_PRE_IMPLEMENTACAO.md, preservada como documento histórico. Implementação atual em revisoes/corpo64/firmware/. A especificação antiga está em historico/payload_2026-10-17/ESPECIFICACAO_PROTOCOLO.md.
+A implementação atual está em firmware/. A [proposta prévia desta revisão](https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria/blob/520dca3/revisoes/corpo64/ESPECIFICACAO_REVISAO_PRE_IMPLEMENTACAO.md) permanece no histórico Git. Esse registro não comprova a ordem de elaboração da versão original.
