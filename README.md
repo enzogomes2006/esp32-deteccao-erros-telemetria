@@ -49,6 +49,6 @@ O modo 4 é um controle dirigido: mira os bits de valor 128 em P0 e P1. Se ambos
 
 ## Autoria e apoio
 
-Houve assistência de IA na programação, análise e documentação.
+Houve assistência de IA na programação e análise.
 
 Repositório: https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria
