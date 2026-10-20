@@ -12,7 +12,6 @@ Enzo Aurélio ficou responsável pelo TX, Vinicius Campos pelo RX e Luís Fernan
 | Conteúdo | Onde abrir |
 | --- | --- |
 | Relatório final em PDF | [Relatorio_Final_ESP32.pdf](Relatorio_Final_ESP32.pdf) |
-| Fonte editável do relatório | [relatorio_latex/](relatorio_latex/LEIA_PRIMEIRO.md) |
 | Formato, algoritmos, sequência e timeouts | [ESPECIFICACAO_PROTOCOLO.md](ESPECIFICACAO_PROTOCOLO.md) |
 | TX, RX e injetor, com os headers necessários | [firmware/](firmware/) |
 | CSVs, logs, metadados e tabelas das duas técnicas | [dados/](dados/README.md) |
@@ -46,10 +45,10 @@ SUM8/modo 2 registrou **2 erros não detectados entre 621 erros checados (0,3221
 
 Na demonstração de 20 minutos, cada integrante precisa explicar TX, RX e RUÍDO. Antes do cenário escolhido pelo professor, cada um prevê e justifica os contadores dos próximos dez quadros usando as tabelas; depois compara com o RX. Novos sorteios não têm contagens exatas garantidas.
 
-## Histórico e autoria
+O modo 4 é um controle dirigido: mira os bits de valor 128 em P0 e P1. Se ambos mudarem, a soma diminui 256 e o SUM8 mantém resíduo zero com o payload alterado. Confirme o efeito nos logs. Esse controle é separado das séries aleatórias dos modos 1 a 3.
 
-As versões anteriores permanecem no histórico Git. A [proposta prévia CORPO64](https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria/blob/520dca3/revisoes/corpo64/ESPECIFICACAO_REVISAO_PRE_IMPLEMENTACAO.md) documenta essa revisão e não comprova a ordem de elaboração do projeto original.
+## Autoria e apoio
 
-Houve assistência de IA na programação, análise e documentação. A revisão dos arquivos não substitui a regra de autoria nem a defesa individual exigidas pelo professor.
+Houve assistência de IA na programação, análise e documentação.
 
 Repositório: https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria
