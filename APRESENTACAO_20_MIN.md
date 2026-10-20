@@ -32,6 +32,8 @@ Técnica e modo escolhidos pelo professor: ___________________
 
 | Integrante | OK previsto | Corrompido previsto | Perdido previsto | ND previsto | Justificativa |
 |---|---|---|---|---|---|
-| Enzo | | | | | |
+| Enzo Aurélio | | | | | |
+| Luís Fernando | | | | | |
+| Vinicius Moraes | | | | | |
 
 Resultado e validade observados: __________________________

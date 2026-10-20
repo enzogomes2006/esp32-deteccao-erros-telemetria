@@ -1,6 +1,6 @@
 {
   "algoritmo": "SHA256",
-  "observacao": "Entrega organizada da serie CORPO64. Exclui apenas este manifesto. Programas e registros originais preservados byte a byte.",
+  "observacao": "Entrega CORPO64 com relatorio compilado em LaTeX. Exclui apenas este manifesto. Programas e registros experimentais preservados byte a byte.",
   "arquivos": {
     ".gitattributes": {
       "bytes": 63,
@@ -11,8 +11,8 @@
       "sha256": "2049585cc4ff0d0bf548bb10058b20c47fcb4947412db02b393eda88dec680b0"
     },
     "APRESENTACAO_20_MIN.md": {
-      "bytes": 2226,
-      "sha256": "56780435fdf2e49e9977a2bbc970929ef37a8dc068ce07ddd3efaa07a3651efe"
+      "bytes": 2296,
+      "sha256": "4c9d7e20626c45f7a9ae4fa36c7e58cb2419ac501525b8302d3bc13002ea05a2"
     },
     "coletor/Abrir_Coletor.cmd": {
       "bytes": 273,
@@ -263,12 +263,28 @@
       "sha256": "89563a91a17a53a6639d604eb54716551d7449ea00a273772c9a6cc1bee95b49"
     },
     "README.md": {
-      "bytes": 5020,
-      "sha256": "959f867b0dca312cfb9087c4b926620ed1ef205cbc22e761a7b2fde58378cf4e"
+      "bytes": 5091,
+      "sha256": "15d5df18677835c50d058d526b3b3234d121a2b0367674adc1432767c7a33123"
     },
     "Relatorio_Final_ESP32.pdf": {
-      "bytes": 123554,
-      "sha256": "ff6d1793459d4d048bd0908b6750932d440a03410ad7c65193df2bee1bf312af"
+      "bytes": 228455,
+      "sha256": "aaa7daee66223afc26299594edc0c86ca018bc35444a1a8a93ff8fb543e07ab1"
+    },
+    "relatorio_latex/figuras/contagens.pdf": {
+      "bytes": 74578,
+      "sha256": "0a759edd7c4d342cd1ac0bee3e27bc68c50bac4711530ecd444340522fc376eb"
+    },
+    "relatorio_latex/figuras/tempos_rx.pdf": {
+      "bytes": 74501,
+      "sha256": "1678774746a95f498a3911c17e8936f8bba5cf996f6815a4627e15467158ec42"
+    },
+    "relatorio_latex/LEIA_PRIMEIRO.md": {
+      "bytes": 325,
+      "sha256": "8a424c4c123bed294f8fb5fb849453f86f8076f0eb7e871131e735ba5a6502be"
+    },
+    "relatorio_latex/main.tex": {
+      "bytes": 30627,
+      "sha256": "20e7dd0282763dfb5c8e48156384a924f6520773cd2cc2b8608e490e436b9893"
     }
   }
 }

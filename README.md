@@ -1,6 +1,6 @@
 # Detecção de erro em telemetria sob ruído real — ESP32
 
-Enzo Aurélio · IFMT - Octayde · TCD · Professor Ruy Oliveira.
+Enzo Aurélio · Luís Fernando · Vinicius Moraes · IFMT - Octayde · TCD · Professor Ruy Oliveira.
 
 Entrega da série **CORPO64**, coletada em 19/10/2026. Três ESP32 realizam transmissão UART, recepção com checagem e injeção física de ruído. Uma técnica por rodada: SUM8 ou CRC-8/SMBUS.
 
@@ -8,7 +8,7 @@ Entrega da série **CORPO64**, coletada em 19/10/2026. Três ESP32 realizam tran
 
 | Material | Arquivo ou pasta |
 | --- | --- |
-| Relatório explicado, tabelas e análise dos casos | [Relatorio_Final_ESP32.pdf](Relatorio_Final_ESP32.pdf) |
+| Relatório em LaTeX, tabelas e análise dos casos | [PDF de entrega](Relatorio_Final_ESP32.pdf) e [fonte LaTeX](relatorio_latex/main.tex) |
 | Protocolo, enquadramento, sequência e timeouts | [ESPECIFICACAO_PROTOCOLO.md](ESPECIFICACAO_PROTOCOLO.md) |
 | Três programas e seus headers necessários | [firmware/](firmware/) |
 | Sete coletas, CSVs e tabelas | [dados/](dados/) |
@@ -55,8 +55,8 @@ A defesa inclui prever e justificar os contadores dos próximos dez quadros ante
 
 ## Rastreabilidade e autoria
 
-Os programas e os dados foram preservados na reorganização; o relatório foi ajustado aos caminhos atuais. O manifesto registra hashes dos arquivos. Versões anteriores e documentos de preparação permanecem no histórico Git; a versão anterior à limpeza é o commit `2649ac9`.
+Os programas e os dados foram preservados na reorganização; o relatório foi diagramado em LaTeX e seu fonte está em relatorio_latex/. O manifesto registra hashes dos arquivos. Versões anteriores e documentos de preparação permanecem no histórico Git; a versão anterior à limpeza é o commit `2649ac9`.
 
-A [especificação prévia da revisão CORPO64](https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria/blob/520dca3/revisoes/corpo64/ESPECIFICACAO_REVISAO_PRE_IMPLEMENTACAO.md) foi registrada antes de seus ajustes. Isso não comprova a ordem de elaboração do projeto original. Houve assistência de IA na programação, análise e documentação, declarada no relatório. As regras de autoria e defesa da disciplina continuam aplicáveis.
+A [especificação prévia da revisão CORPO64](https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria/blob/520dca3/revisoes/corpo64/ESPECIFICACAO_REVISAO_PRE_IMPLEMENTACAO.md) foi registrada antes de seus ajustes. Isso não comprova a ordem de elaboração do projeto original. Houve assistência de IA na programação, análise e documentação. As regras de autoria e defesa da disciplina continuam aplicáveis.
 
 Repositório: https://github.com/enzogomes2006/esp32-deteccao-erros-telemetria
