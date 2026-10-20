@@ -1,6 +1,6 @@
 # Fonte do relatório
 
-O relatório é de Enzo Aurélio, Luís Fernando e Vinicius Moraes. O arquivo `main.tex` e a pasta `figuras/` geram o PDF de entrega da raiz. Não há uma segunda versão do relatório para escolher.
+O relatório é de Enzo Aurélio, Luís Fernando e Vinicius Campos. O arquivo `main.tex` e a pasta `figuras/` geram o PDF de entrega da raiz. Não há uma segunda versão do relatório para escolher.
 
 Com pdfLaTeX, execute duas vezes nesta pasta para atualizar sumário e referências:
 

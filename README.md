@@ -1,9 +1,11 @@
 # Detecção de erro em telemetria com ESP32
 
-Enzo Aurélio · Luís Fernando · Vinicius Moraes
+Enzo Aurélio · Luís Fernando · Vinicius Campos
 IFMT - Octayde · Transmissão e Comunicação de Dados · Professor Ruy Oliveira
 
 Três ESP32 formam um enlace UART a 115200 baud. TX envia o quadro, RX verifica SUM8 ou CRC-8 e a terceira placa injeta ruído físico. As sete coletas de 19/10/2026 têm mil quadros por condição.
+
+Enzo Aurélio ficou responsável pelo TX, Vinicius Campos pelo RX e Luís Fernando pelo injetor de ruído. As principais dificuldades da bancada foram ajustar o ruído e organizar os cabos para deixar as ligações visíveis e claras.
 
 ## Arquivos da entrega
 
